@@ -12,6 +12,10 @@
   color: #333333;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 .link {
   text-decoration: none;
   text-decoration-skip-ink: none;

@@ -1,0 +1,7 @@
+@import '../../const/const.scss';
+
+.page-content {
+  min-height: calc(100vh - $header-height - $footer-height);
+  max-width: $content-max-width;
+  margin: auto;
+}
