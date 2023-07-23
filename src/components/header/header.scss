@@ -1,0 +1,35 @@
+@import '../../const/const.scss';
+
+header {
+  background-color: $main-color;
+  height: 100px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+
+  .header-limiter {
+    flex-grow: 1;
+    max-width: $content-max-width;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .header-logo {
+      color: rgb(255, 255, 255);
+      font-size: 34px;
+
+      @media screen and (max-width: 420px) {
+        font-size: 24px;
+      }
+    }
+
+    .header-login-link {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    padding: 0 20px;
+  }
+}

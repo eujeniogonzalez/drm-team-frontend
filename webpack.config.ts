@@ -7,6 +7,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackInjector = require('html-webpack-injector');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const devMode = process.env.NODE_ENV !== 'production';
+
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
@@ -37,7 +39,7 @@ const config: Configuration = {
       {
         test: /\.(scss|css)$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -77,11 +79,13 @@ const config: Configuration = {
       patterns: [
         {
           from: path.join(__dirname, 'public', 'fonts'),
-          to: path.join(__dirname, 'build', 'fonts')
+          to: path.join(__dirname, 'build', 'fonts'),
+          noErrorOnMissing: true
         },
         {
           from: path.join(__dirname, 'public', 'images'),
-          to: path.join(__dirname, 'build', 'images')
+          to: path.join(__dirname, 'build', 'images'),
+          noErrorOnMissing: true
         }
       ],
     })

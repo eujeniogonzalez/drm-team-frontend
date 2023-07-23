@@ -6,10 +6,10 @@ function Navigation() {
   return (
     <nav>
       <div>
-        <Link to={AppRoutes.Main}>Main</Link>
+        <Link to={AppRoutes.Main} className='dark-link'>Main</Link>
       </div>
       <div>
-        <Link to={AppRoutes.Login}>Login</Link>
+        <Link to={AppRoutes.Login} className='dark-link'>Login</Link>
       </div>
     </nav>
   );
