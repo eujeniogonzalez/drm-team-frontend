@@ -4,4 +4,5 @@
   min-height: calc(100vh - $header-height - $footer-height);
   max-width: $content-max-width;
   margin: auto;
+  box-sizing: border-box;
 }

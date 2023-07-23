@@ -1,3 +1,22 @@
-.main-test {
-  color: violet;
+.main-page-content {
+  max-width: 600px;
+  margin: auto;
+  padding-top: 200px;
+
+  .main-page-title {
+    text-align: center;
+    font-size: 40px;
+  }
+
+  .main-page-navigation {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+
+    .navigation-item {
+      & a {
+        font-size: 20px;
+      }
+    }
+  }
 }
