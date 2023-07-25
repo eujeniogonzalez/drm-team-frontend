@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import { AppRoutes } from '../../const/router-const';
+import RegisterPage from '../../pages/register-page/register-page';
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
       <Route
         path={AppRoutes.Login}
         element={<LoginPage />}
+      />
+      <Route
+        path={AppRoutes.Register}
+        element={<RegisterPage />}
       />
     </Routes>
   );
