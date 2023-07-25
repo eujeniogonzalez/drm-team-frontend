@@ -7,7 +7,9 @@ function Header() {
   return (
     <header>
       <div className="header-limiter">
-        <div className="header-logo">DRM Team</div>
+        <div className="header-logo">
+          <Link to={AppRoutes.Main} className='light-link header-logo-link'>DRM Team</Link>
+        </div>
         <div className="header-user-block">
           <Link to={AppRoutes.Login} className='light-link header-login-link'>Войти</Link>
         </div>
