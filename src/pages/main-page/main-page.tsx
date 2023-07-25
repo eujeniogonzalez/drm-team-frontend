@@ -20,6 +20,9 @@ function MainPage() {
               <Link to={AppRoutes.Login} className='dark-link'>Войти</Link>
             </div>
             <div className="navigation-item">
+              <Link to={AppRoutes.Repass} className='dark-link'>Вспомнить пароль</Link>
+            </div>
+            <div className="navigation-item">
               <Link to={AppRoutes.Register} className='dark-link'>Зарегистрироваться</Link>
             </div>
           </div>

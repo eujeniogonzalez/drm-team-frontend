@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 
 function NotFoundPage() {
-  document.title = 'Register';
+  document.title = 'Not Found';
   return (
     <>
       <Header/>
