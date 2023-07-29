@@ -7,6 +7,7 @@ import RegisterPage from '../../pages/register-page/register-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import RepassPage from '../../pages/repass-page/repass-page';
 import ConfirmPage from '../../pages/confirm-page/confirm-page';
+import NewPasswordPage from '../../pages/new-password-page/new-password-page';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path={AppRoutes.Register} element={<RegisterPage />} />
       <Route path={AppRoutes.Repass} element={<RepassPage />} />
       <Route path={AppRoutes.Confirm} element={<ConfirmPage />} />
+      <Route path={AppRoutes.NewPassword} element={<NewPasswordPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
