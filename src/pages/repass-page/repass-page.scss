@@ -1,3 +1,35 @@
-.repass-test {
-  color: chocolate;
+.repass-page-content {
+  width: 90%;
+  max-width: 400px;
+  margin-top: 50px;
+  
+  .repass-page-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .repass-page-input-login,
+  .repass-page-submit-button {
+    margin-top: 20px;
+  }
+
+  .repass-page-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .repass-page-links-item {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 420px) {
+      flex-direction: column;
+      align-items: center;
+
+      & a + a {
+        margin-top: 10px;
+      }
+    }
+  }
 }
