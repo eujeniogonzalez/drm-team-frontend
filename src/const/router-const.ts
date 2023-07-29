@@ -2,5 +2,6 @@ export enum AppRoutes {
   Main = '/',
   Login = '/login',
   Register = '/register',
-  Repass = '/repass'
+  Repass = '/repass',
+  Confirm = '/confirm/:confirmID'
 }

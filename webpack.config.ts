@@ -18,6 +18,7 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.[contenthash].js',
+    publicPath: '/',
     clean: true
   },
   module: {
