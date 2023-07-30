@@ -1,14 +1,14 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { useAppSelector } from '../hooks';
 import { getAccessToken } from '../store/processes/user-process/user-selectors';
+import { API_URL_DEV, API_URL_PROD } from '../const/api-const';
 
-// todo Заменить константы
-const BACKEND_URL = 'https://12.react.pages.academy/wtw';
+const API_URL = (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? API_URL_DEV : API_URL_PROD;
 const REQUEST_TIMEOUT = 5000;
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
-    baseURL: BACKEND_URL,
+    baseURL: API_URL,
     timeout: REQUEST_TIMEOUT
   });
 

@@ -2,6 +2,7 @@ import path from 'path';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import { WEBPACK_DEVSERVER_PORT } from './src/const/api-const';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackInjector = require('html-webpack-injector');
@@ -61,7 +62,7 @@ const config: Configuration = {
   devServer: {
     static: path.join(__dirname, 'public'),
     compress: true,
-    port: 4000,
+    port: WEBPACK_DEVSERVER_PORT,
     historyApiFallback: true
   },
   plugins: [
