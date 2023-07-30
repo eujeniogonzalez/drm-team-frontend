@@ -6,3 +6,8 @@ export enum AppRoutes {
   Confirm = '/confirm/:confirmID',
   NewPassword = '/newpassword/:newpasswordID'
 }
+
+export enum APIRoutes {
+  Login = '/login',
+  Refresh = '/refresh'
+}
