@@ -9,18 +9,19 @@ import RepassPage from '../../pages/repass-page/repass-page';
 import ConfirmPage from '../../pages/confirm-page/confirm-page';
 import NewPasswordPage from '../../pages/new-password-page/new-password-page';
 import TasksPage from '../../pages/tasks-page/tasks-page';
+import PrivateRoute from '../private-route/private-route';
 
 
 function App() {
   return (
     <Routes>
       <Route path={AppRoutes.Main} element={<MainPage />} />
-      <Route path={AppRoutes.Login}element={<LoginPage />} />
+      <Route path={AppRoutes.Login} element={<LoginPage />} />
       <Route path={AppRoutes.Register} element={<RegisterPage />} />
       <Route path={AppRoutes.Repass} element={<RepassPage />} />
       <Route path={AppRoutes.Confirm} element={<ConfirmPage />} />
       <Route path={AppRoutes.NewPassword} element={<NewPasswordPage />} />
-      <Route path={AppRoutes.Tasks} element={<TasksPage />} />
+      <Route path={AppRoutes.Tasks} element={<PrivateRoute><TasksPage /></PrivateRoute>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

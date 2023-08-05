@@ -6,17 +6,20 @@ import { createRoot } from 'react-dom/client';
 import browserHistory from './services/browser-history';
 import { store } from './store';
 import { refreshAuthAction } from './store/api-actions';
+import { Provider } from 'react-redux';
 
-store.dispatch(refreshAuthAction());
+// store.dispatch(refreshAuthAction());
 
 const element = document.getElementById('root');
 const root = createRoot(element!);
 
 root.render(
   <React.StrictMode>
-    <HistoryRouter history={browserHistory}>
-      <App />
-    </HistoryRouter>
+    <Provider store = {store}>
+      <HistoryRouter history={browserHistory}>
+        <App />
+      </HistoryRouter>
+    </Provider>
   </React.StrictMode>
 );
 
