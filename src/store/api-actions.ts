@@ -15,10 +15,10 @@ export const refreshAuthAction = createAsyncThunk<Token, undefined, {
 >
 (
   'refreshAuthAction',
-  async (_arg, { dispatch, extra: api }) => { // todo Попробовать убрать диспатч
-    const { data: { payload } } = await api.get(APIRoutes.Refresh);
+  async (_arg, { extra: api }) => { // todo Попробовать убрать диспатч
+    const { data } = await api.get(APIRoutes.Refresh);
 
-    return payload.access_token; // todo Заменить на кэмел кейс
+    return data.access_token; // todo Заменить на кэмел кейс
   }
 );
 

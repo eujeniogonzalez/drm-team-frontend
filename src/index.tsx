@@ -4,6 +4,10 @@ import App from './components/app/app';
 import HistoryRouter from './components/history-router/history-routr';
 import { createRoot } from 'react-dom/client';
 import browserHistory from './services/browser-history';
+import { store } from './store';
+import { refreshAuthAction } from './store/api-actions';
+
+store.dispatch(refreshAuthAction());
 
 const element = document.getElementById('root');
 const root = createRoot(element!);

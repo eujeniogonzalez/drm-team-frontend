@@ -1,10 +1,8 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { useAppSelector } from '../hooks';
-import { getAccessToken } from '../store/processes/user-process/user-selectors';
-import { API_URL_DEV, API_URL_PROD } from '../const/api-const';
+import { API_URL_DEV, API_URL_PROD, REQUEST_TIMEOUT } from '../const/api-const';
+import { store } from '../store';
 
-const API_URL = (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? API_URL_DEV : API_URL_PROD;
-const REQUEST_TIMEOUT = 5000;
+const API_URL = (process.env.NODE_ENV === 'production') ? API_URL_PROD : API_URL_DEV;
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -14,7 +12,9 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-      const accessToken = useAppSelector(getAccessToken);
+      const accessToken = store.getState().user.accessToken;
+
+      // todo Сделать проверку токена, если истёк, сначала делаем рефреш
 
       if (accessToken && config.headers) {
         config.headers['x-token'] = accessToken;
