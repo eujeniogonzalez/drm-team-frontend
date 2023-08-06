@@ -1,27 +1,27 @@
-.register-page-content {
+.register-form-content {
   width: 90%;
   max-width: 400px;
   margin-top: 50px;
   
-  .register-page-title {
+  .register-form-title {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
   }
 
-  .register-page-input-login,
-  .register-page-input-password,
-  .register-page-repeat-password,
-  .register-page-submit-button {
+  .register-form-input-login,
+  .register-form-input-password,
+  .register-form-repeat-password,
+  .register-form-submit-button {
     margin-top: 20px;
   }
 
-  .register-page-links {
+  .register-form-links {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 
-    .register-page-links-item {
+    .register-form-links-item {
       font-size: 18px;
     }
 

@@ -9,3 +9,10 @@ export enum APIMethods {
   POST = 'POST'
 }
 
+export enum APIActions {
+  Register = 'register'
+}
+
+export const API_MESSAGES = {
+  FILED: 'Request to server is failed'
+};

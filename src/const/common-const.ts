@@ -1,4 +1,5 @@
 export enum NameSpace {
+  Api = 'api',
   User = 'user'
 }
 

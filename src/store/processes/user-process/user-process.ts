@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthStatuses, Symbols } from '../../../const/common-const';
 import { UserProcess } from '../../../types/state-types';
-import { refreshAuthAction, loginAction } from '../../api-actions';
+import { refreshAuthAction, loginAction, registerUserAction } from '../../api-actions';
+import { APIActions, API_MESSAGES } from '../../../const/api-const';
 
 const initialState: UserProcess = {
+  isRegisterInProgress: false,
   authorizationStatus: AuthStatuses.Unknown,
-  accessToken: Symbols.Empty
+  accessToken: Symbols.Empty,
+  userAPIResponse: {
+    type: null,
+    body: null
+  }
 };
 
 export const userProcess = createSlice({
@@ -19,6 +25,23 @@ export const userProcess = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(registerUserAction.pending, (state) => {
+        state.isRegisterInProgress = true;
+      })
+      .addCase(registerUserAction.fulfilled, (state, action) => {
+        state.isRegisterInProgress = false;
+        state.userAPIResponse.type = APIActions.Register;
+        state.userAPIResponse.body = action.payload;
+      })
+      .addCase(registerUserAction.rejected, (state) => {
+        state.isRegisterInProgress = false;
+        state.userAPIResponse.type = APIActions.Register;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
+      })
       .addCase(refreshAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthStatuses.Auth;
         state.accessToken = action.payload;

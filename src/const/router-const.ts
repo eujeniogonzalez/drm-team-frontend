@@ -9,6 +9,7 @@ export enum AppRoutes {
 }
 
 export enum APIRoutes {
+  Register = '/register',
   Login = '/login',
   Refresh = '/refresh'
 }
