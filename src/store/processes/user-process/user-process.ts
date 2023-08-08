@@ -6,6 +6,7 @@ import { APIActions, API_MESSAGES } from '../../../const/api-const';
 
 const initialState: UserProcess = {
   isRegisterInProgress: false,
+  isUserRegistered: false,
   authorizationStatus: AuthStatuses.Unknown,
   accessToken: Symbols.Empty,
   userAPIResponse: {
@@ -30,8 +31,9 @@ export const userProcess = createSlice({
       })
       .addCase(registerUserAction.fulfilled, (state, action) => {
         state.isRegisterInProgress = false;
-        state.userAPIResponse.type = APIActions.Register;
-        state.userAPIResponse.body = action.payload;
+        state.isUserRegistered = true;
+        state.userAPIResponse.type = null;
+        state.userAPIResponse.body = null;
       })
       .addCase(registerUserAction.rejected, (state) => {
         state.isRegisterInProgress = false;
