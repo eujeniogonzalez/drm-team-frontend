@@ -9,8 +9,8 @@ export type APIResponse = {
 };
 
 export type UserProcess = {
-  isRegisterInProgress: boolean;
-  isUserRegistered: boolean;
+  isUserRequestInProgress: boolean;
+  isUserRequestSuccess: boolean;
   authorizationStatus: AuthStatuses;
   accessToken: string;
   userAPIResponse: APIResponse;

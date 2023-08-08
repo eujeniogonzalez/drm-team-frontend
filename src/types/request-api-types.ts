@@ -4,4 +4,8 @@ export type RegisterBody = {
   repeatPassword: string;
 };
 
+export type LoginBody = {
+  email: string;
+  password: string;
+};
 

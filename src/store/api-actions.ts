@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { State } from '../types/state-types';
 import { APIRoutes } from '../const/router-const';
 import { Token } from '../types/token-type';
-import { AuthData } from '../types/auth-data-type';
+import { LoginBody } from '../types/request-api-types';
 import { ResponseAPI, LoginPayload, RegisterPayload } from '../types/response-api-types';
 import { RegisterBody } from '../types/request-api-types';
 
@@ -38,7 +38,7 @@ export const refreshAuthAction = createAsyncThunk<Token, undefined, {
   }
 );
 
-export const loginAction = createAsyncThunk<Token, AuthData, {
+export const loginUserAction = createAsyncThunk<ResponseAPI<LoginPayload>, LoginBody, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -46,10 +46,10 @@ export const loginAction = createAsyncThunk<Token, AuthData, {
 >
 (
   'loginAction',
-  async ({ login: email, password }, { extra: api }) => {
-    const { data: { payload } } = await api.post<ResponseAPI<LoginPayload>>(APIRoutes.Login, { email, password });
+  async ({ email, password }, { extra: api }) => {
+    const { data } = await api.post<ResponseAPI<LoginPayload>>(APIRoutes.Login, { email, password });
 
-    return payload.access_token; // todo Заменить на кэмел кейс
+    return data;
   }
 );
 

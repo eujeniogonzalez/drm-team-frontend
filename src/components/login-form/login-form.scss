@@ -1,24 +1,24 @@
-.login-page-content {
+.login-form-content {
   width: 90%;
   max-width: 400px;
   margin-top: 50px;
   
-  .login-page-title {
+  .login-form-title {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
   }
 
-  .login-page-input-login, .login-page-input-password, .login-page-submit-button {
+  .login-form-input-login, .login-form-input-password, .login-form-submit-button {
     margin-top: 20px;
   }
 
-  .login-page-links {
+  .login-form-links {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 
-    .login-page-links-item {
+    .login-form-links-item {
       font-size: 18px;
     }
 
