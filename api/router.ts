@@ -6,13 +6,19 @@ import { register } from './db/register';
 
 const router = (app: Express) => {
   app.post(APIRoutes.Register, (request: Request, response: Response) => {
-		response.send(register[request.method as keyof typeof register]);
+    setTimeout(() => {
+      response.send(register[request.method as keyof typeof register]);
+    }, 4000);
 	});
 	app.post(APIRoutes.Login, (request: Request, response: Response) => {
-		response.send(login[request.method as keyof typeof login]);
+    setTimeout(() => {
+      response.send(login[request.method as keyof typeof login]);
+    }, 4000);
 	});
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {
-    response.send(refresh[request.method as keyof typeof refresh]);
+    setTimeout(() => {
+      response.send(refresh[request.method as keyof typeof refresh]);
+    }, 4000);
 	});
 };
 
