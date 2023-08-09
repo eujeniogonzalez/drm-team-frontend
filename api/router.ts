@@ -4,6 +4,7 @@ import { Express, Request, Response } from 'express';
 import { APIRoutes } from '../src/const/api-const';
 import { register } from './db/register';
 import { confirm } from './db/confirm';
+import { repass } from './db/repass';
 
 const router = (app: Express) => {
   app.post(APIRoutes.Register, (request: Request, response: Response) => {
@@ -19,6 +20,11 @@ const router = (app: Express) => {
   app.post(APIRoutes.Confirm, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(confirm[request.method as keyof typeof login]);
+    }, 4000);
+	});
+  app.post(APIRoutes.Repass, (request: Request, response: Response) => {
+    setTimeout(() => {
+      response.send(repass[request.method as keyof typeof login]);
     }, 4000);
 	});
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {

@@ -12,3 +12,5 @@ export type LoginPayload = {
 
 export type ConfirmPayload = null;
 
+export type RepassPayload = null;
+

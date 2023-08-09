@@ -1,25 +1,25 @@
-.repass-page-content {
+.repass-form-content {
   width: 90%;
   max-width: 400px;
   margin-top: 50px;
   
-  .repass-page-title {
+  .repass-form-title {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
   }
 
-  .repass-page-input-login,
-  .repass-page-submit-button {
+  .repass-form-input-login,
+  .repass-form-submit-button {
     margin-top: 20px;
   }
 
-  .repass-page-links {
+  .repass-form-links {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 
-    .repass-page-links-item {
+    .repass-form-links-item {
       font-size: 18px;
     }
 

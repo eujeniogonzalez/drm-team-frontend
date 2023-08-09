@@ -13,3 +13,7 @@ export type ConfirmBody = {
   confirmID: string;
 };
 
+export type RepassBody = {
+  email: string;
+};
+

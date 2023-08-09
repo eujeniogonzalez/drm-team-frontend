@@ -13,13 +13,15 @@ export enum APIRoutes {
   Register = '/register',
   Login = '/login',
   Confirm = '/confirm',
+  Repass = '/repass',
   Refresh = '/refresh'
 }
 
 export enum APIActions {
   Register = 'register',
   Login = 'login',
-  Confirm = 'confirm'
+  Confirm = 'confirm',
+  Repass = 'repass'
 }
 
 export const API_MESSAGES = {

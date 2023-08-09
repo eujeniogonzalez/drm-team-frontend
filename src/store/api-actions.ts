@@ -4,9 +4,22 @@ import { AxiosInstance } from 'axios';
 import { State } from '../types/state-types';
 import { APIRoutes } from '../const/api-const';
 import { Token } from '../types/token-type';
-import { ConfirmBody, LoginBody } from '../types/request-api-types';
-import { ResponseAPI, LoginPayload, RegisterPayload, ConfirmPayload } from '../types/response-api-types';
-import { RegisterBody } from '../types/request-api-types';
+
+import {
+  ConfirmBody,
+  LoginBody,
+  RepassBody,
+  RegisterBody
+} from '../types/request-api-types';
+
+import {
+  ResponseAPI,
+  LoginPayload,
+  RegisterPayload,
+  ConfirmPayload,
+  RepassPayload
+} from '../types/response-api-types';
+
 
 export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>, RegisterBody, {
   dispatch: AppDispatch;
@@ -48,6 +61,21 @@ export const confirmUserAction = createAsyncThunk<ResponseAPI<ConfirmPayload>, C
   'confirmUserAction',
   async ({ confirmID }, { extra: api }) => {
     const { data } = await api.post<ResponseAPI<ConfirmPayload>>(APIRoutes.Confirm, { confirmID });
+
+    return data;
+  }
+);
+
+export const repassUserAction = createAsyncThunk<ResponseAPI<RepassPayload>, RepassBody, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>
+(
+  'repassUserAction',
+  async ({ email }, { extra: api }) => {
+    const { data } = await api.post<ResponseAPI<RepassPayload>>(APIRoutes.Repass, { email });
 
     return data;
   }
