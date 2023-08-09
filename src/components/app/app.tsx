@@ -11,7 +11,6 @@ import NewPasswordPage from '../../pages/new-password-page/new-password-page';
 import TasksPage from '../../pages/tasks-page/tasks-page';
 import PrivateRoute from '../private-route/private-route';
 
-
 function App() {
   return (
     <Routes>
