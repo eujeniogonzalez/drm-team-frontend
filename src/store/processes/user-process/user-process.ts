@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthStatuses, Symbols } from '../../../const/common-const';
 import { UserProcess } from '../../../types/state-types';
-import { refreshAuthAction, loginUserAction, registerUserAction } from '../../api-actions';
+import { refreshAuthAction, loginUserAction, registerUserAction, confirmUserAction } from '../../api-actions';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
 
 const initialState: UserProcess = {
@@ -66,6 +66,26 @@ export const userProcess = createSlice({
         state.userAPIResponse.type = APIActions.Register;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
+      })
+      .addCase(confirmUserAction.pending, (state) => {
+        state.isUserRequestInProgress = true;
+        state.isUserRequestSuccess = false;
+      })
+      .addCase(confirmUserAction.fulfilled, (state, action) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = action.payload.success;
+        state.userAPIResponse.type = APIActions.Confirm;
+        state.userAPIResponse.body = action.payload;
+      })
+      .addCase(confirmUserAction.rejected, (state) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
+        state.userAPIResponse.type = APIActions.Confirm;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,

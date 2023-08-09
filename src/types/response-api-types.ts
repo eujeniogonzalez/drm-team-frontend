@@ -10,4 +10,5 @@ export type LoginPayload = {
   access_token: string;
 };
 
+export type ConfirmPayload = null;
 

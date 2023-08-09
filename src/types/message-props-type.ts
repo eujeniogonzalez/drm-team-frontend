@@ -1,3 +1,3 @@
 export type MessageProps = {
-  message: JSX.Element;
+  message: JSX.Element | string;
 };

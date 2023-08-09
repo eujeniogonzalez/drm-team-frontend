@@ -9,11 +9,13 @@ type LoaderProps = {
 
 function Loader({ size, color }: LoaderProps) {
   return (
-    <div className={`${size} ${color}`}>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="loader">
+      <div className={`${size} ${color}`}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 }

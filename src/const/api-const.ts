@@ -12,12 +12,14 @@ export enum APIMethods {
 export enum APIRoutes {
   Register = '/register',
   Login = '/login',
+  Confirm = '/confirm',
   Refresh = '/refresh'
 }
 
 export enum APIActions {
   Register = 'register',
-  Login = 'login'
+  Login = 'login',
+  Confirm = 'confirm'
 }
 
 export const API_MESSAGES = {

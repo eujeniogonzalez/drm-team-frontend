@@ -3,6 +3,7 @@ import { refresh } from './db/refresh';
 import { Express, Request, Response } from 'express';
 import { APIRoutes } from '../src/const/api-const';
 import { register } from './db/register';
+import { confirm } from './db/confirm';
 
 const router = (app: Express) => {
   app.post(APIRoutes.Register, (request: Request, response: Response) => {
@@ -13,6 +14,11 @@ const router = (app: Express) => {
 	app.post(APIRoutes.Login, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(login[request.method as keyof typeof login]);
+    }, 4000);
+	});
+  app.post(APIRoutes.Confirm, (request: Request, response: Response) => {
+    setTimeout(() => {
+      response.send(confirm[request.method as keyof typeof login]);
     }, 4000);
 	});
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {

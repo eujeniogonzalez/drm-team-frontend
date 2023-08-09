@@ -9,3 +9,7 @@ export type LoginBody = {
   password: string;
 };
 
+export type ConfirmBody = {
+  confirmID: string;
+};
+
