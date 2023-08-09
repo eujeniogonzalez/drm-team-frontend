@@ -1,7 +1,7 @@
 import { login } from './db/login';
 import { refresh } from './db/refresh';
 import { Express, Request, Response } from 'express';
-import { APIRoutes } from '../src/const/router-const';
+import { APIRoutes } from '../src/const/api-const';
 import { register } from './db/register';
 
 const router = (app: Express) => {

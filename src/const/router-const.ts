@@ -7,9 +7,3 @@ export enum AppRoutes {
   NewPassword = '/newpassword/:newpasswordID',
   Tasks = '/tasks'
 }
-
-export enum APIRoutes {
-  Register = '/register',
-  Login = '/login',
-  Refresh = '/refresh'
-}

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch } from '../types/state-types';
 import { AxiosInstance } from 'axios';
 import { State } from '../types/state-types';
-import { APIRoutes } from '../const/router-const';
+import { APIRoutes } from '../const/api-const';
 import { Token } from '../types/token-type';
 import { LoginBody } from '../types/request-api-types';
 import { ResponseAPI, LoginPayload, RegisterPayload } from '../types/response-api-types';

@@ -9,6 +9,12 @@ export enum APIMethods {
   POST = 'POST'
 }
 
+export enum APIRoutes {
+  Register = '/register',
+  Login = '/login',
+  Refresh = '/refresh'
+}
+
 export enum APIActions {
   Register = 'register',
   Login = 'login'
