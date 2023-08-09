@@ -13,8 +13,6 @@ function LoginPage() {
   document.title = 'Login';
 
   const authorizationStatus: AuthStatuses = useAppSelector(getAuthorizationStatus);
-  const userAPIResponse = useAppSelector(getUserAPIResponse);
-  console.log(userAPIResponse);
 
   const getPageContent = () => {
     switch (true) {
