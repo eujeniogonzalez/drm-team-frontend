@@ -1,11 +1,11 @@
 import { APIActions } from '../const/api-const';
 import { AuthStatuses } from '../const/common-const';
 import { store } from '../store/index';
-import { RegisterPayload, ResponseAPI } from './response-api-types';
+import { LoginPayload, RegisterPayload, ResponseAPI } from './response-api-types';
 
 export type APIResponse = {
   type: APIActions | null;
-  body: ResponseAPI<RegisterPayload> | null;
+  body: ResponseAPI<RegisterPayload | LoginPayload> | null;
 };
 
 export type UserProcess = {

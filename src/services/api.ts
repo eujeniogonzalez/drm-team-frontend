@@ -7,10 +7,7 @@ const API_URL = (process.env.NODE_ENV === 'production') ? API_URL_PROD : API_URL
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: API_URL,
-    timeout: REQUEST_TIMEOUT,
-    validateStatus: (status) => {
-      return status === 200 || status === 400;
-    }
+    timeout: REQUEST_TIMEOUT
   });
 
   api.interceptors.request.use(

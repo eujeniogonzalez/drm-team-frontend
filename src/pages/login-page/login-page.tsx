@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
 import LoginForm from '../../components/login-form/login-form';
 import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus } from '../../store/processes/user-process/user-selectors';
+import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
@@ -13,6 +13,8 @@ function LoginPage() {
   document.title = 'Login';
 
   const authorizationStatus: AuthStatuses = useAppSelector(getAuthorizationStatus);
+  const userAPIResponse = useAppSelector(getUserAPIResponse);
+  console.log(userAPIResponse);
 
   const getPageContent = () => {
     switch (true) {

@@ -30,14 +30,15 @@ export const userProcess = createSlice({
         state.isUserRequestInProgress = true;
         state.isUserRequestSuccess = false;
       })
-      .addCase(registerUserAction.fulfilled, (state) => {
+      .addCase(registerUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = true;
-        state.userAPIResponse.type = null;
-        state.userAPIResponse.body = null;
+        state.isUserRequestSuccess = action.payload.success;
+        state.userAPIResponse.type = APIActions.Register;
+        state.userAPIResponse.body = action.payload;
       })
       .addCase(registerUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Register;
         state.userAPIResponse.body = {
           success: false,
@@ -50,17 +51,26 @@ export const userProcess = createSlice({
         state.isUserRequestSuccess = false;
       })
       .addCase(loginUserAction.fulfilled, (state, action) => {
+        const isSuccess = action.payload.success;
+
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = true; // todo Проверить если сервер отдал 400 с объектом всех данных, api.
-        state.userAPIResponse.type = null;
-        state.userAPIResponse.body = null;
-        state.authorizationStatus = AuthStatuses.Auth;
-        state.accessToken = action.payload.payload.access_token;
+        state.isUserRequestSuccess = isSuccess;
+        state.userAPIResponse.type = APIActions.Login;
+        state.userAPIResponse.body = action.payload;
+        state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
+        state.accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
       })
       .addCase(loginUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
+        state.userAPIResponse.type = APIActions.Register;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
       })
       .addCase(refreshAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthStatuses.Auth;

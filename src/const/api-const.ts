@@ -10,7 +10,8 @@ export enum APIMethods {
 }
 
 export enum APIActions {
-  Register = 'register'
+  Register = 'register',
+  Login = 'login'
 }
 
 export const API_MESSAGES = {
