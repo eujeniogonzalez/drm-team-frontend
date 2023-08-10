@@ -42,7 +42,7 @@ function LoginForm() {
       <input
         className="input login-form-input-password"
         type="password"
-        placeholder="Придумайте пароль"
+        placeholder="Пароль"
         value={password}
         onInput={inputPasswordHandler}
       />
@@ -50,7 +50,7 @@ function LoginForm() {
       <input
         className="submit login-form-submit-button" 
         type="submit" 
-        value="Зарегистрироваться" 
+        value="Войти" 
         onClick={loginButtonClickHandler} 
       />
 
