@@ -19,7 +19,8 @@ import {
   RegisterPayload,
   ConfirmPayload,
   RepassPayload,
-  NewPasswordPayload
+  NewPasswordPayload,
+  LogoutPayload
 } from '../types/response-api-types';
 
 
@@ -93,6 +94,21 @@ export const newPasswordUserAction = createAsyncThunk<ResponseAPI<NewPasswordPay
   'newPasswordUserAction',
   async ({ repassID, new_password, new_repeat_password }, { extra: api }) => {
     const { data } = await api.post<ResponseAPI<NewPasswordPayload>>(APIRoutes.NewPassword, { repassID, new_password, new_repeat_password });
+
+    return data;
+  }
+);
+
+export const logoutUserAction = createAsyncThunk<ResponseAPI<LogoutPayload>, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>
+(
+  'logoutUserAction',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<ResponseAPI<LogoutPayload>>(APIRoutes.Logout);
 
     return data;
   }

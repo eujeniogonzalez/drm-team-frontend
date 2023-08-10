@@ -1,4 +1,4 @@
-@import '../../const/const.scss';
+@import '../../../const/const.scss';
 
 header {
   background-color: $main-color;
@@ -22,10 +22,6 @@ header {
       @media screen and (max-width: 420px) {
         font-size: 24px;
       }
-    }
-
-    .header-login-link {
-      font-size: 18px;
     }
   }
 

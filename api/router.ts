@@ -6,6 +6,7 @@ import { register } from './db/register';
 import { confirm } from './db/confirm';
 import { repass } from './db/repass';
 import { newPassword } from './db/new-password';
+import { logout } from './db/logout';
 
 const router = (app: Express) => {
   app.post(APIRoutes.Register, (request: Request, response: Response) => {
@@ -31,6 +32,11 @@ const router = (app: Express) => {
   app.post(APIRoutes.NewPassword, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(newPassword[request.method as keyof typeof login]);
+    }, 4000);
+	});
+  app.get(APIRoutes.Logout, (request: Request, response: Response) => {
+    setTimeout(() => {
+      response.send(logout[request.method as keyof typeof refresh]);
     }, 4000);
 	});
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {

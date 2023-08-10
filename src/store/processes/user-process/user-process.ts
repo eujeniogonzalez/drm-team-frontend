@@ -9,7 +9,8 @@ import {
   registerUserAction,
   confirmUserAction,
   repassUserAction,
-  newPasswordUserAction
+  newPasswordUserAction,
+  logoutUserAction
 } from '../../api-actions';
 
 const initialState: UserProcess = {
@@ -134,6 +135,28 @@ export const userProcess = createSlice({
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.NewPassword;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
+      })
+      .addCase(logoutUserAction.pending, (state) => {
+        state.isUserRequestInProgress = true;
+        state.isUserRequestSuccess = false;
+      })
+      .addCase(logoutUserAction.fulfilled, (state, action) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = action.payload.success;
+        state.userAPIResponse.type = APIActions.Logout;
+        state.userAPIResponse.body = action.payload;
+        state.authorizationStatus = AuthStatuses.NoAuth;
+        state.accessToken = Symbols.Empty;
+      })
+      .addCase(logoutUserAction.rejected, (state) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
+        state.userAPIResponse.type = APIActions.Logout;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,

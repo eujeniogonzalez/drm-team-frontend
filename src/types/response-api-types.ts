@@ -16,3 +16,5 @@ export type RepassPayload = null;
 
 export type NewPasswordPayload = null;
 
+export type LogoutPayload = null;
+
