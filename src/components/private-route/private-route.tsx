@@ -1,5 +1,5 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { AuthStatuses } from '../../const/common-const';
 import { useAppSelector } from '../../hooks';
@@ -9,14 +9,15 @@ import { PrivateRouteProps } from '../../types/private-route-props';
 function PrivateRoute(props: PrivateRouteProps) {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const { children } = props;
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (authStatus !== AuthStatuses.Auth) {
+      navigate(AppRoutes.Login);
+    }
+  }, [authStatus]);
 
-  switch (authStatus) {
-    case AuthStatuses.Auth:
-      return children;
-
-    default:
-      return <Navigate to={AppRoutes.Login} />;
-  }
+  return children;
 }
 
 export default PrivateRoute;
