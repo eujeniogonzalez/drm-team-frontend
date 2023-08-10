@@ -9,7 +9,8 @@ import {
   ConfirmBody,
   LoginBody,
   RepassBody,
-  RegisterBody
+  RegisterBody,
+  NewPasswordBody
 } from '../types/request-api-types';
 
 import {
@@ -17,7 +18,8 @@ import {
   LoginPayload,
   RegisterPayload,
   ConfirmPayload,
-  RepassPayload
+  RepassPayload,
+  NewPasswordPayload
 } from '../types/response-api-types';
 
 
@@ -76,6 +78,21 @@ export const repassUserAction = createAsyncThunk<ResponseAPI<RepassPayload>, Rep
   'repassUserAction',
   async ({ email }, { extra: api }) => {
     const { data } = await api.post<ResponseAPI<RepassPayload>>(APIRoutes.Repass, { email });
+
+    return data;
+  }
+);
+
+export const newPasswordUserAction = createAsyncThunk<ResponseAPI<NewPasswordPayload>, NewPasswordBody, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>
+(
+  'newPasswordUserAction',
+  async ({ repassID, new_password, new_repeat_password }, { extra: api }) => {
+    const { data } = await api.post<ResponseAPI<NewPasswordPayload>>(APIRoutes.NewPassword, { repassID, new_password, new_repeat_password });
 
     return data;
   }

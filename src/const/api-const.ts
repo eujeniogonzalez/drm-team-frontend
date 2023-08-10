@@ -14,6 +14,7 @@ export enum APIRoutes {
   Login = '/login',
   Confirm = '/confirm',
   Repass = '/repass',
+  NewPassword = '/newpassword',
   Refresh = '/refresh'
 }
 
@@ -21,7 +22,8 @@ export enum APIActions {
   Register = 'register',
   Login = 'login',
   Confirm = 'confirm',
-  Repass = 'repass'
+  Repass = 'repass',
+  NewPassword = 'newPassword'
 }
 
 export const API_MESSAGES = {

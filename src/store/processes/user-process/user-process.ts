@@ -1,8 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthStatuses, Symbols } from '../../../const/common-const';
 import { UserProcess } from '../../../types/state-types';
-import { refreshAuthAction, loginUserAction, registerUserAction, confirmUserAction, repassUserAction } from '../../api-actions';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
+
+import {
+  refreshAuthAction,
+  loginUserAction,
+  registerUserAction,
+  confirmUserAction,
+  repassUserAction,
+  newPasswordUserAction
+} from '../../api-actions';
 
 const initialState: UserProcess = {
   isUserRequestInProgress: false,
@@ -106,6 +114,26 @@ export const userProcess = createSlice({
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Repass;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
+      })
+      .addCase(newPasswordUserAction.pending, (state) => {
+        state.isUserRequestInProgress = true;
+        state.isUserRequestSuccess = false;
+      })
+      .addCase(newPasswordUserAction.fulfilled, (state, action) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = action.payload.success;
+        state.userAPIResponse.type = APIActions.NewPassword;
+        state.userAPIResponse.body = action.payload;
+      })
+      .addCase(newPasswordUserAction.rejected, (state) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
+        state.userAPIResponse.type = APIActions.NewPassword;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,

@@ -14,3 +14,5 @@ export type ConfirmPayload = null;
 
 export type RepassPayload = null;
 
+export type NewPasswordPayload = null;
+

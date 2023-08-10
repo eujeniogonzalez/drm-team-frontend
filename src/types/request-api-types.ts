@@ -17,3 +17,9 @@ export type RepassBody = {
   email: string;
 };
 
+export type NewPasswordBody = {
+  repassID: string;
+  new_password: string;
+  new_repeat_password: string;
+};
+

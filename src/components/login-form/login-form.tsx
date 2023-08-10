@@ -27,40 +27,38 @@ function LoginForm() {
   };
   
   return (
-    <>
-      <div className="login-form-content">
-        <div className="login-form-title">Вход</div>
-        
-        <input 
-          className="input login-form-input-login"
-          type="text"
-          placeholder="E-mail"
-          autoFocus
-          value={email}
-          onInput={inputEmailHandler}
-        />
+    <div className="login-form-content">
+      <div className="login-form-title">Вход</div>
+      
+      <input 
+        className="input login-form-input-login"
+        type="text"
+        placeholder="E-mail"
+        autoFocus
+        value={email}
+        onInput={inputEmailHandler}
+      />
 
-        <input
-          className="input login-form-input-password"
-          type="password"
-          placeholder="Придумайте пароль"
-          value={password}
-          onInput={inputPasswordHandler}
-        />
+      <input
+        className="input login-form-input-password"
+        type="password"
+        placeholder="Придумайте пароль"
+        value={password}
+        onInput={inputPasswordHandler}
+      />
 
-        <input
-          className="submit login-form-submit-button" 
-          type="submit" 
-          value="Зарегистрироваться" 
-          onClick={loginButtonClickHandler} 
-        />
+      <input
+        className="submit login-form-submit-button" 
+        type="submit" 
+        value="Зарегистрироваться" 
+        onClick={loginButtonClickHandler} 
+      />
 
-        <div className="login-form-links">
-          <Link className="dark-link login-form-links-item" to={AppRoutes.Repass}>Вспомнить пароль</Link>
-          <Link className="dark-link login-form-links-item" to={AppRoutes.Register}>Регистрация</Link>
-        </div>
+      <div className="login-form-links">
+        <Link className="dark-link login-form-links-item" to={AppRoutes.Repass}>Вспомнить пароль</Link>
+        <Link className="dark-link login-form-links-item" to={AppRoutes.Register}>Регистрация</Link>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,10 +1,11 @@
+import { Express, Request, Response } from 'express';
 import { login } from './db/login';
 import { refresh } from './db/refresh';
-import { Express, Request, Response } from 'express';
 import { APIRoutes } from '../src/const/api-const';
 import { register } from './db/register';
 import { confirm } from './db/confirm';
 import { repass } from './db/repass';
+import { newPassword } from './db/new-password';
 
 const router = (app: Express) => {
   app.post(APIRoutes.Register, (request: Request, response: Response) => {
@@ -25,6 +26,11 @@ const router = (app: Express) => {
   app.post(APIRoutes.Repass, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(repass[request.method as keyof typeof login]);
+    }, 4000);
+	});
+  app.post(APIRoutes.NewPassword, (request: Request, response: Response) => {
+    setTimeout(() => {
+      response.send(newPassword[request.method as keyof typeof login]);
     }, 4000);
 	});
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {
