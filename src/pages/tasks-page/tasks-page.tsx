@@ -8,7 +8,7 @@ function TasksPage() {
   document.title = 'Tasks';
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         <h1>Tasks Page</h1>
       </Content>

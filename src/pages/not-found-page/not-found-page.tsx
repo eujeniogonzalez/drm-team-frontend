@@ -10,7 +10,7 @@ function NotFoundPage() {
   document.title = 'Not Found';
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         <div className="not-found-message">
           <p>

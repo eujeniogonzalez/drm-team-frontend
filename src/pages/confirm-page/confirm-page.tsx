@@ -35,7 +35,7 @@ function ConfirmPage() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         {getPageContent()}
       </Content>

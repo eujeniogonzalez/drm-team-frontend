@@ -10,7 +10,7 @@ function MainPage() {
   document.title = 'Main';
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         <div className="main-page-content">
           <div className="main-page-title">Здесь лендинг</div>

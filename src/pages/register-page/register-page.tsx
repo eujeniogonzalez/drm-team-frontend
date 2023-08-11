@@ -20,7 +20,7 @@ function RegisterPage() {
   const getPageContent = () => {
     switch (true) {
       case authorizationStatus === AuthStatuses.Auth:
-        return <Navigate to={AppRoutes.Tasks}/>;
+        return <Navigate to={AppRoutes.Tasks} />;
     
       case isUserRegistered:
         return <Message message={JSX_MESSAGES.SUCCESS_REGISTER} />;
@@ -32,7 +32,7 @@ function RegisterPage() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         {getPageContent()}
       </Content>

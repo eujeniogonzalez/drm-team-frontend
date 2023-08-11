@@ -17,7 +17,7 @@ function LoginPage() {
   const getPageContent = () => {
     switch (true) {
       case authorizationStatus === AuthStatuses.Auth:
-        return <Navigate to={AppRoutes.Tasks}/>
+        return <Navigate to={AppRoutes.Tasks} />
     
       default:
         return <LoginForm />;
@@ -26,7 +26,7 @@ function LoginPage() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <Content>
         {getPageContent()}
       </Content>
