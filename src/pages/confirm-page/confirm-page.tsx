@@ -5,16 +5,19 @@ import Content from '../../components/content/content';
 import Loader from '../../components/loader/loader';
 import { LoaderColors, LoaderSizes } from '../../const/loader-const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
-import { useParams } from 'react-router-dom';
+import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
+import { Navigate, useParams } from 'react-router-dom';
 import { confirmUserAction } from '../../store/api-actions';
 import Message from '../../components/message/message';
+import { AuthStatuses } from '../../const/common-const';
+import { AppRoutes } from '../../const/router-const';
 
 function ConfirmPage() {
   document.title = 'Confirm';
 
   const { confirmID } = useParams();
   const userAPIResponse = useAppSelector(getUserAPIResponse);
+  const authStatus = useAppSelector(getAuthorizationStatus)
   const dispatch = useAppDispatch();
 
   if (confirmID && !userAPIResponse.type) {
@@ -23,6 +26,9 @@ function ConfirmPage() {
 
   const getPageContent = () => {
     switch (true) {
+      case authStatus === AuthStatuses.Auth:
+        return <Navigate to={AppRoutes.Tasks} />
+
       case userAPIResponse.body !== null:
         if (userAPIResponse.body !== null) {
           return <Message message={userAPIResponse.body.message} />;

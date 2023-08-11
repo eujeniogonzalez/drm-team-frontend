@@ -14,12 +14,12 @@ import { AppRoutes } from '../../const/router-const';
 function RegisterPage() {
   document.title = 'Register';
 
-  const authorizationStatus: AuthStatuses = useAppSelector(getAuthorizationStatus);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const isUserRegistered = useAppSelector(getIsUserRequestSuccess);
   
   const getPageContent = () => {
     switch (true) {
-      case authorizationStatus === AuthStatuses.Auth:
+      case authStatus === AuthStatuses.Auth:
         return <Navigate to={AppRoutes.Tasks} />;
     
       case isUserRegistered:
