@@ -11,9 +11,10 @@ import { confirmUserAction } from '../../store/api-actions';
 import Message from '../../components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { AppRoutes } from '../../const/router-const';
+import { META } from '../../const/meta-const';
 
 function ConfirmPage() {
-  document.title = 'Confirm';
+  document.title = META.TITLE.CONFIRM;
 
   const { confirmID } = useParams();
   const userAPIResponse = useAppSelector(getUserAPIResponse);

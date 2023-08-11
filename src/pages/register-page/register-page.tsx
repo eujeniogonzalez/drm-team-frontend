@@ -10,9 +10,10 @@ import { JSX_MESSAGES } from '../../const/messages-const';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
+import { META } from '../../const/meta-const';
 
 function RegisterPage() {
-  document.title = 'Register';
+  document.title = META.TITLE.REGISTER;
 
   const authStatus = useAppSelector(getAuthorizationStatus);
   const isUserRegistered = useAppSelector(getIsUserRequestSuccess);

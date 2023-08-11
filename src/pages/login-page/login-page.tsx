@@ -8,9 +8,10 @@ import { getAuthorizationStatus } from '../../store/processes/user-process/user-
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
+import { META } from '../../const/meta-const';
 
 function LoginPage() {
-  document.title = 'Login';
+  document.title = META.TITLE.LOGIN;
 
   const authStatus = useAppSelector(getAuthorizationStatus);
 

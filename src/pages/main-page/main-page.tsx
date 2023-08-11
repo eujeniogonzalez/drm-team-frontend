@@ -5,9 +5,11 @@ import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
+import { META } from '../../const/meta-const';
 
 function MainPage() {
-  document.title = 'Main';
+  document.title = META.TITLE.MAIN;
+
   return (
     <>
       <Header />

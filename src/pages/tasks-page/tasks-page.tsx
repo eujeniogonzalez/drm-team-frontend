@@ -3,9 +3,11 @@ import React from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
+import { META } from '../../const/meta-const';
 
 function TasksPage() {
-  document.title = 'Tasks';
+  document.title = META.TITLE.TASKS;
+
   return (
     <>
       <Header />

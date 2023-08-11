@@ -9,9 +9,10 @@ import Message from '../../components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
+import { META } from '../../const/meta-const';
 
 function NewPasswordPage() {
-  document.title = 'New Password';
+  document.title = META.TITLE.NEW_PASSWORD;
   
   const authStatus = useAppSelector(getAuthorizationStatus);
   const userAPIResponse = useAppSelector(getUserAPIResponse);
