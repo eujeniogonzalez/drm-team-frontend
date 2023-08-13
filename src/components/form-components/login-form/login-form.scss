@@ -1,3 +1,5 @@
+@import '../../../const/const.scss';
+
 .login-form-content {
   width: 90%;
   max-width: 400px;
@@ -7,10 +9,6 @@
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-  }
-
-  .login-form-input-login, .login-form-input-password, .login-form-submit-button {
-    margin-top: 20px;
   }
 
   .login-form-links {

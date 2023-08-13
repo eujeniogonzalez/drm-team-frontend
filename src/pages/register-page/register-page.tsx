@@ -2,7 +2,7 @@ import React  from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
-import RegisterForm from '../../components/register-form/register-form';
+import RegisterForm from '../../components/form-components/register-form/register-form';
 import Message from '../../components/message/message';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getIsUserRequestSuccess } from '../../store/processes/user-process/user-selectors';

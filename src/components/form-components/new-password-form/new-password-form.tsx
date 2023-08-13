@@ -1,9 +1,9 @@
 import './new-password-form.scss';
-import { Symbols } from '../../const/common-const';
-import { useAppDispatch } from '../../hooks';
+import { Symbols } from '../../../const/common-const';
+import { useAppDispatch } from '../../../hooks';
 import React, { ChangeEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { newPasswordUserAction } from '../../store/api-actions';
+import { newPasswordUserAction } from '../../../store/api-actions';
 
 function NewPasswordForm() {
   const dispatch = useAppDispatch();
@@ -46,7 +46,7 @@ function NewPasswordForm() {
       />
 
       <input
-        className="submit new-password-form-submit-button" 
+        className="button new-password-form-submit-button" 
         type="submit"
         value="Сохранить"
         onClick={newPasswordButtonClickHandler}

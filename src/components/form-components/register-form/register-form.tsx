@@ -1,10 +1,10 @@
 import './register-form.scss';
 import React, { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../const/router-const';
-import { Symbols } from '../../const/common-const';
-import { useAppDispatch } from '../../hooks';
-import { registerUserAction } from '../../store/api-actions';
+import { AppRoutes } from '../../../const/router-const';
+import { Symbols } from '../../../const/common-const';
+import { useAppDispatch } from '../../../hooks';
+import { registerUserAction } from '../../../store/api-actions';
 
 function RegisterForm() {
   const dispatch = useAppDispatch();
@@ -62,7 +62,7 @@ function RegisterForm() {
         />
         
         <input
-          className="submit register-form-submit-button" 
+          className="button register-form-submit-button" 
           type="submit" 
           value="Зарегистрироваться" 
           onClick={registerButtonClickHandler} 

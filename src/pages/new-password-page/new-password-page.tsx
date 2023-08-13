@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
-import NewPasswordForm from '../../components/new-password-form/new-password-form';
+import NewPasswordForm from '../../components/form-components/new-password-form/new-password-form';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import Message from '../../components/message/message';
