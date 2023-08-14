@@ -47,7 +47,10 @@ function LoginForm() {
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
         />
 
-        <SubmitButton submitButtonClickHandler={submitLoginFormHandler} />
+        <SubmitButton
+          submitButtonClickHandler={submitLoginFormHandler}
+          buttonText='Войти'
+        />
       </form>
 
       <div className='login-form-links'>

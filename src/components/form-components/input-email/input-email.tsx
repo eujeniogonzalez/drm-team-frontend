@@ -4,6 +4,8 @@ import { EMAIL_REGEXP, MAX_EMAIL_LENGTH, Symbols } from '../../../const/common-c
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../const/messages-const';
 import { InputEmailProps } from '../../../types/form-props-types';
+import { useAppSelector } from '../../../hooks';
+import { getIsUserRequestInProgress } from '../../../store/processes/user-process/user-selectors';
 
 function InputEmail({
   passEmailToParent,
@@ -11,6 +13,7 @@ function InputEmail({
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit
 }: InputEmailProps) {
+  const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const [email, setEmail] = useState<string>(Symbols.Empty);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
@@ -68,6 +71,7 @@ function InputEmail({
         name='email'
         maxLength={MAX_EMAIL_LENGTH}
         autoFocus
+        disabled={isUserRequestInProgress}
         value={email}
         onInput={inputEmailHandler}
         onBlur={blurEmailHandler}

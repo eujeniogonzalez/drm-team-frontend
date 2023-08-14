@@ -6,16 +6,20 @@ import Loader from '../../loader/loader';
 import { LoaderColors, LoaderSizes } from '../../../const/loader-const';
 import { SubmitButtonProps } from '../../../types/form-props-types';
 
-function SubmitButton({ submitButtonClickHandler }: SubmitButtonProps) {
+function SubmitButton({
+  submitButtonClickHandler,
+  buttonText
+}: SubmitButtonProps) {
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
 
   return (
     <button
       className='button submit-button'
       type='submit'
+      disabled={isUserRequestInProgress}
       onClick={() => submitButtonClickHandler}
     >
-      {isUserRequestInProgress ? <Loader color={LoaderColors.White} size={LoaderSizes.Micro} /> : 'Войти'}
+      {isUserRequestInProgress ? <Loader color={LoaderColors.White} size={LoaderSizes.Micro} /> : buttonText}
     </button>
   );
 }

@@ -4,13 +4,18 @@ import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../const/co
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../const/messages-const';
 import { InputPasswordProps } from '../../../types/form-props-types';
+import { useAppSelector } from '../../../hooks';
+import { getIsUserRequestInProgress } from '../../../store/processes/user-process/user-selectors';
 
 function InputPassword({
   passPasswordToParent,
   passPasswordValidStatusToParent,
   isFormTriedToSubmit,
-  resetIsFormTriedToSubmit
+  resetIsFormTriedToSubmit,
+  passwordForMatching,
+  placeholder = 'Пароль'
 }: InputPasswordProps) {
+  const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const [password, setPassword] = useState<string>(Symbols.Empty);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
@@ -28,13 +33,18 @@ function InputPassword({
   const showErrors = () => {
     if (password === Symbols.Empty) return;
 
-    switch (isPasswordValid) {
-      case true:
+    switch (true) {
+      case (passwordForMatching && passwordForMatching !== password):
+        setErrorShouldBeShown(true);
+        setErrorMassage(FORM_MESSAGES.PASSWORDS_NOT_MATCH);
+        break;
+
+      case isPasswordValid:
         setErrorShouldBeShown(false);
         setErrorMassage(Symbols.Empty);
         break;
     
-      case false:
+      case !isPasswordValid:
         setErrorShouldBeShown(true);
         setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT);
         break;
@@ -64,8 +74,9 @@ function InputPassword({
       <input
         className={`input ${errorShouldBeShown ? 'input-wrong' : Symbols.Empty}`} // todo Replace to const and in login
         type='password'
-        placeholder='Пароль'
+        placeholder={placeholder}
         autoComplete='off'
+        disabled={isUserRequestInProgress}
         maxLength={MAX_PASSWORD_LENGTH}
         value={password}
         onInput={inputPasswordHandler}

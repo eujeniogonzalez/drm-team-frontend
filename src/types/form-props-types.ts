@@ -12,8 +12,11 @@ export type InputPasswordProps = {
   passPasswordValidStatusToParent: Dispatch<SetStateAction<boolean>>;
   isFormTriedToSubmit: boolean;
   resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
+  passwordForMatching?: string;
+  placeholder?: string;
 }
 
 export type SubmitButtonProps = {
-  submitButtonClickHandler: (e: FormEvent<HTMLFormElement>) => void
+  submitButtonClickHandler: (e: FormEvent<HTMLFormElement>) => void;
+  buttonText: string;
 };
