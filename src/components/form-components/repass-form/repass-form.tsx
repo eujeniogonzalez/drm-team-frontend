@@ -1,43 +1,47 @@
 import './repass-form.scss';
-import React, { ChangeEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../const/router-const';
 import { useAppDispatch } from '../../../hooks';
 import { Symbols } from '../../../const/common-const';
 import { repassUserAction } from '../../../store/api-actions';
+import InputEmail from '../input-email/input-email';
+import SubmitButton from '../submit-button/submit-button';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState<string>(Symbols.Empty);
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
-  const inputEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const submitRepassFormHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const repassButtonClickHandler = () => {
+    setIsFormTriedToSubmit(true);
+
+    if (!isEmailValid) return;
+
     dispatch(repassUserAction({ email }));
   };
   
   return (
     <div className="repass-form-content">
       <div className="repass-form-title">Вспомнить пароль</div>
-      
-      <input 
-        className="input repass-form-input-login"
-        type="text"
-        placeholder="E-mail"
-        autoFocus
-        value={email}
-        onInput={inputEmailHandler}
-      />
 
-      <input
-        className="button repass-form-submit-button"
-        type="submit"
-        value="Вспомнить"
-        onClick={repassButtonClickHandler}
-      />
+      <form onSubmit={submitRepassFormHandler}>
+        <InputEmail
+          passEmailToParent={setEmail}
+          passEmailValidStatusToParent={setIsEmailValid}
+          isFormTriedToSubmit={isFormTriedToSubmit}
+          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+        />
+
+        <SubmitButton
+          submitButtonClickHandler={submitRepassFormHandler}
+          buttonText='Вспомнить'
+        />
+      </form>
 
       <div className="repass-form-links">
         <Link className="dark-link repass-form-links-item" to={AppRoutes.Login}>Войти</Link>
