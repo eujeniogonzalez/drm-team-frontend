@@ -26,8 +26,8 @@ function RepassForm() {
   };
   
   return (
-    <div className="repass-form-content">
-      <div className="repass-form-title">Вспомнить пароль</div>
+    <div className='repass-form-content'>
+      <div className='repass-form-title'>Вспомнить пароль</div>
 
       <form onSubmit={submitRepassFormHandler}>
         <InputEmail
@@ -43,9 +43,9 @@ function RepassForm() {
         />
       </form>
 
-      <div className="repass-form-links">
-        <Link className="dark-link repass-form-links-item" to={AppRoutes.Login}>Войти</Link>
-        <Link className="dark-link repass-form-links-item" to={AppRoutes.Register}>Регистрация</Link>
+      <div className='repass-form-links'>
+        <Link className='dark-link repass-form-links-item' to={AppRoutes.Login}>Войти</Link>
+        <Link className='dark-link repass-form-links-item' to={AppRoutes.Register}>Регистрация</Link>
       </div>
     </div>
   );

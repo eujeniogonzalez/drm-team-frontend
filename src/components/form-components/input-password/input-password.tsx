@@ -1,5 +1,5 @@
 import './input-password.scss';
-import React, { ChangeEvent, useState } from 'react';
+import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
 import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../const/messages-const';
@@ -34,6 +34,11 @@ function InputPassword({
     if (password === Symbols.Empty) return;
 
     switch (true) {
+      case !isPasswordValid:
+        setErrorShouldBeShown(true);
+        setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT);
+        break;
+        
       case (passwordForMatching && passwordForMatching !== password):
         setErrorShouldBeShown(true);
         setErrorMassage(FORM_MESSAGES.PASSWORDS_NOT_MATCH);
@@ -42,11 +47,6 @@ function InputPassword({
       case isPasswordValid:
         setErrorShouldBeShown(false);
         setErrorMassage(Symbols.Empty);
-        break;
-    
-      case !isPasswordValid:
-        setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT);
         break;
     }
   };
@@ -69,6 +69,13 @@ function InputPassword({
     passPasswordToParent(password);
   };
 
+  const keyDownPasswordHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter') return;
+
+    showErrors();
+    passPasswordToParent(password);
+  };
+
   return (
     <div className='input-password'>
       <input
@@ -81,6 +88,7 @@ function InputPassword({
         value={password}
         onInput={inputPasswordHandler}
         onBlur={blurPasswordHandler}
+        onKeyDown={keyDownPasswordHandler}
       />
 
       <InputErrorMessage message={errorMessage} />
