@@ -13,7 +13,8 @@ function InputPassword({
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit,
   passwordForMatching,
-  placeholder = 'Пароль'
+  placeholder = 'Пароль',
+  autofocus = false
 }: InputPasswordProps) {
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const [password, setPassword] = useState<string>(Symbols.Empty);
@@ -83,6 +84,7 @@ function InputPassword({
         type='password'
         placeholder={placeholder}
         autoComplete='off'
+        autoFocus={autofocus}
         disabled={isUserRequestInProgress}
         maxLength={MAX_PASSWORD_LENGTH}
         value={password}

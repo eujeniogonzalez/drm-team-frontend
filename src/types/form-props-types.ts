@@ -11,6 +11,7 @@ export type InputPasswordProps = {
   passPasswordToParent: Dispatch<SetStateAction<string>>;
   passPasswordValidStatusToParent: Dispatch<SetStateAction<boolean>>;
   isFormTriedToSubmit: boolean;
+  autofocus?: boolean;
   resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
   passwordForMatching?: string;
   placeholder?: string;

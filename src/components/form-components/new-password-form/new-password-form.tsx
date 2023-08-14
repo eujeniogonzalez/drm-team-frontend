@@ -39,6 +39,7 @@ function NewPasswordForm() {
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
           placeholder='Придумайте пароль'
+          autofocus={true}
         />
 
         <InputPassword
