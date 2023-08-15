@@ -4,6 +4,7 @@ import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
 import Message from '../../components/message/message';
 import { META } from '../../const/meta-const';
+import { MESSAGES } from '../../const/messages-const';
 
 function NotFoundPage() {
   document.title = META.TITLE.NOT_FOUND;
@@ -12,7 +13,7 @@ function NotFoundPage() {
     <>
       <Header />
       <Content>
-        <Message message={'Такой страницы не существует'} />
+        <Message message={MESSAGES.NOT_FOUND_PAGE} />
       </Content>
       <Footer />
     </>

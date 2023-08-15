@@ -8,6 +8,7 @@ import { loginUserAction } from '../../../store/api-actions';
 import InputEmail from '../input-email/input-email';
 import InputPassword from '../input-password/input-password';
 import SubmitButton from '../submit-button/submit-button';
+import { UI_NAMES } from '../../../const/ui-const';
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ function LoginForm() {
 
   return (
     <div className='login-form-content'>
-      <div className='login-form-title'>Вход</div>
+      <div className='login-form-title'>{UI_NAMES.ENTRANCE}</div>
 
       <form onSubmit={submitLoginFormHandler}>
         <InputEmail
@@ -49,13 +50,13 @@ function LoginForm() {
 
         <SubmitButton
           submitButtonClickHandler={submitLoginFormHandler}
-          buttonText='Войти'
+          buttonText={UI_NAMES.ENTER}
         />
       </form>
 
       <div className='login-form-links'>
-        <Link className='dark-link login-form-links-item' to={AppRoutes.Repass}>Вспомнить пароль</Link>
-        <Link className='dark-link login-form-links-item' to={AppRoutes.Register}>Регистрация</Link>
+        <Link className='dark-link login-form-links-item' to={AppRoutes.Repass}>{UI_NAMES.REMEMBER_PASSWORD}</Link>
+        <Link className='dark-link login-form-links-item' to={AppRoutes.Register}>{UI_NAMES.REGISTRATION}</Link>
       </div>
     </div>
   );

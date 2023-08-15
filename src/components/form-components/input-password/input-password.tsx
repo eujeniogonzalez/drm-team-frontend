@@ -6,6 +6,7 @@ import { FORM_MESSAGES } from '../../../const/messages-const';
 import { InputPasswordProps } from '../../../types/form-props-types';
 import { useAppSelector } from '../../../hooks';
 import { getIsUserRequestInProgress } from '../../../store/processes/user-process/user-selectors';
+import { UI_NAMES } from '../../../const/ui-const';
 
 function InputPassword({
   passPasswordToParent,
@@ -13,7 +14,7 @@ function InputPassword({
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit,
   passwordForMatching,
-  placeholder = 'Пароль',
+  placeholder = UI_NAMES.PASSWORD,
   autofocus = false
 }: InputPasswordProps) {
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);

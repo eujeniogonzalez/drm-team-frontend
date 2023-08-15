@@ -6,6 +6,7 @@ import { FORM_MESSAGES } from '../../../const/messages-const';
 import { InputEmailProps } from '../../../types/form-props-types';
 import { useAppSelector } from '../../../hooks';
 import { getIsUserRequestInProgress } from '../../../store/processes/user-process/user-selectors';
+import { UI_NAMES } from '../../../const/ui-const';
 
 function InputEmail({
   passEmailToParent,
@@ -67,7 +68,7 @@ function InputEmail({
       <input 
         className={`input ${errorShouldBeShown ? 'input-wrong' : Symbols.Empty}`}
         type='text'
-        placeholder='E-mail'
+        placeholder={UI_NAMES.E_MAIL}
         name='email'
         maxLength={MAX_EMAIL_LENGTH}
         autoFocus

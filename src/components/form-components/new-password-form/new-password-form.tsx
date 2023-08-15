@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { newPasswordUserAction } from '../../../store/api-actions';
 import InputPassword from '../input-password/input-password';
 import SubmitButton from '../submit-button/submit-button';
+import { UI_NAMES } from '../../../const/ui-const';
 
 function NewPasswordForm() {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ function NewPasswordForm() {
 
   return (
     <div className='new-password-form-content'>
-      <div className='new-password-form-title'>Новый пароль</div>
+      <div className='new-password-form-title'>{UI_NAMES.NEW_PASSWORD}</div>
 
       <form onSubmit={submitNewPasswordFormHandler}>
         <InputPassword
@@ -38,7 +39,7 @@ function NewPasswordForm() {
           passPasswordValidStatusToParent={setIsPasswordValid}
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          placeholder='Придумайте пароль'
+          placeholder={UI_NAMES.COME_UP_WITH_PASSWORD}
           autofocus={true}
         />
 
@@ -48,12 +49,12 @@ function NewPasswordForm() {
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
           passwordForMatching={password}
-          placeholder='Повторите пароль'
+          placeholder={UI_NAMES.REPEAT_PASSWORD}
         />
 
         <SubmitButton
           submitButtonClickHandler={submitNewPasswordFormHandler}
-          buttonText='Изменить пароль'
+          buttonText={UI_NAMES.CHANGE_PASSWORD}
         />
       </form>
     </div>
