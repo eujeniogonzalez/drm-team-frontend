@@ -6,4 +6,4 @@ export enum AppRoutes {
   Confirm = '/confirm/:confirmID',
   NewPassword = '/newpassword/:repassID',
   Tasks = '/tasks'
-}
+};

@@ -1,6 +1,5 @@
 import './login-form.scss';
 import React, { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../const/router-const';
 import { Symbols } from '../../../const/common-const';
 import { useAppDispatch } from '../../../hooks';
@@ -9,6 +8,7 @@ import InputEmail from '../input-email/input-email';
 import InputPassword from '../input-password/input-password';
 import SubmitButton from '../submit-button/submit-button';
 import { UI_NAMES } from '../../../const/ui-const';
+import LinksBlock from '../../links-block/links-block';
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -54,10 +54,12 @@ function LoginForm() {
         />
       </form>
 
-      <div className='login-form-links'>
-        <Link className='dark-link login-form-links-item' to={AppRoutes.Repass}>{UI_NAMES.REMEMBER_PASSWORD}</Link>
-        <Link className='dark-link login-form-links-item' to={AppRoutes.Register}>{UI_NAMES.REGISTRATION}</Link>
-      </div>
+      <LinksBlock
+        links={[
+          {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
+          {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+        ]}
+      />
     </div>
   );
 }

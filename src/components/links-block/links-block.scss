@@ -1,0 +1,18 @@
+.links-blocks {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  .links-blocks-item {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+    align-items: center;
+
+    & a + a {
+      margin-top: 10px;
+    }
+  }
+}

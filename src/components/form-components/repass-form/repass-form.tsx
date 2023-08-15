@@ -8,6 +8,7 @@ import { repassUserAction } from '../../../store/api-actions';
 import InputEmail from '../input-email/input-email';
 import SubmitButton from '../submit-button/submit-button';
 import { UI_NAMES } from '../../../const/ui-const';
+import LinksBlock from '../../links-block/links-block';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
@@ -43,11 +44,13 @@ function RepassForm() {
           buttonText={UI_NAMES.REMEMBER}
         />
       </form>
-
-      <div className='repass-form-links'>
-        <Link className='dark-link repass-form-links-item' to={AppRoutes.Login}>{UI_NAMES.ENTER}</Link>
-        <Link className='dark-link repass-form-links-item' to={AppRoutes.Register}>{UI_NAMES.REGISTRATION}</Link>
-      </div>
+      
+      <LinksBlock
+        links={[
+          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
+          {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+        ]}
+      />
     </div>
   );
 }

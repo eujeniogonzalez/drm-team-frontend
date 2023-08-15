@@ -11,23 +11,4 @@
     text-align: center;
     padding-bottom: 15px;
   }
-
-  .login-form-links {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-
-    .login-form-links-item {
-      font-size: 18px;
-    }
-
-    @media screen and (max-width: 420px) {
-      flex-direction: column;
-      align-items: center;
-
-      & a + a {
-        margin-top: 10px;
-      }
-    }
-  }
 }
