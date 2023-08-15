@@ -21,7 +21,7 @@ function App() {
       <Route path={AppRoutes.Confirm} element={<ConfirmPage />} />
       <Route path={AppRoutes.NewPassword} element={<NewPasswordPage />} />
       <Route path={AppRoutes.Tasks} element={<PrivateRoute><TasksPage /></PrivateRoute>} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path='*' element={<NotFoundPage />} />
     </Routes>
   );
 }

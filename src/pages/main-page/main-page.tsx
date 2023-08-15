@@ -14,17 +14,17 @@ function MainPage() {
     <>
       <Header />
       <Content>
-        <div className="main-page-content">
-          <div className="main-page-title">Здесь лендинг</div>
+        <div className='main-page-content'>
+          <div className='main-page-title'>Здесь лендинг</div>
 
-          <div className="main-page-navigation">
-            <div className="navigation-item">
+          <div className='main-page-navigation'>
+            <div className='navigation-item'>
               <Link to={AppRoutes.Login} className='dark-link'>Войти</Link>
             </div>
-            <div className="navigation-item">
+            <div className='navigation-item'>
               <Link to={AppRoutes.Repass} className='dark-link'>Вспомнить пароль</Link>
             </div>
-            <div className="navigation-item">
+            <div className='navigation-item'>
               <Link to={AppRoutes.Register} className='dark-link'>Зарегистрироваться</Link>
             </div>
           </div>

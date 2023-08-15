@@ -4,8 +4,8 @@ import { MessageProps } from '../../types/message-props-type';
 
 function Message({ message }: MessageProps) {
   return (
-    <div className="message">
-      <div className="message-text">{message}</div>
+    <div className='message'>
+      <div className='message-text'>{message}</div>
     </div>
   );
 }

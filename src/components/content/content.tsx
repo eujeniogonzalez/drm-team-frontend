@@ -4,7 +4,7 @@ import { ContentProps } from '../../types/content-props-type';
 
 function Content({children}: ContentProps) {
   return (
-    <div className="page-content">
+    <div className='page-content'>
       {children}
     </div>
   );
