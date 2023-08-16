@@ -14,31 +14,37 @@ const router = (app: Express) => {
       response.send(register[request.method as keyof typeof register]);
     }, 4000);
 	});
+
 	app.post(APIRoutes.Login, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(login[request.method as keyof typeof login]);
     }, 4000);
 	});
+
   app.post(APIRoutes.Confirm, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(confirm[request.method as keyof typeof login]);
     }, 4000);
 	});
+
   app.post(APIRoutes.Repass, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(repass[request.method as keyof typeof login]);
     }, 4000);
 	});
+
   app.post(APIRoutes.NewPassword, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(newPassword[request.method as keyof typeof login]);
     }, 4000);
 	});
+
   app.get(APIRoutes.Logout, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(logout[request.method as keyof typeof refresh]);
     }, 4000);
 	});
+  
   app.get(APIRoutes.Refresh, (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(refresh[request.method as keyof typeof refresh]);
