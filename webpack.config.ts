@@ -88,6 +88,11 @@ const config: Configuration = {
           from: path.join(__dirname, 'public', 'images'),
           to: path.join(__dirname, 'build', 'images'),
           noErrorOnMissing: true
+        },
+        {
+          from: path.join(__dirname, 'public', '.htaccess'),
+          to: path.join(__dirname, 'build'),
+          noErrorOnMissing: true
         }
       ],
     })
