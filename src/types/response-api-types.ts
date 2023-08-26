@@ -8,6 +8,7 @@ export type RegisterPayload = null;
 
 export type LoginPayload = {
   access_token: string;
+  refresh_token?: string;
 };
 
 export type ConfirmPayload = null;

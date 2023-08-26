@@ -13,6 +13,12 @@ import {
   logoutUserAction
 } from '../../api-actions';
 
+import {
+  deleteRefreshTokenFromStorage,
+  isRefreshTokenSetInStorage,
+  setRefreshTokenToStorage
+} from '../../../services/local-storage';
+
 const initialState: UserProcess = {
   isUserRequestInProgress: false,
   isUserRequestSuccess: false,
@@ -68,6 +74,8 @@ export const userProcess = createSlice({
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
+
+        if (action.payload.payload.refresh_token) setRefreshTokenToStorage(action.payload.payload.refresh_token);
       })
       .addCase(loginUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
@@ -152,6 +160,8 @@ export const userProcess = createSlice({
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
+
+        if (isRefreshTokenSetInStorage()) deleteRefreshTokenFromStorage();
       })
       .addCase(logoutUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
