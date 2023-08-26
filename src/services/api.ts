@@ -1,13 +1,13 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { API_URL_DEV, API_URL_PROD, REQUEST_TIMEOUT } from '../const/api-const';
+import { REQUEST_TIMEOUT } from '../const/api-const';
 import { store } from '../store';
-
-const API_URL = (process.env.NODE_ENV === 'production') ? API_URL_PROD : API_URL_DEV;
+import { getAPIURL } from '../utils';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
-    baseURL: API_URL,
-    timeout: REQUEST_TIMEOUT
+    baseURL: getAPIURL(),
+    timeout: REQUEST_TIMEOUT,
+    withCredentials: true
   });
 
   api.interceptors.request.use(
