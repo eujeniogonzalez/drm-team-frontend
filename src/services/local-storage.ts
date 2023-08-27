@@ -5,11 +5,11 @@ export function setRefreshTokenToStorage(refreshToken: string) {
 }
 
 export function getRefreshTokenFromStorage() {
-  localStorage.getItem(REFRESH_TOKEN_NAME);
+  return localStorage.getItem(REFRESH_TOKEN_NAME);
 }
 
 export function isRefreshTokenSetInStorage() {
-  return localStorage.getItem(REFRESH_TOKEN_NAME) ? true : false;
+  return getRefreshTokenFromStorage() ? true : false;
 }
 
 export function deleteRefreshTokenFromStorage() {

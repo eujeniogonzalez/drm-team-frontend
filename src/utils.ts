@@ -1,19 +1,25 @@
-import { API_URL_DEV, API_URL_PROD, CLIENT_URL_PROD } from './const/api-const';
+import { API_URL_DEV, API_URL_PROD, CLIENT_URL_LOCALHOST, CLIENT_URL_PROD } from './const/api-const';
 
-function removeLastSlash(string: string) {
+export function removeLastSlash(string: string) {
   return string.replace(/\/+$/, '');
 }
 
-function getCurrentClientDomain() {
+export function getCurrentClientDomain() {
   return `${window.location.protocol}//${removeLastSlash(window.location.host)}`;
 }
 
-function isClientDomainProd(currentURL: string) {
+export function isClientDomainProd() {
+  const currentURL = getCurrentClientDomain();
+
   return currentURL === CLIENT_URL_PROD;
 }
 
-export function getAPIURL() {
-  const currentClientDomain = getCurrentClientDomain();
+export function isClientDomainLocalhost() {
+  const currentURL = getCurrentClientDomain();
 
-  return isClientDomainProd(currentClientDomain) ? API_URL_PROD : API_URL_DEV;
+  return currentURL === CLIENT_URL_LOCALHOST;
+}
+
+export function getAPIURL() {
+  return isClientDomainProd() ? API_URL_PROD : API_URL_DEV;
 }

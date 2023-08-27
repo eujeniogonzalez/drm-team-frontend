@@ -8,7 +8,7 @@ import { store } from './store';
 import { refreshAuthAction } from './store/api-actions';
 import { Provider } from 'react-redux';
 
-// store.dispatch(refreshAuthAction());
+store.dispatch(refreshAuthAction());
 
 const element = document.getElementById('root');
 const root = createRoot(element!);

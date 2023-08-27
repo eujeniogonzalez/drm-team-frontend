@@ -3,7 +3,8 @@ import { AppDispatch } from '../types/state-types';
 import { AxiosInstance } from 'axios';
 import { State } from '../types/state-types';
 import { APIRoutes } from '../const/api-const';
-import { Token } from '../types/token-type';
+import { isClientDomainLocalhost } from '../utils';
+import { getRefreshTokenFromStorage, isRefreshTokenSetInStorage } from '../services/local-storage';
 
 import {
   ConfirmBody,
@@ -20,9 +21,10 @@ import {
   ConfirmPayload,
   RepassPayload,
   NewPasswordPayload,
-  LogoutPayload
+  LogoutPayload,
+  RefreshPayload
 } from '../types/response-api-types';
-
+import { Symbols } from '../const/common-const';
 
 export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>, RegisterBody, {
   dispatch: AppDispatch;
@@ -114,7 +116,7 @@ export const logoutUserAction = createAsyncThunk<ResponseAPI<LogoutPayload>, und
   }
 );
 
-export const refreshAuthAction = createAsyncThunk<Token, undefined, {
+export const refreshAuthAction = createAsyncThunk<ResponseAPI<RefreshPayload>, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -122,10 +124,22 @@ export const refreshAuthAction = createAsyncThunk<Token, undefined, {
 >
 (
   'refreshAuthAction',
-  async (_arg, { extra: api }) => {
-    const { data } = await api.get(APIRoutes.Refresh);
+  async (_args, { extra: api }) => {
+    let response;
 
-    return data.access_token; // todo Заменить на кэмел кейс
+    switch (true) {
+      case isClientDomainLocalhost():
+        const refresh_token = isRefreshTokenSetInStorage() ? getRefreshTokenFromStorage() : 'yrduyfiyf';
+
+        response = await api.post<ResponseAPI<RefreshPayload>>(APIRoutes.Refresh, { refresh_token });
+        break;
+    
+      default:
+        response = await api.get<ResponseAPI<RefreshPayload>>(APIRoutes.Refresh);
+        break;
+    }
+
+    return response.data;
   }
 );
 

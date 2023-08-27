@@ -22,13 +22,15 @@ export enum APIRoutes {
   Refresh = '/refresh'
 }
 
+// todo Выяснить, где используется
 export enum APIActions {
   Register = 'register',
   Login = 'login',
   Confirm = 'confirm',
   Repass = 'repass',
   NewPassword = 'newPassword',
-  Logout = 'logout'
+  Logout = 'logout',
+  Refresh = 'refresh'
 }
 
 export const API_MESSAGES = {

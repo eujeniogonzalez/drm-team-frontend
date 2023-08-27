@@ -11,6 +11,11 @@ export type LoginPayload = {
   refresh_token?: string;
 };
 
+export type RefreshPayload = {
+  access_token: string;
+  refresh_token?: string;
+};
+
 export type ConfirmPayload = null;
 
 export type RepassPayload = null;

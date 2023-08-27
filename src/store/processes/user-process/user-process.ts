@@ -173,9 +173,31 @@ export const userProcess = createSlice({
           payload: null
         }
       })
+      .addCase(refreshAuthAction.pending, (state) => {
+        state.isUserRequestInProgress = true;
+        state.isUserRequestSuccess = false;
+      })
       .addCase(refreshAuthAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthStatuses.Auth;
-        state.accessToken = action.payload;
+        const isSuccess = action.payload.success;
+
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = isSuccess;
+        state.userAPIResponse.type = APIActions.Refresh;
+        state.userAPIResponse.body = action.payload;
+        state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
+        state.accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
+
+        switch (isSuccess) {
+          case true:
+            if (action.payload.payload.refresh_token) {
+              setRefreshTokenToStorage(action.payload.payload.refresh_token); 
+            }
+            break;
+        
+          case false:
+            deleteRefreshTokenFromStorage()
+            break;
+        }
       })
       .addCase(refreshAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthStatuses.NoAuth;
