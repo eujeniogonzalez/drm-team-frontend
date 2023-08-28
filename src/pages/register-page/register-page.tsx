@@ -5,26 +5,28 @@ import Content from '../../components/content/content';
 import RegisterForm from '../../components/form-components/register-form/register-form';
 import Message from '../../components/message/message';
 import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus, getIsUserRequestSuccess } from '../../store/processes/user-process/user-selectors';
-import { MESSAGES } from '../../const/messages-const';
+import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
+import { APIActions } from '../../const/api-const';
 
 function RegisterPage() {
   document.title = META.TITLE.REGISTER;
 
   const authStatus = useAppSelector(getAuthorizationStatus);
-  const isUserRegistered = useAppSelector(getIsUserRequestSuccess);
+  const userAPIResponse = useAppSelector(getUserAPIResponse);
   
   const getPageContent = () => {
     switch (true) {
       case authStatus === AuthStatuses.Auth:
         return <Navigate to={AppRoutes.Tasks} />;
     
-      case isUserRegistered:
-        return <Message message={MESSAGES.SUCCESS_REGISTER} />;
+      case userAPIResponse.body && userAPIResponse.type === APIActions.Register:
+        if (userAPIResponse.body) {
+          return <Message message={userAPIResponse.body.message} />;
+        }
 
       default:
         return <RegisterForm />;

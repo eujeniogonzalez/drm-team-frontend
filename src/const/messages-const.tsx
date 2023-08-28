@@ -1,12 +1,4 @@
-import React from 'react';
-
 export const MESSAGES = {
-  SUCCESS_REGISTER: (
-    <>
-      Вы успешно зарегистрировались<br/><br/>
-      Проверьте почту, мы отправили письмо со ссылкой для подтверждения
-    </>
-  ),
   NOT_FOUND_PAGE: 'Такой страницы не существует'
 };
 
