@@ -202,8 +202,16 @@ export const userProcess = createSlice({
         }
       })
       .addCase(refreshAuthAction.rejected, (state) => {
+        state.isUserRequestInProgress = false;
+        state.isUserRequestSuccess = false;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
+        state.userAPIResponse.type = APIActions.Refresh;
+        state.userAPIResponse.body = {
+          success: false,
+          message: API_MESSAGES.FILED,
+          payload: null
+        }
       });
   }
 });
