@@ -24,7 +24,6 @@ import {
   LogoutPayload,
   RefreshPayload
 } from '../types/response-api-types';
-import { Symbols } from '../const/common-const';
 
 export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>, RegisterBody, {
   dispatch: AppDispatch;

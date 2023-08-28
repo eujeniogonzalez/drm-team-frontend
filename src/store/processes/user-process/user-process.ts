@@ -67,20 +67,22 @@ export const userProcess = createSlice({
       })
       .addCase(loginUserAction.fulfilled, (state, action) => {
         const isSuccess = action.payload.success;
-
+        const accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
+        const refreshToken = (isSuccess && action.payload.payload.refresh_token) ? action.payload.payload.refresh_token : null;
+        
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = isSuccess;
         state.userAPIResponse.type = APIActions.Login;
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
-        state.accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
+        state.accessToken = accessToken;
 
-        if (action.payload.payload.refresh_token) setRefreshTokenToStorage(action.payload.payload.refresh_token);
+        if (refreshToken) setRefreshTokenToStorage(refreshToken);
       })
       .addCase(loginUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = false;
-        state.userAPIResponse.type = APIActions.Register;
+        state.userAPIResponse.type = APIActions.Login;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
         state.userAPIResponse.body = {
