@@ -10,6 +10,7 @@ import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
+import { APIActions } from '../../const/api-const';
 
 function RepassPage() {
   document.title = META.TITLE.REPASS;
@@ -22,8 +23,8 @@ function RepassPage() {
       case authStatus === AuthStatuses.Auth:
         return <Navigate to={AppRoutes.Tasks} />;
 
-      case userAPIResponse.body !== null:
-        if (userAPIResponse.body !== null) {
+      case userAPIResponse.body && userAPIResponse.type === APIActions.Repass:
+        if (userAPIResponse.body) {
           return <Message message={userAPIResponse.body.message} />;
         }
 
