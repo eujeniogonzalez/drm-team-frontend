@@ -10,7 +10,8 @@ export enum AuthStatuses {
 }
 
 export enum Symbols {
-  Empty = ''
+  Empty = '',
+  DoubleSlash = '//'
 }
 
 export const EMAIL_REGEXP = /^[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,15}$/;

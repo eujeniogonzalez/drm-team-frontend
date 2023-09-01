@@ -1,14 +1,15 @@
 import './repass-form.scss';
 import React, { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../const/router-const';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { Symbols } from '../../../const/common-const';
 import { repassUserAction } from '../../../store/api-actions';
 import InputEmail from '../input-email/input-email';
 import SubmitButton from '../submit-button/submit-button';
 import { UI_NAMES } from '../../../const/ui-const';
 import LinksBlock from '../../links-block/links-block';
+import { APIActions } from '../../../const/api-const';
+import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
@@ -16,6 +17,10 @@ function RepassForm() {
   const [email, setEmail] = useState<string>(Symbols.Empty);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
+
+  const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
+  const APIResponse = useAppSelector(getUserAPIResponse);
+  const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.Repass;
 
   const submitRepassFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,11 +42,13 @@ function RepassForm() {
           passEmailValidStatusToParent={setIsEmailValid}
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+          isFormDisabled={isFormDisabled}
         />
 
         <SubmitButton
           submitButtonClickHandler={submitRepassFormHandler}
           buttonText={UI_NAMES.REMEMBER}
+          isFormDisabled={isFormDisabled}
         />
       </form>
       

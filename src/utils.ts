@@ -1,11 +1,22 @@
-import { API_URL_DEV, API_URL_PROD, CLIENT_URL_LOCALHOST, CLIENT_URL_PROD } from './const/api-const';
+import { Symbols } from './const/common-const';
+
+import {
+  API_URL_DEV,
+  API_URL_PROD,
+  CLIENT_URL_LOCALHOST,
+  CLIENT_URL_PROD
+} from './const/api-const';
 
 export function removeLastSlash(string: string) {
   return string.replace(/\/+$/, '');
 }
 
 export function getCurrentClientDomain() {
-  return `${window.location.protocol}//${removeLastSlash(window.location.host)}`;
+  return `
+    ${window.location.protocol}
+    ${Symbols.DoubleSlash}
+    ${removeLastSlash(window.location.host)}
+  `;
 }
 
 export function isClientDomainProd() {

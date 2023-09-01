@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
@@ -12,6 +12,7 @@ import Message from '../../components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
+import { APIActions } from '../../const/api-const';
 
 function ConfirmPage() {
   document.title = META.TITLE.CONFIRM;
@@ -20,18 +21,16 @@ function ConfirmPage() {
   const userAPIResponse = useAppSelector(getUserAPIResponse);
   const authStatus = useAppSelector(getAuthorizationStatus)
   const dispatch = useAppDispatch();
-
-  if (confirmID && !userAPIResponse.type) {
-    dispatch(confirmUserAction({ confirmID }));
-  }
+  
+  if (confirmID && userAPIResponse.type !== APIActions.Confirm) dispatch(confirmUserAction({ confirmID }));
 
   const getPageContent = () => {
     switch (true) {
       case authStatus === AuthStatuses.Auth:
         return <Navigate to={AppRoutes.Tasks} />
 
-      case userAPIResponse.body !== null:
-        if (userAPIResponse.body !== null) {
+      case userAPIResponse.body && userAPIResponse.type === APIActions.Confirm:
+        if (userAPIResponse.body) {
           return <Message message={userAPIResponse.body.message} />;
         }
 

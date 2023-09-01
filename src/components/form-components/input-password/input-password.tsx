@@ -4,8 +4,6 @@ import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../const/co
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../const/messages-const';
 import { InputPasswordProps } from '../../../types/form-props-types';
-import { useAppSelector } from '../../../hooks';
-import { getIsUserRequestInProgress } from '../../../store/processes/user-process/user-selectors';
 import { UI_NAMES } from '../../../const/ui-const';
 
 function InputPassword({
@@ -15,9 +13,9 @@ function InputPassword({
   resetIsFormTriedToSubmit,
   passwordForMatching,
   placeholder = UI_NAMES.PASSWORD,
-  autofocus = false
+  autofocus = false,
+  isFormDisabled
 }: InputPasswordProps) {
-  const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const [password, setPassword] = useState<string>(Symbols.Empty);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
@@ -81,12 +79,12 @@ function InputPassword({
   return (
     <div className='input-password'>
       <input
-        className={`input ${errorShouldBeShown ? 'input-wrong' : Symbols.Empty}`} // todo Replace to const and in login
+        className={`input ${errorShouldBeShown ? 'input-wrong' : Symbols.Empty}`}
         type='password'
         placeholder={placeholder}
         autoComplete='off'
         autoFocus={autofocus}
-        disabled={isUserRequestInProgress}
+        disabled={isFormDisabled}
         maxLength={MAX_PASSWORD_LENGTH}
         value={password}
         onInput={inputPasswordHandler}

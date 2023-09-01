@@ -34,7 +34,7 @@ export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>,
 (
   'registerUserAction',
   async ({ email, password, repeatPassword }, { extra: api }) => {
-    const { data } = await api.post<ResponseAPI<RegisterPayload>>(APIRoutes.Register, { email, password, repeatPassword });
+    const { data } = await api.post<ResponseAPI<RegisterPayload>>(APIRoutes.Register, { email, password, repeat_password: repeatPassword }); // todo Сделать паттерн адаптер
 
     return data;
   }
