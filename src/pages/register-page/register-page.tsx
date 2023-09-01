@@ -12,6 +12,8 @@ import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
 import { APIActions } from '../../const/api-const';
 import { resetUserAPIResponse } from '../../store/processes/user-process/user-process';
+import LinksBlock from '../../components/links-block/links-block';
+import { UI_NAMES } from '../../const/ui-const';
 
 function RegisterPage() {
   document.title = META.TITLE.REGISTER;
@@ -35,7 +37,14 @@ function RegisterPage() {
     
       case isRegisterSuccess():
         if (userAPIResponse.body) {
-          return <Message message={userAPIResponse.body.message} />;
+          return (
+            <Message
+              message={userAPIResponse.body.message}
+              links={[
+                {route: AppRoutes.Main, anchor: UI_NAMES.MAIN}
+              ]}
+            />
+          );
         }
 
       default:

@@ -11,5 +11,6 @@ export const UI_NAMES = {
   REGISTER: 'Зарегистрироваться',
   REMEMBER: 'Вспомнить',
   GO_OUT: 'Выйти',
-  E_MAIL: 'E-mail'
+  E_MAIL: 'E-mail',
+  MAIN: 'Главная'
 }
