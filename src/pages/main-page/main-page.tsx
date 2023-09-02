@@ -6,6 +6,9 @@ import Content from '../../components/content/content';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
+import LinksBlock from '../../components/links-block/links-block';
+import { UI_NAMES } from '../../const/ui-const';
+import { LinksBlockAlignment } from '../../const/common-const';
 
 function MainPage() {
   document.title = META.TITLE.MAIN;
@@ -15,19 +18,16 @@ function MainPage() {
       <Header />
       <Content>
         <div className='main-page-content'>
-          <div className='main-page-title'>Здесь лендинг</div>
+          <div className='main-page-title'>Это лендинг</div>
 
-          <div className='main-page-navigation'>
-            <div className='navigation-item'>
-              <Link to={AppRoutes.Login} className='dark-link'>Войти</Link>
-            </div>
-            <div className='navigation-item'>
-              <Link to={AppRoutes.Repass} className='dark-link'>Вспомнить пароль</Link>
-            </div>
-            <div className='navigation-item'>
-              <Link to={AppRoutes.Register} className='dark-link'>Зарегистрироваться</Link>
-            </div>
-          </div>
+          <LinksBlock
+            links={[
+              {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
+              {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
+              {route: AppRoutes.Register, anchor: UI_NAMES.REGISTER}
+            ]}
+            alignment={LinksBlockAlignment.Vertical}
+          />
         </div>
       </Content>
       <Footer />

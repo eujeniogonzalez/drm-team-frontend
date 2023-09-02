@@ -12,7 +12,6 @@ import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
 import { APIActions } from '../../const/api-const';
 import { resetUserAPIResponse } from '../../store/processes/user-process/user-process';
-import LinksBlock from '../../components/links-block/links-block';
 import { UI_NAMES } from '../../const/ui-const';
 
 function RegisterPage() {

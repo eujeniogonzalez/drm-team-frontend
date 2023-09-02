@@ -2,7 +2,7 @@ import './repass-form.scss';
 import React, { FormEvent, useState } from 'react';
 import { AppRoutes } from '../../../const/router-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { Symbols } from '../../../const/common-const';
+import { LinksBlockAlignment, Symbols } from '../../../const/common-const';
 import { repassUserAction } from '../../../store/api-actions';
 import InputEmail from '../input-email/input-email';
 import SubmitButton from '../submit-button/submit-button';
@@ -57,6 +57,7 @@ function RepassForm() {
           {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
           {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
         ]}
+        alignment={LinksBlockAlignment.Horizontal}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import './login-form.scss';
 import React, { FormEvent, useState } from 'react';
 import { AppRoutes } from '../../../const/router-const';
-import { Symbols } from '../../../const/common-const';
+import { LinksBlockAlignment, Symbols } from '../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginUserAction } from '../../../store/api-actions';
 import InputEmail from '../input-email/input-email';
@@ -68,6 +68,7 @@ function LoginForm() {
           {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
           {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
         ]}
+        alignment={LinksBlockAlignment.Horizontal}
       />
     </div>
   );

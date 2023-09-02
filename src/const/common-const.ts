@@ -14,6 +14,11 @@ export enum Symbols {
   DoubleSlash = '//'
 }
 
+export enum LinksBlockAlignment {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal'
+}
+
 export const EMAIL_REGEXP = /^[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,15}$/;
 export const PASSWORD_REGEXP = /^[a-zA-Z0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]+$/;
 export const MAX_EMAIL_LENGTH = 129;
