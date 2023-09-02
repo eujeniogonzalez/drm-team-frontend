@@ -13,6 +13,7 @@ import { AuthStatuses } from '../../const/common-const';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
 import { APIActions } from '../../const/api-const';
+import { UI_NAMES } from '../../const/ui-const';
 
 function ConfirmPage() {
   document.title = META.TITLE.CONFIRM;
@@ -24,6 +25,20 @@ function ConfirmPage() {
   
   if (confirmID && userAPIResponse.type !== APIActions.Confirm) dispatch(confirmUserAction({ confirmID }));
 
+  const getLinksList = () => {
+    switch (userAPIResponse.body?.success) {
+      case true:
+        return [
+          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER}
+        ];
+    
+      case false:
+        return [
+          {route: AppRoutes.Main, anchor: UI_NAMES.MAIN}
+        ];
+    }
+  };
+
   const getPageContent = () => {
     switch (true) {
       case authStatus === AuthStatuses.Auth:
@@ -31,7 +46,12 @@ function ConfirmPage() {
 
       case userAPIResponse.body && userAPIResponse.type === APIActions.Confirm:
         if (userAPIResponse.body) {
-          return <Message message={userAPIResponse.body.message} />;
+          return (
+            <Message
+              message={userAPIResponse.body.message}
+              links={getLinksList()}
+            />
+          );
         }
 
       default:
