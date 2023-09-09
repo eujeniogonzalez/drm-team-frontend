@@ -12,6 +12,7 @@ import { LinksBlockAlignment, Symbols } from '../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -39,9 +40,12 @@ function LoginForm() {
   const submitLoginFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!isEmailValid || !isPasswordValid) return;
-    
     setIsFormTriedToSubmit(true);
+
+    if (!isEmailValid || !isPasswordValid) {
+      dispatch(resetUserAPIResponse());
+      return;
+    }
 
     dispatch(loginUserAction({ email, password }));
   };

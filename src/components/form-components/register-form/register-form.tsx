@@ -12,6 +12,7 @@ import LinksBlock from '../../links-block/links-block';
 import { APIActions } from '../../../const/api-const';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
 
 function RegisterForm() {
   const dispatch = useAppDispatch();
@@ -41,9 +42,12 @@ function RegisterForm() {
   const submitRegisterFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isEmailValid || !isPasswordValid || !isRepeatPasswordValid || password !== repeatPassword) return;
-
     setIsFormTriedToSubmit(true);
+
+    if (!isEmailValid || !isPasswordValid || !isRepeatPasswordValid || password !== repeatPassword) {
+      dispatch(resetUserAPIResponse());
+      return;
+    }
 
     dispatch(registerUserAction({ email, password, repeatPassword }));
   };

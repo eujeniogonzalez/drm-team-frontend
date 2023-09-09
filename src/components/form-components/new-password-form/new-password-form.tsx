@@ -10,6 +10,7 @@ import { UI_NAMES } from '../../../const/ui-const';
 import { APIActions } from '../../../const/api-const';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
 
 function NewPasswordForm() {
   const dispatch = useAppDispatch();
@@ -37,9 +38,12 @@ function NewPasswordForm() {
   const submitNewPasswordFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isNewPasswordValid || !isNewRepeatPasswordValid || newPassword !== newRepeatPassword) return;
-
     setIsFormTriedToSubmit(true);
+
+    if (!isNewPasswordValid || !isNewRepeatPasswordValid || newPassword !== newRepeatPassword) {
+      dispatch(resetUserAPIResponse());
+      return;
+    }
 
     if (repassID) {
       dispatch(newPasswordUserAction({ repassID, newPassword, newRepeatPassword }));

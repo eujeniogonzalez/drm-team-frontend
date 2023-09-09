@@ -11,6 +11,7 @@ import LinksBlock from '../../links-block/links-block';
 import { APIActions } from '../../../const/api-const';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
@@ -36,9 +37,12 @@ function RepassForm() {
   const submitRepassFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isEmailValid) return;
-
     setIsFormTriedToSubmit(true);
+
+    if (!isEmailValid) {
+      dispatch(resetUserAPIResponse());
+      return;
+    }
 
     dispatch(repassUserAction({ email }));
   };
