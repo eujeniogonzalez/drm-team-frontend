@@ -13,10 +13,10 @@ import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/p
 function NewPasswordForm() {
   const dispatch = useAppDispatch();
   const { repassID } = useParams();
-  const [password, setPassword] = useState<string>(Symbols.Empty);
-  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
-  const [repeatPassword, setRepeatPassword] = useState<string>(Symbols.Empty);
-  const [isRepeatPasswordValid, setIsRepeatPasswordValid] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<string>(Symbols.Empty);
+  const [isNewPasswordValid, setIsNewPasswordValid] = useState<boolean>(false);
+  const [newRepeatPassword, setNewRepeatPassword] = useState<string>(Symbols.Empty);
+  const [isNewRepeatPasswordValid, setIsNewRepeatPasswordValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
@@ -28,10 +28,10 @@ function NewPasswordForm() {
 
     setIsFormTriedToSubmit(true);
 
-    if (!isPasswordValid || !isRepeatPasswordValid || password !== repeatPassword) return;
+    if (!isNewPasswordValid || !isNewRepeatPasswordValid || newPassword !== newRepeatPassword) return;
 
     if (repassID) {
-      dispatch(newPasswordUserAction({ repassID, new_password: password, new_repeat_password: repeatPassword }));
+      dispatch(newPasswordUserAction({ repassID, newPassword, newRepeatPassword }));
     }
   };
 
@@ -41,8 +41,8 @@ function NewPasswordForm() {
 
       <form onSubmit={submitNewPasswordFormHandler}>
         <InputPassword
-          passPasswordToParent={setPassword}
-          passPasswordValidStatusToParent={setIsPasswordValid}
+          passPasswordToParent={setNewPassword}
+          passPasswordValidStatusToParent={setIsNewPasswordValid}
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
           placeholder={UI_NAMES.COME_UP_WITH_PASSWORD}
@@ -51,11 +51,11 @@ function NewPasswordForm() {
         />
 
         <InputPassword
-          passPasswordToParent={setRepeatPassword}
-          passPasswordValidStatusToParent={setIsRepeatPasswordValid}
+          passPasswordToParent={setNewRepeatPassword}
+          passPasswordValidStatusToParent={setIsNewRepeatPasswordValid}
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          passwordForMatching={password}
+          passwordForMatching={newPassword}
           placeholder={UI_NAMES.REPEAT_PASSWORD}
           isFormDisabled={isFormDisabled}
         />

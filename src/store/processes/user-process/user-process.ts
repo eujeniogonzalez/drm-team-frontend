@@ -79,8 +79,8 @@ export const userProcess = createSlice({
       })
       .addCase(loginUserAction.fulfilled, (state, action) => {
         const isSuccess = action.payload.success;
-        const accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
-        const refreshToken = (isSuccess && action.payload.payload.refresh_token) ? action.payload.payload.refresh_token : null;
+        const accessToken = isSuccess ? action.payload.payload.accessToken : Symbols.Empty;
+        const refreshToken = (isSuccess && action.payload.payload.refreshToken) ? action.payload.payload.refreshToken : null;
         
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = isSuccess;
@@ -197,12 +197,12 @@ export const userProcess = createSlice({
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = isSuccess;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
-        state.accessToken = isSuccess ? action.payload.payload.access_token : Symbols.Empty;
+        state.accessToken = isSuccess ? action.payload.payload.accessToken : Symbols.Empty;
 
         switch (isSuccess) {
           case true:
-            if (action.payload.payload.refresh_token) {
-              setRefreshTokenToStorage(action.payload.payload.refresh_token); 
+            if (action.payload.payload.refreshToken) {
+              setRefreshTokenToStorage(action.payload.payload.refreshToken); 
             }
             break;
         

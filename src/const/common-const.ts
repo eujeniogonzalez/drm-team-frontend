@@ -11,7 +11,8 @@ export enum AuthStatuses {
 
 export enum Symbols {
   Empty = '',
-  DoubleSlash = '//'
+  DoubleSlash = '//',
+  Underline = '_'
 }
 
 export enum LinksBlockAlignment {
@@ -23,4 +24,6 @@ export const EMAIL_REGEXP = /^[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]
 export const PASSWORD_REGEXP = /^[a-zA-Z0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]+$/;
 export const MAX_EMAIL_LENGTH = 129;
 export const MAX_PASSWORD_LENGTH = 50;
+export const ANY_CAPITAL_LETTER_REGEXP = /(?=[A-Z])/;
+export const SLASHES_AT_END_OF_STRING_REGEXP = /\/+$/;
 

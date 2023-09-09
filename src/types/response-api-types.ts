@@ -7,13 +7,13 @@ export type ResponseAPI<T> = {
 export type RegisterPayload = null;
 
 export type LoginPayload = {
-  access_token: string;
-  refresh_token?: string;
+  accessToken: string;
+  refreshToken?: string;
 };
 
 export type RefreshPayload = {
-  access_token: string;
-  refresh_token?: string;
+  accessToken: string;
+  refreshToken?: string;
 };
 
 export type ConfirmPayload = null;

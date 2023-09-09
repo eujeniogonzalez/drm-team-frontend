@@ -19,7 +19,7 @@ export type RepassBody = {
 
 export type NewPasswordBody = {
   repassID: string;
-  new_password: string;
-  new_repeat_password: string;
+  newPassword: string;
+  newRepeatPassword: string;
 };
 

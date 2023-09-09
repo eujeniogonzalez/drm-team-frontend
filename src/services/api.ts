@@ -2,6 +2,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { REQUEST_TIMEOUT } from '../const/api-const';
 import { store } from '../store';
 import { getAPIURL } from '../utils';
+import { adaptFromClientToServer, adaptFromServerToClient } from './adapter';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -20,7 +21,21 @@ export const createAPI = (): AxiosInstance => {
         config.headers['Authorization'] = `Bearer ${accessToken}`;
       }
 
+      if (!config.data) return config;
+      
+      config.data = adaptFromClientToServer(config.data);
+
       return config;
+    }
+  );
+
+  api.interceptors.response.use(
+    (response) => {
+      if (!response.data) return response;
+      
+      response.data = adaptFromServerToClient(response.data);
+      
+      return response;
     }
   );
 

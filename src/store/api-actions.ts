@@ -24,6 +24,7 @@ import {
   LogoutPayload,
   RefreshPayload
 } from '../types/response-api-types';
+import { Symbols } from '../const/common-const';
 
 export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>, RegisterBody, {
   dispatch: AppDispatch;
@@ -34,7 +35,10 @@ export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>,
 (
   'registerUserAction',
   async ({ email, password, repeatPassword }, { extra: api }) => {
-    const { data } = await api.post<ResponseAPI<RegisterPayload>>(APIRoutes.Register, { email, password, repeat_password: repeatPassword }); // todo Сделать паттерн адаптер
+    const { data } = await api.post<ResponseAPI<RegisterPayload>>(
+      APIRoutes.Register,
+      { email, password, repeatPassword }
+    );
 
     return data;
   }
@@ -93,8 +97,8 @@ export const newPasswordUserAction = createAsyncThunk<ResponseAPI<NewPasswordPay
 >
 (
   'newPasswordUserAction',
-  async ({ repassID, new_password, new_repeat_password }, { extra: api }) => {
-    const { data } = await api.post<ResponseAPI<NewPasswordPayload>>(APIRoutes.NewPassword, { repassID, new_password, new_repeat_password });
+  async ({ repassID, newPassword, newRepeatPassword }, { extra: api }) => {
+    const { data } = await api.post<ResponseAPI<NewPasswordPayload>>(APIRoutes.NewPassword, { repassID, newPassword, newRepeatPassword });
 
     return data;
   }
@@ -128,9 +132,9 @@ export const refreshAuthAction = createAsyncThunk<ResponseAPI<RefreshPayload>, u
 
     switch (true) {
       case isClientDomainLocalhost():
-        const refresh_token = isRefreshTokenSetInStorage() ? getRefreshTokenFromStorage() : 'yrduyfiyf';
+        const refreshToken = isRefreshTokenSetInStorage() ? getRefreshTokenFromStorage() : Symbols.Empty;
 
-        response = await api.post<ResponseAPI<RefreshPayload>>(APIRoutes.Refresh, { refresh_token });
+        response = await api.post<ResponseAPI<RefreshPayload>>(APIRoutes.Refresh, { refreshToken });
         break;
     
       default:
