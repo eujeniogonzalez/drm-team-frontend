@@ -36,9 +36,9 @@ function RepassForm() {
   const submitRepassFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsFormTriedToSubmit(true);
-
     if (!isEmailValid) return;
+
+    setIsFormTriedToSubmit(true);
 
     dispatch(repassUserAction({ email }));
   };

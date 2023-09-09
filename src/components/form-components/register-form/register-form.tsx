@@ -41,9 +41,9 @@ function RegisterForm() {
   const submitRegisterFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsFormTriedToSubmit(true);
-
     if (!isEmailValid || !isPasswordValid || !isRepeatPasswordValid || password !== repeatPassword) return;
+
+    setIsFormTriedToSubmit(true);
 
     dispatch(registerUserAction({ email, password, repeatPassword }));
   };

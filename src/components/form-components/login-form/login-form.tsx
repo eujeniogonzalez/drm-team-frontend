@@ -38,11 +38,11 @@ function LoginForm() {
 
   const submitLoginFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    setIsFormTriedToSubmit(true);
     
     if (!isEmailValid || !isPasswordValid) return;
     
+    setIsFormTriedToSubmit(true);
+
     dispatch(loginUserAction({ email, password }));
   };
 

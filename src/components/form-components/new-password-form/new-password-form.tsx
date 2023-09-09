@@ -37,9 +37,9 @@ function NewPasswordForm() {
   const submitNewPasswordFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsFormTriedToSubmit(true);
-
     if (!isNewPasswordValid || !isNewRepeatPasswordValid || newPassword !== newRepeatPassword) return;
+
+    setIsFormTriedToSubmit(true);
 
     if (repassID) {
       dispatch(newPasswordUserAction({ repassID, newPassword, newRepeatPassword }));
