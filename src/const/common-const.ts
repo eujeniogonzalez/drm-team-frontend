@@ -1,6 +1,6 @@
 export enum NameSpace {
-  Api = 'api',
-  User = 'user'
+  User = 'user',
+  Toast = 'toast'
 }
 
 export enum AuthStatuses {

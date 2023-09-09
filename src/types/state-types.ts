@@ -2,6 +2,7 @@ import { APIActions } from '../const/api-const';
 import { AuthStatuses } from '../const/common-const';
 import { store } from '../store/index';
 import { LoginPayload, RegisterPayload, ResponseAPI } from './response-api-types';
+import { IsToastShouldBeShown, ToastMessage } from './toast-types';
 
 export type APIResponse = {
   type: APIActions | null;
@@ -16,6 +17,10 @@ export type UserProcess = {
   userAPIResponse: APIResponse;
 };
 
-export type State = ReturnType<typeof store.getState>;
+export type ToastProcess = {
+  toastMessage: ToastMessage;
+  isToastShouldBeShown: IsToastShouldBeShown;
+};
 
+export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

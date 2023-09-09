@@ -1,7 +1,7 @@
 import './new-password-form.scss';
 import { Symbols } from '../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { newPasswordUserAction } from '../../../store/api-actions';
 import InputPassword from '../input-password/input-password';
@@ -9,6 +9,7 @@ import SubmitButton from '../submit-button/submit-button';
 import { UI_NAMES } from '../../../const/ui-const';
 import { APIActions } from '../../../const/api-const';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
+import { showToast } from '../../../store/processes/toast-process/toast-process';
 
 function NewPasswordForm() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,16 @@ function NewPasswordForm() {
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const APIResponse = useAppSelector(getUserAPIResponse);
   const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.NewPassword;
+  const isToastShouldBeShown = (
+    !APIResponse.body?.success &&
+    APIResponse.type === APIActions.NewPassword &&
+    APIResponse.body?.message &&
+    isFormTriedToSubmit
+  );
+
+  useEffect(() => {
+    if (isToastShouldBeShown) dispatch(showToast(APIResponse.body?.message));
+  });
   
   const submitNewPasswordFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

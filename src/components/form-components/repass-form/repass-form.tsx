@@ -1,5 +1,5 @@
 import './repass-form.scss';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { AppRoutes } from '../../../const/router-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { LinksBlockAlignment, Symbols } from '../../../const/common-const';
@@ -10,6 +10,7 @@ import { UI_NAMES } from '../../../const/ui-const';
 import LinksBlock from '../../links-block/links-block';
 import { APIActions } from '../../../const/api-const';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
+import { showToast } from '../../../store/processes/toast-process/toast-process';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
@@ -21,7 +22,17 @@ function RepassForm() {
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const APIResponse = useAppSelector(getUserAPIResponse);
   const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.Repass;
+  const isToastShouldBeShown = (
+    !APIResponse.body?.success &&
+    APIResponse.type === APIActions.Repass &&
+    APIResponse.body?.message &&
+    isFormTriedToSubmit
+  );
 
+  useEffect(() => {
+    if (isToastShouldBeShown) dispatch(showToast(APIResponse.body?.message));
+  });
+  
   const submitRepassFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

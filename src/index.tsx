@@ -7,6 +7,7 @@ import browserHistory from './services/browser-history';
 import { store } from './store';
 import { refreshAuthAction } from './store/api-actions';
 import { Provider } from 'react-redux';
+import Toast from './components/toast/toast';
 
 store.dispatch(refreshAuthAction());
 
@@ -18,6 +19,7 @@ root.render(
     <Provider store = {store}>
       <HistoryRouter history={browserHistory}>
         <App />
+        <Toast />
       </HistoryRouter>
     </Provider>
   </React.StrictMode>
