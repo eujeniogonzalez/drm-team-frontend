@@ -12,5 +12,6 @@ export const UI_NAMES = {
   REMEMBER: 'Вспомнить',
   GO_OUT: 'Выйти',
   E_MAIL: 'E-mail',
-  MAIN: 'Главная'
+  MAIN: 'Главная',
+  NEW_TASK: 'Новая задача'
 }
