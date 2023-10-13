@@ -1,6 +1,7 @@
 export enum NameSpace {
   User = 'user',
-  Toast = 'toast'
+  Toast = 'toast',
+  Modal = 'modal'
 }
 
 export enum AuthStatuses {
@@ -12,12 +13,19 @@ export enum AuthStatuses {
 export enum Symbols {
   Empty = '',
   DoubleSlash = '//',
-  Underline = '_'
+  Underline = '_',
+  Dot = '.'
 }
 
 export enum LinksBlockAlignment {
   Vertical = 'vertical',
   Horizontal = 'horizontal'
+}
+
+export enum UserRoles {
+  Unknown = 'unknown',
+  Admin = 'admin',
+  Volunteer = 'volunteer'
 }
 
 export const EMAIL_REGEXP = /^[a-zA-Z0-9_]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,15}$/;

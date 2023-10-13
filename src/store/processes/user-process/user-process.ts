@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, AuthStatuses, Symbols } from '../../../const/common-const';
+import { NameSpace, AuthStatuses, Symbols, UserRoles } from '../../../const/common-const';
 import { UserProcess } from '../../../types/state-types';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
+import { getUserRoleByAccessToken } from '../../../utils';
 
 import {
   refreshAuthAction,
@@ -24,6 +25,7 @@ const initialState: UserProcess = {
   isUserRequestSuccess: false,
   authorizationStatus: AuthStatuses.Unknown,
   accessToken: Symbols.Empty,
+  userRole: UserRoles.Unknown,
   userAPIResponse: {
     type: null,
     body: null
@@ -35,18 +37,20 @@ export const userProcess = createSlice({
   initialState,
   reducers: {
     resetUserAPIResponse: (state) => {
-      state.isUserRequestInProgress = false,
-      state.isUserRequestSuccess = false,
-      state.authorizationStatus = AuthStatuses.Unknown,
-      state.accessToken = Symbols.Empty,
+      state.isUserRequestInProgress = false;
+      state.isUserRequestSuccess = false;
+      state.authorizationStatus = AuthStatuses.Unknown;
+      state.accessToken = Symbols.Empty;
+      state.userRole = UserRoles.Unknown;
       state.userAPIResponse = {
         type: null,
         body: null
-      }
+      };
     },
     logout: (state) => {
       state.authorizationStatus = AuthStatuses.NoAuth;
       state.accessToken = Symbols.Empty;
+      state.userRole = UserRoles.Unknown;
     }
   },
   extraReducers(builder) {
@@ -87,6 +91,7 @@ export const userProcess = createSlice({
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
+        state.userRole = getUserRoleByAccessToken(accessToken);
 
         if (refreshToken) setRefreshTokenToStorage(refreshToken);
       })
@@ -173,6 +178,7 @@ export const userProcess = createSlice({
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
+        state.userRole = UserRoles.Unknown;
 
         if (isRefreshTokenSetInStorage()) deleteRefreshTokenFromStorage();
       })
@@ -193,11 +199,13 @@ export const userProcess = createSlice({
       })
       .addCase(refreshAuthAction.fulfilled, (state, action) => {
         const isSuccess = action.payload.success;
+        const accessToken = isSuccess ? action.payload.payload.accessToken : Symbols.Empty;
 
         state.isUserRequestInProgress = false;
         state.isUserRequestSuccess = isSuccess;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
-        state.accessToken = isSuccess ? action.payload.payload.accessToken : Symbols.Empty;
+        state.accessToken = accessToken;
+        state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
 
         switch (isSuccess) {
           case true:

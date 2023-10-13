@@ -1,7 +1,8 @@
 import {
   ANY_CAPITAL_LETTER_REGEXP,
   SLASHES_AT_END_OF_STRING_REGEXP,
-  Symbols
+  Symbols,
+  UserRoles
 } from './const/common-const';
 
 import {
@@ -10,6 +11,7 @@ import {
   CLIENT_URL_LOCALHOST,
   CLIENT_URL_PROD
 } from './const/api-const';
+import { Token } from './types/token-type';
 
 export function removeLastSlash(string: string) {
   return string.replace(SLASHES_AT_END_OF_STRING_REGEXP, Symbols.Empty);
@@ -95,3 +97,7 @@ function joinSplittedAbbreviation(arr: string[]) {
 function isUpperCase(str: string) {
   return str !== str.toLowerCase() && str === str.toUpperCase();
 }
+
+export function getUserRoleByAccessToken(accessToken: Token): UserRoles {
+  return JSON.parse(atob(accessToken.split(Symbols.Dot)[1])).role;
+};
