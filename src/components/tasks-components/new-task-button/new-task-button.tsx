@@ -12,6 +12,8 @@ function NewTaskButton() {
   const isUserAdmin = userRole === UserRoles.Admin;
   const dispatch = useAppDispatch();
 
+  if (!isUserAdmin) return;
+
   const newTaskButtonHandler = () => {
     dispatch(showModal());
   };
@@ -25,12 +27,9 @@ function NewTaskButton() {
         {UI_NAMES.NEW_TASK}
       </button>
 
-      {
-        isUserAdmin &&
-        <Modal>
-          <NewTaskForm />
-        </Modal>
-      }
+      <Modal>
+        <NewTaskForm />
+      </Modal>
     </>
   );
 }
