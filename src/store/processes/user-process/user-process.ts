@@ -22,7 +22,6 @@ import {
 
 const initialState: UserProcess = {
   isUserRequestInProgress: false,
-  isUserRequestSuccess: false,
   authorizationStatus: AuthStatuses.Unknown,
   accessToken: Symbols.Empty,
   userRole: UserRoles.Unknown,
@@ -38,7 +37,6 @@ export const userProcess = createSlice({
   reducers: {
     resetUserAPIResponse: (state) => {
       state.isUserRequestInProgress = false;
-      state.isUserRequestSuccess = false;
       state.authorizationStatus = AuthStatuses.Unknown;
       state.accessToken = Symbols.Empty;
       state.userRole = UserRoles.Unknown;
@@ -57,18 +55,15 @@ export const userProcess = createSlice({
     builder
       .addCase(registerUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Register;
         state.userAPIResponse.body = null;
       })
       .addCase(registerUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = action.payload.success;
         state.userAPIResponse.body = action.payload;
       })
       .addCase(registerUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,
@@ -77,7 +72,6 @@ export const userProcess = createSlice({
       })
       .addCase(loginUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Login;
         state.userAPIResponse.body = null;
       })
@@ -87,17 +81,15 @@ export const userProcess = createSlice({
         const refreshToken = (isSuccess && action.payload.payload.refreshToken) ? action.payload.payload.refreshToken : null;
         
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = isSuccess;
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
-        state.userRole = getUserRoleByAccessToken(accessToken);
+        state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
 
         if (refreshToken) setRefreshTokenToStorage(refreshToken);
       })
       .addCase(loginUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
         state.userAPIResponse.body = {
@@ -108,18 +100,15 @@ export const userProcess = createSlice({
       })
       .addCase(confirmUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Confirm;
         state.userAPIResponse.body = null;
       })
       .addCase(confirmUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = action.payload.success;
         state.userAPIResponse.body = action.payload;
       })
       .addCase(confirmUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,
@@ -128,18 +117,15 @@ export const userProcess = createSlice({
       })
       .addCase(repassUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Repass;
         state.userAPIResponse.body = null;
       })
       .addCase(repassUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = action.payload.success;
         state.userAPIResponse.body = action.payload;
       })
       .addCase(repassUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,
@@ -148,18 +134,15 @@ export const userProcess = createSlice({
       })
       .addCase(newPasswordUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.NewPassword;
         state.userAPIResponse.body = null;
       })
       .addCase(newPasswordUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = action.payload.success;
         state.userAPIResponse.body = action.payload;
       })
       .addCase(newPasswordUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,
@@ -168,13 +151,11 @@ export const userProcess = createSlice({
       })
       .addCase(logoutUserAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = APIActions.Logout;
         state.userAPIResponse.body = null;
       })
       .addCase(logoutUserAction.fulfilled, (state, action) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = action.payload.success;
         state.userAPIResponse.body = action.payload;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
@@ -184,7 +165,6 @@ export const userProcess = createSlice({
       })
       .addCase(logoutUserAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.body = {
           success: false,
           message: API_MESSAGES.FILED,
@@ -193,7 +173,6 @@ export const userProcess = createSlice({
       })
       .addCase(refreshAuthAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.isUserRequestSuccess = false;
         state.userAPIResponse.type = null;
         state.userAPIResponse.body = null;
       })
@@ -202,7 +181,6 @@ export const userProcess = createSlice({
         const accessToken = isSuccess ? action.payload.payload.accessToken : Symbols.Empty;
 
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = isSuccess;
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
         state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
@@ -221,7 +199,6 @@ export const userProcess = createSlice({
       })
       .addCase(refreshAuthAction.rejected, (state) => {
         state.isUserRequestInProgress = false;
-        state.isUserRequestSuccess = false;
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
         state.userAPIResponse.body = {

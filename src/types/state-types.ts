@@ -12,7 +12,6 @@ export type APIResponse = {
 
 export type UserProcess = {
   isUserRequestInProgress: boolean;
-  isUserRequestSuccess: boolean;
   authorizationStatus: AuthStatuses;
   accessToken: string;
   userRole: UserRoles,
