@@ -1,10 +1,17 @@
 import './input-email.scss';
-import React, { ChangeEvent, useState } from 'react';
-import { EMAIL_REGEXP, MAX_EMAIL_LENGTH, Symbols } from '../../../const/common-const';
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { EMAIL_REGEXP, MAX_EMAIL_LENGTH, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
-import { FORM_MESSAGES } from '../../../const/messages-const';
-import { InputEmailProps } from '../../../types/form-props-types';
-import { UI_NAMES } from '../../../const/ui-const';
+import { FORM_MESSAGES } from '../../../../const/messages-const';
+import { UI_NAMES } from '../../../../const/ui-const';
+
+type InputEmailProps = {
+  passEmailToParent: Dispatch<SetStateAction<string>>;
+  passEmailValidStatusToParent: Dispatch<SetStateAction<boolean>>;
+  isFormTriedToSubmit: boolean;
+  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
+  isFormDisabled: boolean;
+}
 
 function InputEmail({
   passEmailToParent,

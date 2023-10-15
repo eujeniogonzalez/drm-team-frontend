@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
-import LoginForm from '../../components/form-components/login-form/login-form';
+import LoginForm from '../../components/forms/form-components/login-form/login-form';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/processes/user-process/user-selectors';
 import { AuthStatuses } from '../../const/common-const';

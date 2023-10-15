@@ -13,5 +13,8 @@ export const UI_NAMES = {
   GO_OUT: 'Выйти',
   E_MAIL: 'E-mail',
   MAIN: 'Главная',
-  NEW_TASK: 'Новая задача'
+  NEW_TASK: 'Новая задача',
+  CREATE_TASK: 'Создать задачу',
+  TASK_NAME: 'Название задачи',
+  TASK_DESCRIPTION: 'Описание задачи'
 }

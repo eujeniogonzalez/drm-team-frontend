@@ -1,7 +1,8 @@
 export enum NameSpace {
   User = 'user',
   Toast = 'toast',
-  Modal = 'modal'
+  Modal = 'modal',
+  Task = 'task'
 }
 
 export enum AuthStatuses {

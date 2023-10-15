@@ -4,14 +4,20 @@ import { AxiosInstance } from 'axios';
 import { State } from '../types/state-types';
 import { APIRoutes } from '../const/api-const';
 import { isClientDomainLocalhost } from '../utils';
-import { getRefreshTokenFromStorage, isRefreshTokenSetInStorage } from '../services/local-storage';
+import { Symbols } from '../const/common-const';
+
+import {
+  getRefreshTokenFromStorage,
+  isRefreshTokenSetInStorage
+} from '../services/local-storage';
 
 import {
   ConfirmBody,
   LoginBody,
   RepassBody,
   RegisterBody,
-  NewPasswordBody
+  NewPasswordBody,
+  NewTaskBody
 } from '../types/request-api-types';
 
 import {
@@ -22,9 +28,9 @@ import {
   RepassPayload,
   NewPasswordPayload,
   LogoutPayload,
-  RefreshPayload
+  RefreshPayload,
+  NewTaskPayload
 } from '../types/response-api-types';
-import { Symbols } from '../const/common-const';
 
 export const registerUserAction = createAsyncThunk<ResponseAPI<RegisterPayload>, RegisterBody, {
   dispatch: AppDispatch;
@@ -146,4 +152,18 @@ export const refreshAuthAction = createAsyncThunk<ResponseAPI<RefreshPayload>, u
   }
 );
 
+export const createTaskAction = createAsyncThunk<ResponseAPI<NewTaskPayload>, NewTaskBody, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>
+(
+  'createTaskAction',
+  async ({ title, description, parentTaskID }, { extra: api }) => {
+    const { data } = await api.post<ResponseAPI<NewTaskPayload>>(APIRoutes.Tasks, { title, description, parentTaskID });
+
+    return data;
+  }
+);
 

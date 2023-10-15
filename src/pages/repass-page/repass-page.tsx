@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
-import RepassForm from '../../components/form-components/repass-form/repass-form';
+import RepassForm from '../../components/forms/form-components/repass-form/repass-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import Message from '../../components/message/message';

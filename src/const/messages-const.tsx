@@ -7,6 +7,7 @@ export const FORM_MESSAGES = {
   EMAIL_EMPTY: 'Email не может быть пустым',
   PASSWORD_INCORRECT: 'Только латинские буквы, цифры и символы',
   PASSWORD_EMPTY: 'Пароль не может быть пустым',
-  PASSWORDS_NOT_MATCH: 'Пароли не совпадают'
+  PASSWORDS_NOT_MATCH: 'Пароли не совпадают',
+  TEXTAREA_EMPTY: 'Поле не может быть пустым'
 };
 

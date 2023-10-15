@@ -24,3 +24,4 @@ export type NewPasswordPayload = null;
 
 export type LogoutPayload = null;
 
+export type NewTaskPayload = null;

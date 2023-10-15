@@ -1,10 +1,20 @@
 import './input-password.scss';
-import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
-import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../const/common-const';
+import React, { KeyboardEvent, ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
+import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
-import { FORM_MESSAGES } from '../../../const/messages-const';
-import { InputPasswordProps } from '../../../types/form-props-types';
-import { UI_NAMES } from '../../../const/ui-const';
+import { FORM_MESSAGES } from '../../../../const/messages-const';
+import { UI_NAMES } from '../../../../const/ui-const';
+
+type InputPasswordProps = {
+  passPasswordToParent: Dispatch<SetStateAction<string>>;
+  passPasswordValidStatusToParent: Dispatch<SetStateAction<boolean>>;
+  isFormTriedToSubmit: boolean;
+  autofocus?: boolean;
+  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
+  passwordForMatching?: string;
+  placeholder?: string;
+  isFormDisabled: boolean;
+}
 
 function InputPassword({
   passPasswordToParent,

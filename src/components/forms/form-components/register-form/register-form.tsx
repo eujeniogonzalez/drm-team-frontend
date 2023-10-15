@@ -1,18 +1,18 @@
 import './register-form.scss';
 import React, { FormEvent, useEffect, useState } from 'react';
-import { AppRoutes } from '../../../const/router-const';
-import { LinksBlockAlignment, Symbols } from '../../../const/common-const';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { registerUserAction } from '../../../store/api-actions';
-import InputEmail from '../input-email/input-email';
-import InputPassword from '../input-password/input-password';
-import SubmitButton from '../submit-button/submit-button';
-import { UI_NAMES } from '../../../const/ui-const';
-import LinksBlock from '../../links-block/links-block';
-import { APIActions } from '../../../const/api-const';
-import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
-import { showToast } from '../../../store/processes/toast-process/toast-process';
-import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
+import { AppRoutes } from '../../../../const/router-const';
+import { LinksBlockAlignment, Symbols } from '../../../../const/common-const';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { registerUserAction } from '../../../../store/api-actions';
+import InputEmail from '../../form-elements/input-email/input-email';
+import InputPassword from '../../form-elements/input-password/input-password';
+import SubmitButton from '../../form-elements/submit-button/submit-button';
+import { UI_NAMES } from '../../../../const/ui-const';
+import LinksBlock from '../../../links-block/links-block';
+import { APIActions } from '../../../../const/api-const';
+import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
+import { showToast } from '../../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
 
 function RegisterForm() {
   const dispatch = useAppDispatch();

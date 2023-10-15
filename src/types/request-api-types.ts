@@ -23,3 +23,9 @@ export type NewPasswordBody = {
   newRepeatPassword: string;
 };
 
+export type NewTaskBody = {
+  title: string;
+  description: string;
+  parentTaskID: null | string;
+};
+

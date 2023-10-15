@@ -1,16 +1,16 @@
 import './new-password-form.scss';
-import { Symbols } from '../../../const/common-const';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { Symbols } from '../../../../const/common-const';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { newPasswordUserAction } from '../../../store/api-actions';
-import InputPassword from '../input-password/input-password';
-import SubmitButton from '../submit-button/submit-button';
-import { UI_NAMES } from '../../../const/ui-const';
-import { APIActions } from '../../../const/api-const';
-import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../store/processes/user-process/user-selectors';
-import { showToast } from '../../../store/processes/toast-process/toast-process';
-import { resetUserAPIResponse } from '../../../store/processes/user-process/user-process';
+import { newPasswordUserAction } from '../../../../store/api-actions';
+import InputPassword from '../../form-elements/input-password/input-password';
+import SubmitButton from '../../form-elements/submit-button/submit-button';
+import { UI_NAMES } from '../../../../const/ui-const';
+import { APIActions } from '../../../../const/api-const';
+import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
+import { showToast } from '../../../../store/processes/toast-process/toast-process';
+import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
 
 function NewPasswordForm() {
   const dispatch = useAppDispatch();

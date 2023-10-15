@@ -5,13 +5,12 @@ import { getUserRole } from '../../../store/processes/user-process/user-selector
 import { UserRoles } from '../../../const/common-const';
 import { showModal } from '../../../store/processes/modal-process/modal-process';
 import Modal from '../../modal/modal';
+import NewTaskForm from '../../forms/form-components/new-task-form/new-task-form';
 
 function NewTaskButton() {
   const userRole = useAppSelector(getUserRole);
   const isUserAdmin = userRole === UserRoles.Admin;
   const dispatch = useAppDispatch();
-
-  if (!isUserAdmin) return;
 
   const newTaskButtonHandler = () => {
     dispatch(showModal());
@@ -26,9 +25,12 @@ function NewTaskButton() {
         {UI_NAMES.NEW_TASK}
       </button>
 
-      <Modal>
-        <h1>Hello</h1>
-      </Modal>
+      {
+        isUserAdmin &&
+        <Modal>
+          <NewTaskForm />
+        </Modal>
+      }
     </>
   );
 }

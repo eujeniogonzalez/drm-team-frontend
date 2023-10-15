@@ -18,7 +18,7 @@ export const createAPI = (): AxiosInstance => {
       // todo Сделать проверку токена, если истёк, сначала делаем рефреш
 
       if (accessToken && config.headers) {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
+        config.headers['authorization'] = `Bearer ${accessToken}`;
       }
 
       if (!config.data) return config;

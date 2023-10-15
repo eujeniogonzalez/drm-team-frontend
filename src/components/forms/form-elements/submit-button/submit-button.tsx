@@ -1,8 +1,13 @@
 import './submit-button.scss';
-import React from 'react';
-import Loader from '../../loader/loader';
-import { LoaderColors, LoaderSizes } from '../../../const/loader-const';
-import { SubmitButtonProps } from '../../../types/form-props-types';
+import React, { FormEvent } from 'react';
+import Loader from '../../../loader/loader';
+import { LoaderColors, LoaderSizes } from '../../../../const/loader-const';
+
+type SubmitButtonProps = {
+  submitButtonClickHandler: (e: FormEvent<HTMLFormElement>) => void;
+  buttonText: string;
+  isFormDisabled: boolean;
+};
 
 function SubmitButton({
   submitButtonClickHandler,
