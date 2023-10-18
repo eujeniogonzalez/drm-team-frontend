@@ -173,7 +173,7 @@ export const userProcess = createSlice({
       })
       .addCase(refreshAuthAction.pending, (state) => {
         state.isUserRequestInProgress = true;
-        state.userAPIResponse.type = null;
+        state.userAPIResponse.type = APIActions.Refresh;
         state.userAPIResponse.body = null;
       })
       .addCase(refreshAuthAction.fulfilled, (state, action) => {
@@ -184,6 +184,10 @@ export const userProcess = createSlice({
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
         state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
+        state.userAPIResponse = {
+          type: null,
+          body: null
+        }
 
         switch (isSuccess) {
           case true:

@@ -1,3 +1,5 @@
+import { Token } from './types/token-type';
+
 import {
   ANY_CAPITAL_LETTER_REGEXP,
   SLASHES_AT_END_OF_STRING_REGEXP,
@@ -10,8 +12,7 @@ import {
   API_URL_PROD,
   CLIENT_URL_LOCALHOST,
   CLIENT_URL_PROD
-} from './const/api-const';
-import { Token } from './types/token-type';
+} from './const/api-const'
 
 export function removeLastSlash(string: string) {
   return string.replace(SLASHES_AT_END_OF_STRING_REGEXP, Symbols.Empty);
@@ -101,3 +102,15 @@ function isUpperCase(str: string) {
 export function getUserRoleByAccessToken(accessToken: Token): UserRoles {
   return JSON.parse(atob(accessToken.split(Symbols.Dot)[1])).role;
 };
+
+export function getAccessTokenExpireDate(accessToken: Token): number {
+  return JSON.parse(atob(accessToken.split(Symbols.Dot)[1])).exp;
+};
+
+export function getTimestampWithoutMilliseconds(): number {
+  return Math.floor(Date.now() / 1000);
+}
+
+export function isAccessTokenExpired(accessToken: Token): boolean {
+  return getAccessTokenExpireDate(accessToken) < getTimestampWithoutMilliseconds();
+}

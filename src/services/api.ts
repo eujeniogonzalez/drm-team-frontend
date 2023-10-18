@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { REQUEST_TIMEOUT } from '../const/api-const';
+import { APIActions, REQUEST_TIMEOUT } from '../const/api-const';
 import { store } from '../store';
-import { getAPIURL } from '../utils';
+import { getAPIURL, isAccessTokenExpired } from '../utils';
 import { adaptFromClientToServer, adaptFromServerToClient } from './adapter';
+import { refreshAuthAction } from '../store/api-actions';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -12,13 +13,22 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
+    async (config: InternalAxiosRequestConfig) => {
       const accessToken = store.getState().user.accessToken;
+      const isAPIActionRefresh = store.getState().user.userAPIResponse.type === APIActions.Refresh;
+      
+      switch (true) {
+        case accessToken && !isAccessTokenExpired(accessToken):
+          config.headers['authorization'] = `Bearer ${accessToken}`;
+          break;
+      
+        case accessToken && isAccessTokenExpired(accessToken) && !isAPIActionRefresh:
+          await store.dispatch(refreshAuthAction());
 
-      // todo Сделать проверку токена, если истёк, сначала делаем рефреш
+          const newAccessToken = store.getState().user.accessToken;
 
-      if (accessToken && config.headers) {
-        config.headers['authorization'] = `Bearer ${accessToken}`;
+          config.headers['authorization'] = `Bearer ${newAccessToken}`;
+          break;
       }
 
       if (!config.data) return config;
