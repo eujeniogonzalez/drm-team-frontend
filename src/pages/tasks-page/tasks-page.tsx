@@ -3,19 +3,22 @@ import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
 import { META } from '../../const/meta-const';
-import NewTaskButton from '../../components/tasks-components/new-task-button/new-task-button';
-import ButtonsBlock from '../../components/buttons-block/buttons-block';
+import NewTaskButton from '../../components/tasks-components/create-task-button/create-task-button';
+import Wrapper from '../../components/wrapper/wrapper';
+import TaskList from '../../components/tasks-components/task-list/task-list';
 
 function TasksPage() {
   document.title = META.TITLE.TASKS;
-
+  
   return (
     <>
       <Header />
       <Content>
-        <ButtonsBlock>
+        <Wrapper minHeight={30}>
           <NewTaskButton />
-        </ButtonsBlock>
+        </Wrapper>
+
+        <TaskList />
       </Content>
       <Footer />
     </>

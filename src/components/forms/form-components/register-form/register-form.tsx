@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { AppRoutes } from '../../../../const/router-const';
 import { LinksBlockAlignment, Symbols } from '../../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { registerUserAction } from '../../../../store/api-actions';
+import { registerUserAction } from '../../../../store/api-actions/user-api-actions';
 import InputEmail from '../../form-elements/input-email/input-email';
 import InputPassword from '../../form-elements/input-password/input-password';
 import SubmitButton from '../../form-elements/submit-button/submit-button';
@@ -53,51 +53,53 @@ function RegisterForm() {
   };
 
   return (
-    <div className='register-form-content'>
-      <div className='register-form-title'>{UI_NAMES.REGISTRATION}</div>
-      
-      <form onSubmit={submitRegisterFormHandler}>
-        <InputEmail
-          passEmailToParent={setEmail}
-          passEmailValidStatusToParent={setIsEmailValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          isFormDisabled={isFormDisabled}
-        />
-
-        <InputPassword
-          passPasswordToParent={setPassword}
-          passPasswordValidStatusToParent={setIsPasswordValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          placeholder={UI_NAMES.COME_UP_WITH_PASSWORD}
-          isFormDisabled={isFormDisabled}
-        />
+    <div className='register-form-wrapper'>
+      <div className='register-form-content'>
+        <div className='register-form-title'>{UI_NAMES.REGISTRATION}</div>
         
-        <InputPassword
-          passPasswordToParent={setRepeatPassword}
-          passPasswordValidStatusToParent={setIsRepeatPasswordValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          passwordForMatching={password}
-          placeholder={UI_NAMES.REPEAT_PASSWORD}
-          isFormDisabled={isFormDisabled}
-        />
+        <form onSubmit={submitRegisterFormHandler}>
+          <InputEmail
+            passEmailToParent={setEmail}
+            passEmailValidStatusToParent={setIsEmailValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+          />
 
-        <SubmitButton
-          submitButtonClickHandler={submitRegisterFormHandler}
-          buttonText={UI_NAMES.REGISTER}
-          isFormDisabled={isFormDisabled}
-        />
-      </form>
+          <InputPassword
+            passPasswordToParent={setPassword}
+            passPasswordValidStatusToParent={setIsPasswordValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            placeholder={UI_NAMES.COME_UP_WITH_PASSWORD}
+            isFormDisabled={isFormDisabled}
+          />
+          
+          <InputPassword
+            passPasswordToParent={setRepeatPassword}
+            passPasswordValidStatusToParent={setIsRepeatPasswordValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            passwordForMatching={password}
+            placeholder={UI_NAMES.REPEAT_PASSWORD}
+            isFormDisabled={isFormDisabled}
+          />
 
-      <LinksBlock
-        links={[
-          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
-          {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD}
-        ]}
-        alignment={LinksBlockAlignment.Horizontal}
-      />
+          <SubmitButton
+            submitButtonClickHandler={submitRegisterFormHandler}
+            buttonText={UI_NAMES.REGISTER}
+            isFormDisabled={isFormDisabled}
+          />
+        </form>
+
+        <LinksBlock
+          links={[
+            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
+            {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD}
+          ]}
+          alignment={LinksBlockAlignment.Horizontal}
+        />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,27 @@
+@import '../../../const/const.scss';
+
+.task-details {
+  width: 100%;
+  max-width: 900px;
+
+  .task-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .task-description {
+    margin: 20px 0 40px;
+    line-height: 25px;
+    white-space: pre-wrap;
+  }
+
+  .task-not-available {
+    background-color: $wrong-color;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+  }
+}

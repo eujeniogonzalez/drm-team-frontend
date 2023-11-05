@@ -15,7 +15,8 @@ export enum Symbols {
   Empty = '',
   DoubleSlash = '//',
   Underline = '_',
-  Dot = '.'
+  Dot = '.',
+  Space = ' '
 }
 
 export enum LinksBlockAlignment {
@@ -29,10 +30,19 @@ export enum UserRoles {
   Volunteer = 'volunteer'
 }
 
+export enum TaskStatuses {
+  New = 'new',
+  Running = 'running',
+  Reviewing = 'reviewing',
+  Done = 'done'
+}
+
 export const EMAIL_REGEXP = /^[a-zA-Z0-9_]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,15}$/;
 export const PASSWORD_REGEXP = /^[a-zA-Z0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]+$/;
 export const MAX_EMAIL_LENGTH = 129;
 export const MAX_PASSWORD_LENGTH = 50;
 export const ANY_CAPITAL_LETTER_REGEXP = /(?=[A-Z])/;
 export const SLASHES_AT_END_OF_STRING_REGEXP = /\/+$/;
+export const MIN_LOADER_DISPLAYING_TIME = 700;
+export const WRAPPER_MIN_HEIGHT = 30;
 

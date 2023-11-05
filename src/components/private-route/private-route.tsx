@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { AuthStatuses } from '../../const/common-const';
 import { useAppSelector } from '../../hooks';
-import { PrivateRouteProps } from '../../types/private-route-props-types';
+import { PrivateRoutePropsType } from '../../types/private-route-props-types';
 
 import {
   getAuthorizationStatus,
@@ -14,9 +14,9 @@ import Header from '../header-components/header/header';
 import Footer from '../footer/footer';
 import Content from '../content/content';
 import Loader from '../loader/loader';
-import { LoaderColors, LoaderSizes } from '../../const/loader-const';
+import { LoaderColors, LoaderSizes } from '../../const/classnames-const';
 
-function PrivateRoute(props: PrivateRouteProps) {
+function PrivateRoute(props: PrivateRoutePropsType) {
   const { children } = props;
   const navigate = useNavigate();
   const authStatus = useAppSelector(getAuthorizationStatus);

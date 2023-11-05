@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useLayoutEffect } from 'react';
 import { Router } from 'react-router-dom';
-import { HistoryRouterProps } from '../../types/history-route-props';
+import { HistoryRouterPropsType } from '../../types/history-router-props-type';
 
-function HistoryRouter({ basename, children, history }: HistoryRouterProps) {
+function HistoryRouter({ basename, children, history }: HistoryRouterPropsType) {
   const [state, setState] = useState({
     action: history.action,
     location: history.location,

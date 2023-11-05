@@ -1,6 +1,6 @@
-import { LinksList } from './links-block-props';
+import { LinksListType } from './links-block-props-type';
 
-export type MessageProps = {
-  message: JSX.Element | string;
-  links?: LinksList;
+export type MessagePropsType = {
+  message: JSX.Element | string,
+  links?: LinksListType
 };

@@ -16,5 +16,17 @@ export const UI_NAMES = {
   NEW_TASK: 'Новая задача',
   CREATE_TASK: 'Создать задачу',
   TASK_NAME: 'Название задачи',
-  TASK_DESCRIPTION: 'Описание задачи'
+  TASK_DESCRIPTION: 'Описание задачи',
+  TASK_LIST_EMPTY: 'Задач нет',
+  ASSIGN_TASK: 'Взять задачу',
+  UNASSIGN_TASK: 'Отказаться',
+  SEND_TASK_FOR_REVIEW: 'На проверку',
+  TASK_IS_REVIEWING: 'Проверяется',
+  TASK_STATUS_DESCRIPTIONS: {
+    NEW: 'Новая',
+    RUNNING: 'В работе',
+    REVIEWING: 'На проверке',
+    DONE: 'Выполнена'
+  },
+  MY_TASK: 'Моя задача'
 }

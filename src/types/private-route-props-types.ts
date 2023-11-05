@@ -1,3 +1,3 @@
-export type PrivateRouteProps = {
-  children: JSX.Element;
+export type PrivateRoutePropsType = {
+  children: JSX.Element
 }

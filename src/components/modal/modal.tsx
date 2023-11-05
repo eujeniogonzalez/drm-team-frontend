@@ -2,14 +2,14 @@ import './modal.scss';
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getIsModalShouldBeShown } from '../../store/processes/modal-process/modal-selectors';
+import { getIsModalShouldBeShown, } from '../../store/processes/modal-process/modal-selectors';
 import { hideModal } from '../../store/processes/modal-process/modal-process';
 
-type ModalProps = {
+type ModalPropsType = {
   children: JSX.Element | JSX.Element[]
 };
 
-function Modal({children}: ModalProps) {
+function Modal({children}: ModalPropsType) {
   const isModalShouldBeShown = useAppSelector(getIsModalShouldBeShown);
   const dispatch = useAppDispatch();
 

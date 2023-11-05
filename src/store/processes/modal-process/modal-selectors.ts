@@ -1,6 +1,7 @@
 import { NameSpace } from '../../../const/common-const';
-import { IsModalShouldBeShown } from '../../../types/modal-types';
-import { State } from '../../../types/state-types';
+import { StateType } from '../../../types/state-types';
 
-export const getIsModalShouldBeShown = (state: State): IsModalShouldBeShown => state[NameSpace.Modal].isModalShouldBeShown;
+type IsModalShouldBeShownType = boolean;
+
+export const getIsModalShouldBeShown = (state: StateType): IsModalShouldBeShownType => state[NameSpace.Modal].isModalShouldBeShown;
 

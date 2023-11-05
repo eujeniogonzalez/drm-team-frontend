@@ -5,12 +5,12 @@ import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
 import { UI_NAMES } from '../../../../const/ui-const';
 
-type InputEmailProps = {
-  passEmailToParent: Dispatch<SetStateAction<string>>;
-  passEmailValidStatusToParent: Dispatch<SetStateAction<boolean>>;
-  isFormTriedToSubmit: boolean;
-  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
-  isFormDisabled: boolean;
+type InputEmailPropsType = {
+  passEmailToParent: Dispatch<SetStateAction<string>>,
+  passEmailValidStatusToParent: Dispatch<SetStateAction<boolean>>,
+  isFormTriedToSubmit: boolean,
+  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>,
+  isFormDisabled: boolean
 }
 
 function InputEmail({
@@ -19,7 +19,7 @@ function InputEmail({
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit,
   isFormDisabled
-}: InputEmailProps) {
+}: InputEmailPropsType) {
   const [email, setEmail] = useState<string>(Symbols.Empty);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);

@@ -1,2 +1,2 @@
-export type ToastMessage = string;
-export type IsToastShouldBeShown = boolean;
+export type ToastMessageType = string;
+export type IsToastShouldBeShownType = boolean;

@@ -1,5 +1,6 @@
 export const MESSAGES = {
-  NOT_FOUND_PAGE: 'Такой страницы не существует'
+  NOT_FOUND_PAGE: 'Такой страницы не существует',
+  TASK_NOT_AVAILABLE_FOR_YOU: 'Задача недоступна, она занята другим пользователем, либо у вас уже есть задача в работе'
 };
 
 export const FORM_MESSAGES = {

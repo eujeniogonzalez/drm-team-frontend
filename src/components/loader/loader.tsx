@@ -1,13 +1,13 @@
-import { LoaderColors, LoaderSizes } from '../../const/loader-const';
+import { LoaderColors, LoaderSizes } from '../../const/classnames-const';
 import './loader.scss';
 import React from 'react';
 
-type LoaderProps = {
-  size: LoaderSizes;
-  color: LoaderColors;
+type LoaderPropsType = {
+  size: LoaderSizes,
+  color: LoaderColors
 };
 
-function Loader({ size, color }: LoaderProps) {
+function Loader({ size, color }: LoaderPropsType) {
   return (
     <div className='loader'>
       <div className={`${size} ${color}`}>

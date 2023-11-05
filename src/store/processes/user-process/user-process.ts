@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthStatuses, Symbols, UserRoles } from '../../../const/common-const';
-import { UserProcess } from '../../../types/state-types';
+import { UserProcessType } from '../../../types/state-types';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
-import { getUserRoleByAccessToken } from '../../../utils';
+import { getUserIDByAccessToken, getUserRoleByAccessToken } from '../../../utils';
 
 import {
   refreshAuthAction,
@@ -12,7 +12,7 @@ import {
   repassUserAction,
   newPasswordUserAction,
   logoutUserAction
-} from '../../api-actions';
+} from '../../api-actions/user-api-actions';
 
 import {
   deleteRefreshTokenFromStorage,
@@ -20,11 +20,12 @@ import {
   setRefreshTokenToStorage
 } from '../../../services/local-storage';
 
-const initialState: UserProcess = {
+const initialState: UserProcessType = {
   isUserRequestInProgress: false,
   authorizationStatus: AuthStatuses.Unknown,
   accessToken: Symbols.Empty,
   userRole: UserRoles.Unknown,
+  userID: null,
   userAPIResponse: {
     type: null,
     body: null
@@ -40,15 +41,11 @@ export const userProcess = createSlice({
       state.authorizationStatus = AuthStatuses.Unknown;
       state.accessToken = Symbols.Empty;
       state.userRole = UserRoles.Unknown;
+      state.userID = null;
       state.userAPIResponse = {
         type: null,
         body: null
-      };
-    },
-    logout: (state) => {
-      state.authorizationStatus = AuthStatuses.NoAuth;
-      state.accessToken = Symbols.Empty;
-      state.userRole = UserRoles.Unknown;
+      }
     }
   },
   extraReducers(builder) {
@@ -85,6 +82,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
         state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
+        state.userID = getUserIDByAccessToken(accessToken);
 
         if (refreshToken) setRefreshTokenToStorage(refreshToken);
       })
@@ -160,6 +158,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = AuthStatuses.NoAuth;
         state.accessToken = Symbols.Empty;
         state.userRole = UserRoles.Unknown;
+        state.userID = null;
 
         if (isRefreshTokenSetInStorage()) deleteRefreshTokenFromStorage();
       })
@@ -184,6 +183,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
         state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
+        state.userID = isSuccess ? getUserIDByAccessToken(accessToken) : null;
         state.userAPIResponse = {
           type: null,
           body: null
@@ -214,4 +214,4 @@ export const userProcess = createSlice({
   }
 });
 
-export const { logout, resetUserAPIResponse } = userProcess.actions;
+export const { resetUserAPIResponse } = userProcess.actions;

@@ -4,15 +4,15 @@ import { Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
 
-export type TextareaProps = {
-  passTextToParent: Dispatch<SetStateAction<string>>;
-  passTextValidStatusToParent: Dispatch<SetStateAction<boolean>>;
-  isFormTriedToSubmit: boolean;
-  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
-  isFormDisabled: boolean;
-  placeholder: string;
-  autoFocus: boolean;
-  rows: number;
+export type TextareaPropsType = {
+  passTextToParent: Dispatch<SetStateAction<string>>,
+  passTextValidStatusToParent: Dispatch<SetStateAction<boolean>>,
+  isFormTriedToSubmit: boolean,
+  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>,
+  isFormDisabled: boolean,
+  placeholder: string,
+  autoFocus: boolean,
+  rows: number
 }
 
 function Textarea({
@@ -24,7 +24,7 @@ function Textarea({
   placeholder,
   autoFocus,
   rows
-}: TextareaProps) {
+}: TextareaPropsType) {
   const [text, setText] = useState<string>(Symbols.Empty);
   const [isTextValid, setIsTextValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);

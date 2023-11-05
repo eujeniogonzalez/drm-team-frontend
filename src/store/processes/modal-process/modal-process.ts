@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, Symbols } from '../../../const/common-const';
-import { ModalProcess } from '../../../types/state-types';
+import { NameSpace } from '../../../const/common-const';
+import { ModalProcessType } from '../../../types/state-types';
 
-const initialState: ModalProcess = {
+const initialState: ModalProcessType = {
   isModalShouldBeShown: false
 };
 

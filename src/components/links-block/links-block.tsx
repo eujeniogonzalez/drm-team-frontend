@@ -1,9 +1,9 @@
 import './links-block.scss';
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { LinksBlockProps } from '../../types/links-block-props';
+import { LinksBlockPropsType } from '../../types/links-block-props-type';
 
-function LinksBlock({ links, alignment }: LinksBlockProps) {
+function LinksBlock({ links, alignment }: LinksBlockPropsType) {
   const getLinks = () => links.map((link, i) => (
     <Link
       key={`linkID-${i}`}

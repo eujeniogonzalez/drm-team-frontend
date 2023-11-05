@@ -7,7 +7,7 @@ import InputPassword from '../../form-elements/input-password/input-password';
 import { UI_NAMES } from '../../../../const/ui-const';
 import { AppRoutes } from '../../../../const/router-const';
 import { APIActions } from '../../../../const/api-const';
-import { loginUserAction } from '../../../../store/api-actions';
+import { loginUserAction } from '../../../../store/api-actions/user-api-actions';
 import { LinksBlockAlignment, Symbols } from '../../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
@@ -51,40 +51,42 @@ function LoginForm() {
   };
 
   return (
-    <div className='login-form-content'>
-      <div className='login-form-title'>{UI_NAMES.ENTRANCE}</div>
+    <div className='login-form-wrapper'>
+      <div className='login-form-content'>
+        <div className='login-form-title'>{UI_NAMES.ENTRANCE}</div>
 
-      <form onSubmit={submitLoginFormHandler}>
-        <InputEmail
-          passEmailToParent={setEmail}
-          passEmailValidStatusToParent={setIsEmailValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          isFormDisabled={isFormDisabled}
+        <form onSubmit={submitLoginFormHandler}>
+          <InputEmail
+            passEmailToParent={setEmail}
+            passEmailValidStatusToParent={setIsEmailValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+          />
+
+          <InputPassword
+            passPasswordToParent={setPassword}
+            passPasswordValidStatusToParent={setIsPasswordValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+          />
+
+          <SubmitButton
+            submitButtonClickHandler={submitLoginFormHandler}
+            buttonText={UI_NAMES.ENTER}
+            isFormDisabled={isFormDisabled}
+          />
+        </form>
+
+        <LinksBlock
+          links={[
+            {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
+            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+          ]}
+          alignment={LinksBlockAlignment.Horizontal}
         />
-
-        <InputPassword
-          passPasswordToParent={setPassword}
-          passPasswordValidStatusToParent={setIsPasswordValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          isFormDisabled={isFormDisabled}
-        />
-
-        <SubmitButton
-          submitButtonClickHandler={submitLoginFormHandler}
-          buttonText={UI_NAMES.ENTER}
-          isFormDisabled={isFormDisabled}
-        />
-      </form>
-
-      <LinksBlock
-        links={[
-          {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
-          {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
-        ]}
-        alignment={LinksBlockAlignment.Horizontal}
-      />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,38 @@
+.task-status {
+  display: flex;
+  align-items: center;
+
+  .task-status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+
+    &.task-status-indicator-new {
+      background-color: rgb(252, 28, 252);
+    }
+
+    &.task-status-indicator-running {
+      background-color: rgb(255, 220, 63);
+    }
+
+    &.task-status-indicator-reviewing {
+      background-color: rgb(255, 122, 107);
+    }
+
+    &.task-status-indicator-done {
+      background-color: rgb(47, 255, 127);
+    }
+  }
+
+  .task-status-description {
+    color: #666666;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  & > div + div {
+    margin-left: 10px;
+  }
+}

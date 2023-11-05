@@ -1,14 +1,16 @@
-@import '../../../../const/const.scss';
-
-.login-form-content {
+.login-form-wrapper {
   width: 90%;
   max-width: 400px;
-  margin-top: 50px;
-  
-  .login-form-title {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 15px;
-  }
+  flex-grow: 1;
+
+  .login-form-content {
+    margin-top: 50px;
+    
+    .login-form-title {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 15px;
+    }
+  }  
 }

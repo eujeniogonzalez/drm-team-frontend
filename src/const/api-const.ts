@@ -20,7 +20,8 @@ export enum APIRoutes {
   NewPassword = '/newpassword',
   Logout = '/logout',
   Refresh = '/refresh',
-  Tasks = '/tasks'
+  TasksInfo = '/tasks',
+  CurrentTasks = '/tasks/:quantityPerPage/:pageNumber'
 }
 
 export enum APIActions {
@@ -31,8 +32,24 @@ export enum APIActions {
   NewPassword = 'newPassword',
   Logout = 'logout',
   Refresh = 'refresh',
-  CreateTask = 'createTask'
+  CreateTask = 'createTask',
+  GetCurrentTasks = 'getCurrentTasks',
+  UpdateTask = 'updateTask'
 }
+
+export enum UpdateTaskAPIMicroActions {
+  AssignTaskToUser = 'assignTaskToUser',
+  UnassignTaskFromUser = 'unassignTaskFromUser',
+  SendTaskForReview = 'sendTaskForReview',
+  AcceptTask = 'acceptTask',
+  ArchiveTask = 'archiveTask',
+  UnarchiveTask = 'unarchiveTask'
+}
+
+export enum TasksPagination {
+  QuantityPerPage = '10',
+  PageNumber = '1'
+};
 
 export const API_MESSAGES = {
   FILED: 'Request to server is failed'

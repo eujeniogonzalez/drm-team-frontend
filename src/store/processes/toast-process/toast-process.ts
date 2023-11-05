@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, Symbols } from '../../../const/common-const';
-import { ToastProcess } from '../../../types/state-types';
+import { ToastProcessType } from '../../../types/state-types';
 
-const initialState: ToastProcess = {
+const initialState: ToastProcessType = {
   toastMessage: Symbols.Empty,
   isToastShouldBeShown: false
 };

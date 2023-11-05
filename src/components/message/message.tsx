@@ -1,10 +1,10 @@
 import './message.scss';
 import React from 'react';
-import { MessageProps } from '../../types/message-props-type';
+import { MessagePropsType } from '../../types/message-props-type';
 import LinksBlock from '../links-block/links-block';
 import { LinksBlockAlignment } from '../../const/common-const';
 
-function Message({ message, links }: MessageProps) {
+function Message({ message, links }: MessagePropsType) {
   const showLinks = () => {
     if (!links) return;
 

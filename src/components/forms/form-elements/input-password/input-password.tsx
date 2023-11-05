@@ -5,15 +5,15 @@ import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
 import { UI_NAMES } from '../../../../const/ui-const';
 
-type InputPasswordProps = {
-  passPasswordToParent: Dispatch<SetStateAction<string>>;
-  passPasswordValidStatusToParent: Dispatch<SetStateAction<boolean>>;
-  isFormTriedToSubmit: boolean;
-  autofocus?: boolean;
-  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>;
-  passwordForMatching?: string;
-  placeholder?: string;
-  isFormDisabled: boolean;
+type InputPasswordPropsType = {
+  passPasswordToParent: Dispatch<SetStateAction<string>>,
+  passPasswordValidStatusToParent: Dispatch<SetStateAction<boolean>>,
+  isFormTriedToSubmit: boolean,
+  autofocus?: boolean,
+  resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>,
+  passwordForMatching?: string,
+  placeholder?: string,
+  isFormDisabled: boolean
 }
 
 function InputPassword({
@@ -25,7 +25,7 @@ function InputPassword({
   placeholder = UI_NAMES.PASSWORD,
   autofocus = false,
   isFormDisabled
-}: InputPasswordProps) {
+}: InputPasswordPropsType) {
   const [password, setPassword] = useState<string>(Symbols.Empty);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);

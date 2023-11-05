@@ -1,16 +1,16 @@
 import './new-task-form.scss';
-import { Symbols } from '../../../../const/common-const';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { Symbols } from '../../../const/common-const';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import React, { FormEvent, useEffect, useState } from 'react';
-import SubmitButton from '../../form-elements/submit-button/submit-button';
-import { UI_NAMES } from '../../../../const/ui-const';
-import { APIActions } from '../../../../const/api-const';
-import { showToast } from '../../../../store/processes/toast-process/toast-process';
-import Textarea from '../../form-elements/textarea/textarea';
-import { createTaskAction } from '../../../../store/api-actions';
-import { getIsTaskRequestInProgress, getTaskAPIResponse } from '../../../../store/processes/task-process/task-selectors';
-import { hideModal } from '../../../../store/processes/modal-process/modal-process';
-import { resetTaskAPIResponse } from '../../../../store/processes/task-process/task-process';
+import SubmitButton from '../../forms/form-elements/submit-button/submit-button';
+import { UI_NAMES } from '../../../const/ui-const';
+import { APIActions, TasksPagination } from '../../../const/api-const';
+import { showToast } from '../../../store/processes/toast-process/toast-process';
+import Textarea from '../../forms/form-elements/textarea/textarea';
+import { createTaskAction, getCurrentTasksAction } from '../../../store/api-actions/task-api-actions';
+import { getIsTaskRequestInProgress, getTaskAPIResponse } from '../../../store/processes/task-process/task-selectors';
+import { hideModal } from '../../../store/processes/modal-process/modal-process';
+import { resetTaskAPIResponse } from '../../../store/processes/task-process/task-process';
 
 function NewTaskForm() {
   const dispatch = useAppDispatch();
@@ -23,7 +23,8 @@ function NewTaskForm() {
   const isTaskRequestInProgress = useAppSelector(getIsTaskRequestInProgress);
   const APIResponse = useAppSelector(getTaskAPIResponse);
   const isFormDisabled = isTaskRequestInProgress && APIResponse.type === APIActions.CreateTask;
-  const isModalShouldBeClosed = APIResponse.body?.success;
+  const isModalShouldBeClosed = APIResponse.body?.success && APIResponse.type === APIActions.CreateTask;
+  
   const isToastShouldBeShown = (
     !APIResponse.body?.success &&
     APIResponse.type === APIActions.CreateTask &&
@@ -40,14 +41,18 @@ function NewTaskForm() {
     };
   });
   
-  const submitNewTaskFormHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitNewTaskFormHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsFormTriedToSubmit(true);
 
     if (!isTaskTitleValid || !isTaskDescriptionValid) return;
 
-    dispatch(createTaskAction({ title: taskTitle, description: taskDescription, parentTaskID: null }));
+    await dispatch(createTaskAction({ title: taskTitle, description: taskDescription, parentTaskID: null }));
+    await dispatch(getCurrentTasksAction({
+      quantityPerPage: TasksPagination.QuantityPerPage,
+      pageNumber: TasksPagination.PageNumber
+    }));
   };
 
   return (

@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { AppRoutes } from '../../../../const/router-const';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { LinksBlockAlignment, Symbols } from '../../../../const/common-const';
-import { repassUserAction } from '../../../../store/api-actions';
+import { repassUserAction } from '../../../../store/api-actions/user-api-actions';
 import InputEmail from '../../form-elements/input-email/input-email';
 import SubmitButton from '../../form-elements/submit-button/submit-button';
 import { UI_NAMES } from '../../../../const/ui-const';
@@ -48,32 +48,34 @@ function RepassForm() {
   };
   
   return (
-    <div className='repass-form-content'>
-      <div className='repass-form-title'>{UI_NAMES.REMEMBER_PASSWORD}</div>
+    <div className='repass-form-wrapper'>
+      <div className='repass-form-content'>
+        <div className='repass-form-title'>{UI_NAMES.REMEMBER_PASSWORD}</div>
 
-      <form onSubmit={submitRepassFormHandler}>
-        <InputEmail
-          passEmailToParent={setEmail}
-          passEmailValidStatusToParent={setIsEmailValid}
-          isFormTriedToSubmit={isFormTriedToSubmit}
-          resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-          isFormDisabled={isFormDisabled}
-        />
+        <form onSubmit={submitRepassFormHandler}>
+          <InputEmail
+            passEmailToParent={setEmail}
+            passEmailValidStatusToParent={setIsEmailValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+          />
 
-        <SubmitButton
-          submitButtonClickHandler={submitRepassFormHandler}
-          buttonText={UI_NAMES.REMEMBER}
-          isFormDisabled={isFormDisabled}
+          <SubmitButton
+            submitButtonClickHandler={submitRepassFormHandler}
+            buttonText={UI_NAMES.REMEMBER}
+            isFormDisabled={isFormDisabled}
+          />
+        </form>
+        
+        <LinksBlock
+          links={[
+            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
+            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+          ]}
+          alignment={LinksBlockAlignment.Horizontal}
         />
-      </form>
-      
-      <LinksBlock
-        links={[
-          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
-          {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
-        ]}
-        alignment={LinksBlockAlignment.Horizontal}
-      />
+      </div>
     </div>
   );
 }

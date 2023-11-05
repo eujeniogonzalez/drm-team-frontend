@@ -1,7 +1,11 @@
-import { Token } from './types/token-type';
+import { TokenType } from './types/token-type';
+import { adaptFromServerToClient } from './services/adapter';
+import { UserIDType } from './types/state-types';
+import { StartAPITimeType } from './types/start-API-time-type';
 
 import {
   ANY_CAPITAL_LETTER_REGEXP,
+  MIN_LOADER_DISPLAYING_TIME,
   SLASHES_AT_END_OF_STRING_REGEXP,
   Symbols,
   UserRoles
@@ -68,9 +72,7 @@ export function convertFromCamelToSnakeCase(text: string) {
   splittedString = joinSplittedAbbreviation(splittedString);
 
   splittedString.forEach((word, i) => {
-    if (word.length > 1 && isUpperCase(word.charAt(1))) return;
-
-    splittedString[i] = uncapitalizeFirstLetter(word);
+    splittedString[i] = word.length > 1 && isAbbreviation(word) ? word : uncapitalizeFirstLetter(word);
   });
 
   return splittedString.join(Symbols.Underline);
@@ -95,15 +97,23 @@ function joinSplittedAbbreviation(arr: string[]) {
   return newArr;
 }
 
-function isUpperCase(str: string) {
+export function isUpperCase(str: string) {
   return str !== str.toLowerCase() && str === str.toUpperCase();
 }
 
-export function getUserRoleByAccessToken(accessToken: Token): UserRoles {
-  return JSON.parse(atob(accessToken.split(Symbols.Dot)[1])).role;
+export function getUserRoleByAccessToken(accessToken: TokenType): UserRoles {
+  const tokenPayload = adaptFromServerToClient(JSON.parse(atob(accessToken.split(Symbols.Dot)[1])));
+  
+  return tokenPayload.role;
 };
 
-export function getAccessTokenExpireDate(accessToken: Token): number {
+export function getUserIDByAccessToken(accessToken: TokenType): UserIDType {
+  const tokenPayload = adaptFromServerToClient(JSON.parse(atob(accessToken.split(Symbols.Dot)[1])));
+  
+  return tokenPayload.userID;
+};
+
+export function getAccessTokenExpireDate(accessToken: TokenType): number {
   return JSON.parse(atob(accessToken.split(Symbols.Dot)[1])).exp;
 };
 
@@ -111,6 +121,30 @@ export function getTimestampWithoutMilliseconds(): number {
   return Math.floor(Date.now() / 1000);
 }
 
-export function isAccessTokenExpired(accessToken: Token): boolean {
+export function isAccessTokenExpired(accessToken: TokenType): boolean {
   return getAccessTokenExpireDate(accessToken) < getTimestampWithoutMilliseconds();
+}
+
+export function isObject(object: any) {
+  return object && !Array.isArray(object) && typeof object === 'object';
+}
+
+export function isArray(array: any) {
+  return Array.isArray(array);
+}
+
+export function isAbbreviation(string: string) {
+  return string === string.toUpperCase() && string !== string.toLowerCase();
+}
+
+export function syntheticAPIDelay(startTime: StartAPITimeType){
+  if (!startTime) return;
+
+  const endTime = new Date().getTime();
+  const duration = endTime - startTime;
+  const delay = MIN_LOADER_DISPLAYING_TIME - duration;
+
+  if (delay <= 0) return;
+  
+  return new Promise(resolve => setTimeout(() => resolve('result'), delay));
 }

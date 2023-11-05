@@ -1,11 +1,11 @@
 import './input-error-message.scss';
 import React from 'react';
 
-type InputErrorMessageProps = {
-  message: string;
+type InputErrorMessagePropsType = {
+  message: string
 };
 
-function InputErrorMessage({ message }: InputErrorMessageProps) {
+function InputErrorMessage({ message }: InputErrorMessagePropsType) {
   return (
     <div className='input-error-message'>{message}</div>
   );

@@ -1,12 +1,16 @@
-.register-form-content {
+.register-form-wrapper {
   width: 90%;
   max-width: 400px;
-  margin-top: 50px;
+  flex-grow: 1;
   
-  .register-form-title {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 15px;
+  .register-form-content {
+    margin-top: 50px;
+    
+    .register-form-title {
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 15px;
+    }
   }
 }

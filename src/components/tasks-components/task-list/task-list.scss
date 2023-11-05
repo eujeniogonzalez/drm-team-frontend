@@ -1,0 +1,22 @@
+@import '../../../const/const.scss';
+
+.task-list-wrapper {
+  width: 100%;
+  flex-grow: 1;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: $bg-grey-superlight-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  .task-list {
+    flex-grow: 1;
+
+    & > div + div {
+      margin-top: 10px;
+    }
+  }
+}

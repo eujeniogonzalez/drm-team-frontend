@@ -1,31 +1,42 @@
-export type RegisterBody = {
-  email: string;
-  password: string;
-  repeatPassword: string;
+import { UpdateTaskAPIMicroActions } from '../const/api-const';
+
+export type RegisterBodyType = {
+  email: string,
+  password: string,
+  repeatPassword: string
 };
 
-export type LoginBody = {
-  email: string;
-  password: string;
+export type LoginBodyType = {
+  email: string,
+  password: string
 };
 
-export type ConfirmBody = {
-  confirmID: string;
+export type ConfirmBodyType = {
+  confirmID: string
 };
 
-export type RepassBody = {
-  email: string;
+export type RepassBodyType = {
+  email: string
 };
 
-export type NewPasswordBody = {
-  repassID: string;
-  newPassword: string;
-  newRepeatPassword: string;
+export type NewPasswordBodyType = {
+  repassID: string,
+  newPassword: string,
+  newRepeatPassword: string
 };
 
-export type NewTaskBody = {
-  title: string;
-  description: string;
-  parentTaskID: null | string;
+export type NewTaskBodyType = {
+  title: string,
+  description: string,
+  parentTaskID: null | string
 };
 
+export type CurrentTasksParamsBodyType = {
+  quantityPerPage: string,
+  pageNumber: string
+};
+
+export type UpdateTaskBodyType = {
+  action: UpdateTaskAPIMicroActions,
+  taskID: string
+};

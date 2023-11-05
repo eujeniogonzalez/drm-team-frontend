@@ -1,27 +1,39 @@
-export type ResponseAPI<T> = {
-  success: boolean;
-  message: string;
-  payload: T;
+import { TaskType, TasksInfoType } from './task-types';
+
+export type ResponseAPIType<T> = {
+  success: boolean,
+  message: string,
+  payload: T
 };
 
-export type RegisterPayload = null;
+export type RegisterPayloadType = null;
 
-export type LoginPayload = {
-  accessToken: string;
-  refreshToken?: string;
+export type LoginPayloadType = {
+  accessToken: string,
+  refreshToken?: string
 };
 
-export type RefreshPayload = {
-  accessToken: string;
-  refreshToken?: string;
+export type RefreshPayloadType = {
+  accessToken: string,
+  refreshToken?: string
 };
 
-export type ConfirmPayload = null;
+export type ConfirmPayloadType = null;
 
-export type RepassPayload = null;
+export type RepassPayloadType = null;
 
-export type NewPasswordPayload = null;
+export type NewPasswordPayloadType = null;
 
-export type LogoutPayload = null;
+export type LogoutPayloadType = null;
 
-export type NewTaskPayload = null;
+export type NewTaskPayloadType = null;
+
+export type CurrentTasksPayloadType = {
+  tasksInfo: TasksInfoType,
+  tasks: TaskType[]
+};
+
+export type UpdateTaskPayloadType = {
+  task: TaskType,
+  tasksInfo: TasksInfoType
+};

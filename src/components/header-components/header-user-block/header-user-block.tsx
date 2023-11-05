@@ -4,15 +4,15 @@ import Loader from '../../loader/loader';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../const/router-const';
 import { AuthStatuses } from '../../../const/common-const';
-import { logoutUserAction } from '../../../store/api-actions';
-import { LoaderColors, LoaderSizes } from '../../../const/loader-const';
+import { logoutUserAction } from '../../../store/api-actions/user-api-actions';
+import { LoaderColors, LoaderSizes } from '../../../const/classnames-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { UI_NAMES } from '../../../const/ui-const';
 
 import {
   getAuthorizationStatus,
   getIsUserRequestInProgress
 } from '../../../store/processes/user-process/user-selectors';
-import { UI_NAMES } from '../../../const/ui-const';
 
 function HeaderUserBlock() {
   const dispatch = useAppDispatch();

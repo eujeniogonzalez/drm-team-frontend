@@ -1,24 +1,24 @@
 import './submit-button.scss';
 import React, { FormEvent } from 'react';
 import Loader from '../../../loader/loader';
-import { LoaderColors, LoaderSizes } from '../../../../const/loader-const';
+import { LoaderColors, LoaderSizes } from '../../../../const/classnames-const';
 
-type SubmitButtonProps = {
-  submitButtonClickHandler: (e: FormEvent<HTMLFormElement>) => void;
-  buttonText: string;
-  isFormDisabled: boolean;
+type SubmitButtonPropsType = {
+  submitButtonClickHandler: (e: FormEvent<HTMLFormElement>) => void,
+  buttonText: string,
+  isFormDisabled: boolean
 };
 
 function SubmitButton({
   submitButtonClickHandler,
   buttonText,
   isFormDisabled
-}: SubmitButtonProps) {
+}: SubmitButtonPropsType) {
   const loader = <Loader color={LoaderColors.White} size={LoaderSizes.Micro} />;
 
   return (
     <button
-      className='button submit-button'
+      className='button button-main-color submit-button'
       type='submit'
       disabled={isFormDisabled}
       onClick={() => submitButtonClickHandler}
