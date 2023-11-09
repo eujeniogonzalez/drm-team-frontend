@@ -3,6 +3,8 @@ import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
+import { useAppSelector } from '../../../../hooks';
+import { getLanguageCode } from '../../../../store/processes/user-process/user-selectors';
 
 export type TextareaPropsType = {
   passTextToParent: Dispatch<SetStateAction<string>>,
@@ -25,6 +27,8 @@ function Textarea({
   autoFocus,
   rows
 }: TextareaPropsType) {
+  const languageCode = useAppSelector(getLanguageCode);
+  
   const [text, setText] = useState<string>(Symbols.Empty);
   const [isTextValid, setIsTextValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
@@ -32,7 +36,7 @@ function Textarea({
 
   if (!isTextValid && isFormTriedToSubmit && !errorShouldBeShown) {
     setErrorShouldBeShown(true);
-    setErrorMassage(FORM_MESSAGES.TEXTAREA_EMPTY);
+    setErrorMassage(FORM_MESSAGES.TEXTAREA_EMPTY[languageCode]);
   };
 
   const validateText = (text: string) => text !== Symbols.Empty;

@@ -3,6 +3,7 @@ import { NameSpace, AuthStatuses, Symbols, UserRoles } from '../../../const/comm
 import { UserProcessType } from '../../../types/state-types';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
 import { getUserIDByAccessToken, getUserRoleByAccessToken } from '../../../utils';
+import { LanguageCodes } from '../../../const/languages-const';
 
 import {
   refreshAuthAction,
@@ -26,6 +27,7 @@ const initialState: UserProcessType = {
   accessToken: Symbols.Empty,
   userRole: UserRoles.Unknown,
   userID: null,
+  languageCode: LanguageCodes.English,
   userAPIResponse: {
     type: null,
     body: null
@@ -46,6 +48,9 @@ export const userProcess = createSlice({
         type: null,
         body: null
       }
+    },
+    setLanguageCode: (state, action) => {
+      state.languageCode = action.payload;
     }
   },
   extraReducers(builder) {
@@ -214,4 +219,4 @@ export const userProcess = createSlice({
   }
 });
 
-export const { resetUserAPIResponse } = userProcess.actions;
+export const { resetUserAPIResponse, setLanguageCode } = userProcess.actions;

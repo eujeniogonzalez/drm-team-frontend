@@ -9,6 +9,7 @@ import { TaskType } from '../../../types/task-types';
 import { getIsTaskRequestInProgress } from '../../../store/processes/task-process/task-selectors';
 import Loader from '../../loader/loader';
 import { ButtonStyles, LoaderColors, LoaderSizes } from '../../../const/classnames-const';
+import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 
 type ReviewTaskButtonPropsType = {
   task: TaskType
@@ -18,6 +19,7 @@ type UpdateTaskParamsType = UpdateTaskAPIMicroActions.SendTaskForReview;
 
 function ReviewTaskButton({ task }: ReviewTaskButtonPropsType) {
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const isTaskRequestInProgress = useAppSelector(getIsTaskRequestInProgress);
   const isTaskAvailable = task.status === TaskStatuses.New || TaskStatuses.Running || task.status === TaskStatuses.Reviewing;
   const [buttonText, setButtonText] = useState<string>();
@@ -28,19 +30,19 @@ function ReviewTaskButton({ task }: ReviewTaskButtonPropsType) {
   useEffect(() => {
     switch (task.status) {
       case TaskStatuses.New:
-        setButtonText(UI_NAMES.SEND_TASK_FOR_REVIEW);
+        setButtonText(UI_NAMES.SEND_TASK_FOR_REVIEW[languageCode]);
         setButtonStyles(`${ButtonStyles.GreyColor} ${ButtonStyles.Unavailable}`);
         setLoaderColor(LoaderColors.Grey);
         break;
 
       case TaskStatuses.Running:
-        setButtonText(UI_NAMES.SEND_TASK_FOR_REVIEW);
+        setButtonText(UI_NAMES.SEND_TASK_FOR_REVIEW[languageCode]);
         setButtonStyles(ButtonStyles.MainColor);
         setLoaderColor(LoaderColors.White);
         break;
     
       case TaskStatuses.Reviewing:
-        setButtonText(UI_NAMES.TASK_IS_REVIEWING);
+        setButtonText(UI_NAMES.TASK_IS_REVIEWING[languageCode]);
         setButtonStyles(`${ButtonStyles.GreyColor} ${ButtonStyles.Unavailable}`);
         setLoaderColor(LoaderColors.Grey);
         break;

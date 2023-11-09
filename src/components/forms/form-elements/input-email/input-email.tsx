@@ -4,6 +4,8 @@ import { EMAIL_REGEXP, MAX_EMAIL_LENGTH, Symbols } from '../../../../const/commo
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
 import { UI_NAMES } from '../../../../const/ui-const';
+import { useAppSelector } from '../../../../hooks';
+import { getLanguageCode } from '../../../../store/processes/user-process/user-selectors';
 
 type InputEmailPropsType = {
   passEmailToParent: Dispatch<SetStateAction<string>>,
@@ -20,13 +22,15 @@ function InputEmail({
   resetIsFormTriedToSubmit,
   isFormDisabled
 }: InputEmailPropsType) {
+  const languageCode = useAppSelector(getLanguageCode);
+  
   const [email, setEmail] = useState<string>(Symbols.Empty);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
   const [errorMessage, setErrorMassage] = useState<string>(Symbols.Empty);
   
   if (!isEmailValid && isFormTriedToSubmit && !errorShouldBeShown) {
-    const errorMessage = email === Symbols.Empty ? FORM_MESSAGES.EMAIL_EMPTY : FORM_MESSAGES.EMAIL_INCORRECT;
+    const errorMessage = email === Symbols.Empty ? FORM_MESSAGES.EMAIL_EMPTY[languageCode] : FORM_MESSAGES.EMAIL_INCORRECT[languageCode];
 
     setErrorShouldBeShown(true);
     setErrorMassage(errorMessage);
@@ -45,7 +49,7 @@ function InputEmail({
     
       case false:
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.EMAIL_INCORRECT);
+        setErrorMassage(FORM_MESSAGES.EMAIL_INCORRECT[languageCode]);
         break;
     }
   };
@@ -73,7 +77,7 @@ function InputEmail({
       <input 
         className={`input ${errorShouldBeShown ? 'input-wrong' : Symbols.Empty}`}
         type='text'
-        placeholder={UI_NAMES.E_MAIL}
+        placeholder={UI_NAMES.E_MAIL[languageCode]}
         name='email'
         maxLength={MAX_EMAIL_LENGTH}
         autoFocus

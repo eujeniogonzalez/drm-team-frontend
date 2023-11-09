@@ -11,12 +11,14 @@ import { useAppSelector } from '../../../hooks';
 import { getUsersRunningTaskID } from '../../../store/processes/task-process/task-selectors';
 import { MESSAGES } from '../../../const/messages-const';
 import { WRAPPER_MIN_HEIGHT } from '../../../const/common-const';
+import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 
 type TaskDetailsPropsType = {
   task: TaskType
 };
 
 function TaskDetails({ task }: TaskDetailsPropsType) {
+  const languageCode = useAppSelector(getLanguageCode);
   const usersRunningTaskID = useAppSelector(getUsersRunningTaskID);
   const isTaskMine = task.id === usersRunningTaskID;
   const isTaskFree = !task.executorID;
@@ -36,7 +38,7 @@ function TaskDetails({ task }: TaskDetailsPropsType) {
   const showWarning = () => {
     if (isTaskAvailable) return;
 
-    return <div className='task-not-available'>{MESSAGES.TASK_NOT_AVAILABLE_FOR_YOU}</div>;
+    return <div className='task-not-available'>{MESSAGES.TASK_NOT_AVAILABLE_FOR_YOU[languageCode]}</div>;
   };
 
   return (
@@ -44,7 +46,7 @@ function TaskDetails({ task }: TaskDetailsPropsType) {
       <Wrapper minHeight={WRAPPER_MIN_HEIGHT}>
         <TaskStatus taskStatus={task.status} />
 
-        <Sticker text={UI_NAMES.MY_TASK} isStickerShouldBeShown={isTaskMine} />
+        <Sticker text={UI_NAMES.MY_TASK[languageCode]} isStickerShouldBeShown={isTaskMine} />
       </Wrapper>      
       
       {showWarning()}

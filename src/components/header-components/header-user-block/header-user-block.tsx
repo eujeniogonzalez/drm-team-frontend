@@ -11,15 +11,17 @@ import { UI_NAMES } from '../../../const/ui-const';
 
 import {
   getAuthorizationStatus,
-  getIsUserRequestInProgress
+  getIsUserRequestInProgress,
+  getLanguageCode
 } from '../../../store/processes/user-process/user-selectors';
 
 function HeaderUserBlock() {
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const authStatus = useAppSelector(getAuthorizationStatus);
   const isLogoutInProgress = useAppSelector(getIsUserRequestInProgress);
-
-  const logoutLinkAnchor = isLogoutInProgress ? <Loader size={LoaderSizes.Micro} color={LoaderColors.White} /> : UI_NAMES.GO_OUT;
+  const loader = <Loader size={LoaderSizes.Micro} color={LoaderColors.White} />;
+  const logoutLinkAnchor = isLogoutInProgress ? loader : UI_NAMES.LOGOUT[languageCode];
   
   const authLinkClickHandler = () => {
     dispatch(logoutUserAction());
@@ -31,7 +33,7 @@ function HeaderUserBlock() {
         return <span className='light-link header-logout-link' onClick={authLinkClickHandler}>{logoutLinkAnchor}</span>;
     
       default:
-        return <Link to={AppRoutes.Login} className='light-link header-login-link'>{UI_NAMES.ENTER}</Link>;
+        return <Link to={AppRoutes.Login} className='light-link header-login-link'>{UI_NAMES.ENTER[languageCode]}</Link>;
     }
   };
 

@@ -8,7 +8,7 @@ import { TaskType } from '../../../types/task-types';
 import { UI_NAMES } from '../../../const/ui-const';
 import { APIActions } from '../../../const/api-const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getUserID } from '../../../store/processes/user-process/user-selectors';
+import { getLanguageCode, getUserID } from '../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../store/processes/toast-process/toast-process';
 
 import {
@@ -24,6 +24,7 @@ import {
 
 function TaskList() {
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const currentTasks = useAppSelector(getCurrentTasks);
   const isTaskRequestInProgress = useAppSelector(getIsTaskRequestInProgress);
   const APIResponse = useAppSelector(getTaskAPIResponse);
@@ -56,7 +57,7 @@ function TaskList() {
         );
     
       case !currentTasks.length:
-        return <Message message={UI_NAMES.TASK_LIST_EMPTY} />;
+        return <Message message={UI_NAMES.TASK_LIST_EMPTY[languageCode]} />;
 
       default:
         return <div className='task-list'>{renderTasks(currentTasks)}</div>;

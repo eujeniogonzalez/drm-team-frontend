@@ -4,6 +4,8 @@ import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../../const
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
 import { UI_NAMES } from '../../../../const/ui-const';
+import { useAppSelector } from '../../../../hooks';
+import { getLanguageCode } from '../../../../store/processes/user-process/user-selectors';
 
 type InputPasswordPropsType = {
   passPasswordToParent: Dispatch<SetStateAction<string>>,
@@ -22,17 +24,19 @@ function InputPassword({
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit,
   passwordForMatching,
-  placeholder = UI_NAMES.PASSWORD,
+  placeholder,
   autofocus = false,
   isFormDisabled
 }: InputPasswordPropsType) {
+  const languageCode = useAppSelector(getLanguageCode);
+  
   const [password, setPassword] = useState<string>(Symbols.Empty);
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
   const [errorMessage, setErrorMassage] = useState<string>(Symbols.Empty);
 
   if (!isPasswordValid && isFormTriedToSubmit && !errorShouldBeShown) {
-    const errorMessage = password === Symbols.Empty ? FORM_MESSAGES.PASSWORD_EMPTY : FORM_MESSAGES.PASSWORD_INCORRECT;
+    const errorMessage = password === Symbols.Empty ? FORM_MESSAGES.PASSWORD_EMPTY[languageCode] : FORM_MESSAGES.PASSWORD_INCORRECT[languageCode];
 
     setErrorShouldBeShown(true);
     setErrorMassage(errorMessage);
@@ -46,12 +50,12 @@ function InputPassword({
     switch (true) {
       case !isPasswordValid:
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT);
+        setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT[languageCode]);
         break;
         
       case (passwordForMatching && passwordForMatching !== password):
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.PASSWORDS_NOT_MATCH);
+        setErrorMassage(FORM_MESSAGES.PASSWORDS_NOT_MATCH[languageCode]);
         break;
 
       case isPasswordValid:

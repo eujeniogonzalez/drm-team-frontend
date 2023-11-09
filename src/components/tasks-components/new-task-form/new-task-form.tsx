@@ -11,6 +11,7 @@ import { createTaskAction, getCurrentTasksAction } from '../../../store/api-acti
 import { getIsTaskRequestInProgress, getTaskAPIResponse } from '../../../store/processes/task-process/task-selectors';
 import { hideModal } from '../../../store/processes/modal-process/modal-process';
 import { resetTaskAPIResponse } from '../../../store/processes/task-process/task-process';
+import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 
 function NewTaskForm() {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ function NewTaskForm() {
   const [isTaskDescriptionValid, setIsTaskDescriptionValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
+  const languageCode = useAppSelector(getLanguageCode);
   const isTaskRequestInProgress = useAppSelector(getIsTaskRequestInProgress);
   const APIResponse = useAppSelector(getTaskAPIResponse);
   const isFormDisabled = isTaskRequestInProgress && APIResponse.type === APIActions.CreateTask;
@@ -57,7 +59,7 @@ function NewTaskForm() {
 
   return (
     <div className='new-task-form-content'>
-      <div className='new-task-form-title'>{UI_NAMES.NEW_TASK}</div>
+      <div className='new-task-form-title'>{UI_NAMES.NEW_TASK[languageCode]}</div>
 
       <form onSubmit={submitNewTaskFormHandler}>
 
@@ -67,7 +69,7 @@ function NewTaskForm() {
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
           isFormDisabled={isFormDisabled}
-          placeholder={UI_NAMES.TASK_NAME}
+          placeholder={UI_NAMES.TASK_NAME[languageCode]}
           autoFocus={true}
           rows={2}
         />
@@ -78,14 +80,14 @@ function NewTaskForm() {
           isFormTriedToSubmit={isFormTriedToSubmit}
           resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
           isFormDisabled={isFormDisabled}
-          placeholder={UI_NAMES.TASK_DESCRIPTION}
+          placeholder={UI_NAMES.TASK_DESCRIPTION[languageCode]}
           autoFocus={false}
           rows={5}
         />
 
         <SubmitButton
           submitButtonClickHandler={submitNewTaskFormHandler}
-          buttonText={UI_NAMES.CREATE_TASK}
+          buttonText={UI_NAMES.CREATE_TASK[languageCode]}
           isFormDisabled={isFormDisabled}
         />
 

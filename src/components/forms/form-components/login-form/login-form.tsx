@@ -10,9 +10,14 @@ import { APIActions } from '../../../../const/api-const';
 import { loginUserAction } from '../../../../store/api-actions/user-api-actions';
 import { LinksBlockAlignment, Symbols } from '../../../../const/common-const';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../../store/processes/toast-process/toast-process';
 import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
+
+import {
+  getIsUserRequestInProgress,
+  getLanguageCode,
+  getUserAPIResponse
+} from '../../../../store/processes/user-process/user-selectors';
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -23,6 +28,7 @@ function LoginForm() {
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
+  const languageCode = useAppSelector(getLanguageCode);
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const APIResponse = useAppSelector(getUserAPIResponse);
   const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.Login;
@@ -53,7 +59,7 @@ function LoginForm() {
   return (
     <div className='login-form-wrapper'>
       <div className='login-form-content'>
-        <div className='login-form-title'>{UI_NAMES.ENTRANCE}</div>
+        <div className='login-form-title'>{UI_NAMES.ENTRANCE[languageCode]}</div>
 
         <form onSubmit={submitLoginFormHandler}>
           <InputEmail
@@ -70,19 +76,20 @@ function LoginForm() {
             isFormTriedToSubmit={isFormTriedToSubmit}
             resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
             isFormDisabled={isFormDisabled}
+            placeholder={UI_NAMES.PASSWORD[languageCode]}
           />
 
           <SubmitButton
             submitButtonClickHandler={submitLoginFormHandler}
-            buttonText={UI_NAMES.ENTER}
+            buttonText={UI_NAMES.ENTER[languageCode]}
             isFormDisabled={isFormDisabled}
           />
         </form>
 
         <LinksBlock
           links={[
-            {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
-            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+            {route: AppRoutes.Repass, anchor: UI_NAMES.RESTORE_PASSWORD[languageCode]},
+            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION[languageCode]}
           ]}
           alignment={LinksBlockAlignment.Horizontal}
         />

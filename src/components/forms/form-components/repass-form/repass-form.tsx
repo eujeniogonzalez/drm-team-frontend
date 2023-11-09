@@ -9,9 +9,14 @@ import SubmitButton from '../../form-elements/submit-button/submit-button';
 import { UI_NAMES } from '../../../../const/ui-const';
 import LinksBlock from '../../../links-block/links-block';
 import { APIActions } from '../../../../const/api-const';
-import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../../store/processes/toast-process/toast-process';
 import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
+
+import {
+  getIsUserRequestInProgress,
+  getLanguageCode,
+  getUserAPIResponse
+} from '../../../../store/processes/user-process/user-selectors';
 
 function RepassForm() {
   const dispatch = useAppDispatch();
@@ -20,6 +25,7 @@ function RepassForm() {
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
+  const languageCode = useAppSelector(getLanguageCode);
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const APIResponse = useAppSelector(getUserAPIResponse);
   const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.Repass;
@@ -50,7 +56,7 @@ function RepassForm() {
   return (
     <div className='repass-form-wrapper'>
       <div className='repass-form-content'>
-        <div className='repass-form-title'>{UI_NAMES.REMEMBER_PASSWORD}</div>
+        <div className='repass-form-title'>{UI_NAMES.RESTORE_PASSWORD[languageCode]}</div>
 
         <form onSubmit={submitRepassFormHandler}>
           <InputEmail
@@ -63,15 +69,15 @@ function RepassForm() {
 
           <SubmitButton
             submitButtonClickHandler={submitRepassFormHandler}
-            buttonText={UI_NAMES.REMEMBER}
+            buttonText={UI_NAMES.RESTORE[languageCode]}
             isFormDisabled={isFormDisabled}
           />
         </form>
         
         <LinksBlock
           links={[
-            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
-            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION}
+            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]},
+            {route: AppRoutes.Register, anchor: UI_NAMES.REGISTRATION[languageCode]}
           ]}
           alignment={LinksBlockAlignment.Horizontal}
         />

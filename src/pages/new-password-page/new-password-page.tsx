@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
 import NewPasswordForm from '../../components/forms/form-components/new-password-form/new-password-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
+import { getAuthorizationStatus, getLanguageCode, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import Message from '../../components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ function NewPasswordPage() {
   document.title = META.TITLE.NEW_PASSWORD;
   
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const authStatus = useAppSelector(getAuthorizationStatus);
   const userAPIResponse = useAppSelector(getUserAPIResponse);
   
@@ -40,7 +41,7 @@ function NewPasswordPage() {
             <Message
               message={userAPIResponse.body.message}
               links={[
-                {route: AppRoutes.Login, anchor: UI_NAMES.ENTER}
+                {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]}
               ]}
             />
           );

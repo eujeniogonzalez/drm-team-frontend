@@ -5,7 +5,6 @@ import Content from '../../components/content/content';
 import Loader from '../../components/loader/loader';
 import { LoaderColors, LoaderSizes } from '../../const/classnames-const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import { Navigate, useParams } from 'react-router-dom';
 import { confirmUserAction } from '../../store/api-actions/user-api-actions';
 import Message from '../../components/message/message';
@@ -15,9 +14,16 @@ import { META } from '../../const/meta-const';
 import { APIActions } from '../../const/api-const';
 import { UI_NAMES } from '../../const/ui-const';
 
+import {
+  getAuthorizationStatus,
+  getLanguageCode,
+  getUserAPIResponse
+} from '../../store/processes/user-process/user-selectors';
+
 function ConfirmPage() {
   document.title = META.TITLE.CONFIRM;
 
+  const languageCode = useAppSelector(getLanguageCode);
   const { confirmID } = useParams();
   const userAPIResponse = useAppSelector(getUserAPIResponse);
   const authStatus = useAppSelector(getAuthorizationStatus)
@@ -29,12 +35,12 @@ function ConfirmPage() {
     switch (userAPIResponse.body?.success) {
       case true:
         return [
-          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER}
+          {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]}
         ];
     
       case false:
         return [
-          {route: AppRoutes.Main, anchor: UI_NAMES.MAIN}
+          {route: AppRoutes.Main, anchor: UI_NAMES.MAIN[languageCode]}
         ];
     }
   };

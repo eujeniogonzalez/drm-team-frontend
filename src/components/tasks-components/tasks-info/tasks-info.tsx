@@ -4,10 +4,12 @@ import { useAppSelector } from '../../../hooks';
 import { getTasksInfo } from '../../../store/processes/task-process/task-selectors';
 import Loader from '../../loader/loader';
 import { LoaderColors, LoaderSizes } from '../../../const/classnames-const';
-import { getAuthorizationStatus } from '../../../store/processes/user-process/user-selectors';
+import { getAuthorizationStatus, getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 import { AuthStatuses } from '../../../const/common-const';
+import { UI_NAMES } from '../../../const/ui-const';
 
 function TasksInfo() {
+  const languageCode = useAppSelector(getLanguageCode);
   const tasksInfo = useAppSelector(getTasksInfo);
   const authStatus = useAppSelector(getAuthorizationStatus);
 
@@ -17,7 +19,7 @@ function TasksInfo() {
 
   return (
     <div className='tasks-info'>
-      <div className='tasks-info-total'>Всего задач: <span>{tasksInfo.totalCount || loader}</span></div>
+      <div className='tasks-info-total'>{`${UI_NAMES.TASKS_TOTAL_COUNT[languageCode]}: `}<span>{tasksInfo.totalCount || loader}</span></div>
     </div>
   );
 }

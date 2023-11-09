@@ -12,6 +12,7 @@ import Wrapper from '../../wrapper/wrapper';
 import Sticker from '../../sticker/sticker';
 import { UI_NAMES } from '../../../const/ui-const';
 import { UserIDType } from '../../../types/state-types';
+import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 
 type TaskPropsType = {
   task: TaskType,
@@ -20,6 +21,7 @@ type TaskPropsType = {
 
 function TaskItem({ task, userID }: TaskPropsType) {
   const dispatch = useDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const isModalShouldBeShown = useAppSelector(getIsModalShouldBeShown);
   const isMyTask = task.executorID === userID;
   const [isTaskDetailsShouldBeShown, setIsTaskDetailsShouldBeShown] = useState(false);
@@ -39,7 +41,7 @@ function TaskItem({ task, userID }: TaskPropsType) {
           <Wrapper minHeight={30}>
             <TaskStatus taskStatus={task.status} />
 
-            <Sticker text={UI_NAMES.MY_TASK} isStickerShouldBeShown={isMyTask} />
+            <Sticker text={UI_NAMES.MY_TASK[languageCode]} isStickerShouldBeShown={isMyTask} />
           </Wrapper>
 
           <div className='task-title'>{task.title}</div>

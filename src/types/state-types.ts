@@ -3,6 +3,7 @@ import { AuthStatuses, UserRoles } from '../const/common-const';
 import { store } from '../store/index';
 import { TaskType, TasksInfoType } from './task-types';
 import { IsToastShouldBeShownType, ToastMessageType } from './toast-types';
+import { LanguageCodes } from '../const/languages-const';
 
 import {
   CurrentTasksPayloadType,
@@ -23,6 +24,7 @@ export type UserProcessType = {
   accessToken: string,
   userRole: UserRoles,
   userID: UserIDType,
+  languageCode: LanguageCodes,
   userAPIResponse: APIResponseType
 };
 

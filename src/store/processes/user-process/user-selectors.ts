@@ -1,4 +1,5 @@
 import { AuthStatuses, NameSpace, UserRoles } from '../../../const/common-const';
+import { LanguageCodes } from '../../../const/languages-const';
 import { APIResponseType, StateType, UserIDType } from '../../../types/state-types';
 import { TokenType } from '../../../types/token-type';
 
@@ -8,5 +9,6 @@ export const getIsUserRequestInProgress = (state: StateType): boolean => state[N
 export const getUserAPIResponse = (state: StateType): APIResponseType => state[NameSpace.User].userAPIResponse;
 export const getUserRole = (state: StateType): UserRoles => state[NameSpace.User].userRole;
 export const getUserID = (state: StateType): UserIDType => state[NameSpace.User].userID;
+export const getLanguageCode = (state: StateType): LanguageCodes => state[NameSpace.User].languageCode;
 
 

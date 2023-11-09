@@ -3,15 +3,18 @@ import React from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
-import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
 import LinksBlock from '../../components/links-block/links-block';
 import { UI_NAMES } from '../../const/ui-const';
 import { LinksBlockAlignment } from '../../const/common-const';
+import { useAppSelector } from '../../hooks';
+import { getLanguageCode } from '../../store/processes/user-process/user-selectors';
 
 function MainPage() {
   document.title = META.TITLE.MAIN;
+
+  const languageCode = useAppSelector(getLanguageCode);
 
   return (
     <>
@@ -22,9 +25,9 @@ function MainPage() {
 
           <LinksBlock
             links={[
-              {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
-              {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD},
-              {route: AppRoutes.Register, anchor: UI_NAMES.REGISTER}
+              {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]},
+              {route: AppRoutes.Repass, anchor: UI_NAMES.RESTORE_PASSWORD[languageCode]},
+              {route: AppRoutes.Register, anchor: UI_NAMES.REGISTER[languageCode]}
             ]}
             alignment={LinksBlockAlignment.Vertical}
           />

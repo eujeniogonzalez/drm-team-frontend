@@ -10,9 +10,14 @@ import SubmitButton from '../../form-elements/submit-button/submit-button';
 import { UI_NAMES } from '../../../../const/ui-const';
 import LinksBlock from '../../../links-block/links-block';
 import { APIActions } from '../../../../const/api-const';
-import { getIsUserRequestInProgress, getUserAPIResponse } from '../../../../store/processes/user-process/user-selectors';
 import { showToast } from '../../../../store/processes/toast-process/toast-process';
 import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
+
+import {
+  getIsUserRequestInProgress,
+  getLanguageCode,
+  getUserAPIResponse
+} from '../../../../store/processes/user-process/user-selectors';
 
 function RegisterForm() {
   const dispatch = useAppDispatch();
@@ -25,6 +30,7 @@ function RegisterForm() {
   const [isRepeatPasswordValid, setIsRepeatPasswordValid] = useState<boolean>(false);
   const [isFormTriedToSubmit, setIsFormTriedToSubmit] = useState<boolean>(false);
 
+  const languageCode = useAppSelector(getLanguageCode);
   const isUserRequestInProgress = useAppSelector(getIsUserRequestInProgress);
   const APIResponse = useAppSelector(getUserAPIResponse);
   const isFormDisabled = isUserRequestInProgress && APIResponse.type === APIActions.Register;
@@ -55,7 +61,7 @@ function RegisterForm() {
   return (
     <div className='register-form-wrapper'>
       <div className='register-form-content'>
-        <div className='register-form-title'>{UI_NAMES.REGISTRATION}</div>
+        <div className='register-form-title'>{UI_NAMES.REGISTRATION[languageCode]}</div>
         
         <form onSubmit={submitRegisterFormHandler}>
           <InputEmail
@@ -71,7 +77,7 @@ function RegisterForm() {
             passPasswordValidStatusToParent={setIsPasswordValid}
             isFormTriedToSubmit={isFormTriedToSubmit}
             resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
-            placeholder={UI_NAMES.COME_UP_WITH_PASSWORD}
+            placeholder={UI_NAMES.COME_UP_WITH_PASSWORD[languageCode]}
             isFormDisabled={isFormDisabled}
           />
           
@@ -81,21 +87,21 @@ function RegisterForm() {
             isFormTriedToSubmit={isFormTriedToSubmit}
             resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
             passwordForMatching={password}
-            placeholder={UI_NAMES.REPEAT_PASSWORD}
+            placeholder={UI_NAMES.REPEAT_PASSWORD[languageCode]}
             isFormDisabled={isFormDisabled}
           />
 
           <SubmitButton
             submitButtonClickHandler={submitRegisterFormHandler}
-            buttonText={UI_NAMES.REGISTER}
+            buttonText={UI_NAMES.REGISTER[languageCode]}
             isFormDisabled={isFormDisabled}
           />
         </form>
 
         <LinksBlock
           links={[
-            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER},
-            {route: AppRoutes.Repass, anchor: UI_NAMES.REMEMBER_PASSWORD}
+            {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]},
+            {route: AppRoutes.Repass, anchor: UI_NAMES.RESTORE_PASSWORD[languageCode]}
           ]}
           alignment={LinksBlockAlignment.Horizontal}
         />

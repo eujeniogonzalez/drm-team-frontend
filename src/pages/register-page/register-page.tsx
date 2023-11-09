@@ -5,7 +5,6 @@ import Content from '../../components/content/content';
 import RegisterForm from '../../components/forms/form-components/register-form/register-form';
 import Message from '../../components/message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
@@ -14,10 +13,17 @@ import { APIActions } from '../../const/api-const';
 import { resetUserAPIResponse } from '../../store/processes/user-process/user-process';
 import { UI_NAMES } from '../../const/ui-const';
 
+import {
+  getAuthorizationStatus,
+  getLanguageCode,
+  getUserAPIResponse
+} from '../../store/processes/user-process/user-selectors';
+
 function RegisterPage() {
   document.title = META.TITLE.REGISTER;
 
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const authStatus = useAppSelector(getAuthorizationStatus);
   const userAPIResponse = useAppSelector(getUserAPIResponse);
 
@@ -40,7 +46,7 @@ function RegisterPage() {
             <Message
               message={userAPIResponse.body.message}
               links={[
-                {route: AppRoutes.Main, anchor: UI_NAMES.MAIN}
+                {route: AppRoutes.Main, anchor: UI_NAMES.MAIN[languageCode]}
               ]}
             />
           );

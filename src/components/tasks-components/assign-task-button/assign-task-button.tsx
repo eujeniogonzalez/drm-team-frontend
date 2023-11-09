@@ -9,6 +9,7 @@ import { TaskType } from '../../../types/task-types';
 import { getIsTaskRequestInProgress } from '../../../store/processes/task-process/task-selectors';
 import Loader from '../../loader/loader';
 import { ButtonStyles, LoaderColors, LoaderSizes } from '../../../const/classnames-const';
+import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
 
 type AssignTaskButtonPropsType = {
   task: TaskType
@@ -18,6 +19,7 @@ type UpdateTaskParamsType = UpdateTaskAPIMicroActions.AssignTaskToUser | UpdateT
 
 function AssignTaskButton({ task }: AssignTaskButtonPropsType) {
   const dispatch = useAppDispatch();
+  const languageCode = useAppSelector(getLanguageCode);
   const isTaskRequestInProgress = useAppSelector(getIsTaskRequestInProgress);
   const isTaskAvailable = task.status === TaskStatuses.New || TaskStatuses.Running || task.status === TaskStatuses.Reviewing;
   const [buttonText, setButtonText] = useState<string>();
@@ -28,19 +30,19 @@ function AssignTaskButton({ task }: AssignTaskButtonPropsType) {
   useEffect(() => {
     switch (task.status) {
       case TaskStatuses.New:
-        setButtonText(UI_NAMES.ASSIGN_TASK);
+        setButtonText(UI_NAMES.ASSIGN_TASK[languageCode]);
         setButtonStyles(ButtonStyles.MainColor);
         setLoaderColor(LoaderColors.White);
         break;
     
       case TaskStatuses.Running:
-        setButtonText(UI_NAMES.UNASSIGN_TASK);
+        setButtonText(UI_NAMES.UNASSIGN_TASK[languageCode]);
         setButtonStyles(ButtonStyles.GreyColor);
         setLoaderColor(LoaderColors.Grey);
         break;
 
       case TaskStatuses.Reviewing:
-        setButtonText(UI_NAMES.UNASSIGN_TASK);
+        setButtonText(UI_NAMES.UNASSIGN_TASK[languageCode]);
         setButtonStyles(`${ButtonStyles.GreyColor} ${ButtonStyles.Unavailable}`);
         setLoaderColor(LoaderColors.Grey);
         break;

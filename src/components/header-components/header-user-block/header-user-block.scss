@@ -1,9 +1,12 @@
 .header-user-block {
   min-width: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  min-width: 80px;
 
   .header-login-link, .header-logout-link {
     font-size: 18px;
+    display: flex;
+    align-items: center;
   }
 }
