@@ -108,6 +108,7 @@ export function getUserRoleByAccessToken(accessToken: TokenType): UserRoles {
 };
 
 export function getUserIDByAccessToken(accessToken: TokenType): UserIDType {
+  // todo Исправить ошибку при входе с незарегистрированной почтой
   const tokenPayload = adaptFromServerToClient(JSON.parse(atob(accessToken.split(Symbols.Dot)[1])));
   
   return tokenPayload.userID;

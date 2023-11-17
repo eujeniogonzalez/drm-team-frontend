@@ -87,7 +87,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = isSuccess ? AuthStatuses.Auth : AuthStatuses.NoAuth;
         state.accessToken = accessToken;
         state.userRole = isSuccess ? getUserRoleByAccessToken(accessToken) : UserRoles.Unknown;
-        state.userID = getUserIDByAccessToken(accessToken);
+        state.userID = isSuccess ? getUserIDByAccessToken(accessToken) : null;
 
         if (refreshToken) setRefreshTokenToStorage(refreshToken);
       })
