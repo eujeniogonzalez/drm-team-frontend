@@ -4,17 +4,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getLanguageCode } from '../../store/processes/user-process/user-selectors';
 import { LanguageCodes } from '../../const/languages-const';
 import { setLanguageCode } from '../../store/processes/user-process/user-process';
-
-// todo Подумать вынести в константы
-const LANGUAGE_SWITCHER_CLASSES = {
-  [LanguageCodes.English]: 'switcher-lever-english',
-  [LanguageCodes.Russian]: 'switcher-lever-russian'
-};
-
-const LANGUAGE_SWITCHER_IMAGE_CLASSES = {
-  [LanguageCodes.English]: 'switcher-lever-image-english-visible',
-  [LanguageCodes.Russian]: 'switcher-lever-image-russia-visible'
-};
+import { setLanguageCodeToStorage } from '../../services/local-storage';
+import { Symbols } from '../../const/common-const';
+import { LANGUAGE_SWITCHER_CLASSES, LANGUAGE_SWITCHER_IMAGE_CLASSES } from '../../const/classnames-const';
 
 function LanguageSwitcher() {
   const dispatch = useAppDispatch();
@@ -28,17 +20,28 @@ function LanguageSwitcher() {
   const languageSwitcherClickHandler = () => {
     switch (languageCode) {
       case LanguageCodes.English:
+        setLanguageCodeToStorage(LanguageCodes.Russian);
         dispatch(setLanguageCode(LanguageCodes.Russian));
         break;
 
       case LanguageCodes.Russian:
+        setLanguageCodeToStorage(LanguageCodes.English);
         dispatch(setLanguageCode(LanguageCodes.English));
         break;
     }
   };
 
-  const leverVisibleRussia = languageCode === LanguageCodes.Russian ? 'switcher-lever-image-russia-visible' : ''; // todo Заменить на константу
-  const leverVisibleEnglish = languageCode === LanguageCodes.English ? 'switcher-lever-image-english-visible' : ''; // todo Заменить на константу
+  const leverVisibleRussia = (
+    languageCode === LanguageCodes.Russian 
+      ? LANGUAGE_SWITCHER_IMAGE_CLASSES[LanguageCodes.Russian] 
+      : Symbols.Empty
+  );
+
+  const leverVisibleEnglish = (
+    languageCode === LanguageCodes.English 
+      ? LANGUAGE_SWITCHER_IMAGE_CLASSES[LanguageCodes.English] 
+      : Symbols.Empty
+  );
 
   return (
     <div

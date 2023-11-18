@@ -2,6 +2,7 @@ import { TokenType } from './types/token-type';
 import { adaptFromServerToClient } from './services/adapter';
 import { UserIDType } from './types/state-types';
 import { StartAPITimeType } from './types/start-API-time-type';
+import { getLanguageCodeFromStorage } from './services/local-storage';
 
 import {
   ANY_CAPITAL_LETTER_REGEXP,
@@ -17,6 +18,7 @@ import {
   CLIENT_URL_LOCALHOST,
   CLIENT_URL_PROD
 } from './const/api-const'
+import { LanguageCodes } from './const/languages-const';
 
 export function removeLastSlash(string: string) {
   return string.replace(SLASHES_AT_END_OF_STRING_REGEXP, Symbols.Empty);
@@ -108,7 +110,6 @@ export function getUserRoleByAccessToken(accessToken: TokenType): UserRoles {
 };
 
 export function getUserIDByAccessToken(accessToken: TokenType): UserIDType {
-  // todo Исправить ошибку при входе с незарегистрированной почтой
   const tokenPayload = adaptFromServerToClient(JSON.parse(atob(accessToken.split(Symbols.Dot)[1])));
   
   return tokenPayload.userID;
@@ -148,4 +149,25 @@ export function syntheticAPIDelay(startTime: StartAPITimeType){
   if (delay <= 0) return;
   
   return new Promise(resolve => setTimeout(() => resolve('result'), delay));
+}
+
+export function getEnumKeyByValue<T>(enumValue: string | null, MyEnum: T): keyof T | null {
+  for (const key in MyEnum) {
+    if (MyEnum[key as keyof T] === enumValue) {
+      return key as keyof T;
+    }
+  }
+
+  return null;
+}
+
+export function detectLanguageCode(): LanguageCodes {
+  const languageCodeFromStorage = getLanguageCodeFromStorage();
+  const languageCodeEnumKey = getEnumKeyByValue<typeof LanguageCodes>(languageCodeFromStorage, LanguageCodes);
+
+  if (languageCodeEnumKey) {
+    return LanguageCodes[languageCodeEnumKey];
+  }
+
+  return LanguageCodes.English;
 }

@@ -5,7 +5,6 @@ export const API_URL_DEV = 'https://api.drmteamdev.ru';
 export const CLIENT_URL_PROD = 'https://drmteam.org';
 export const CLIENT_URL_LOCALHOST = `http://localhost:${WEBPACK_DEVSERVER_PORT}`;
 export const REQUEST_TIMEOUT = 10000;
-export const REFRESH_TOKEN_NAME = 'drmteamRefreshToken';
 
 export enum APIMethods {
   GET = 'GET',

@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthStatuses, Symbols, UserRoles } from '../../../const/common-const';
 import { UserProcessType } from '../../../types/state-types';
 import { APIActions, API_MESSAGES } from '../../../const/api-const';
-import { getUserIDByAccessToken, getUserRoleByAccessToken } from '../../../utils';
-import { LanguageCodes } from '../../../const/languages-const';
+import { detectLanguageCode, getUserIDByAccessToken, getUserRoleByAccessToken } from '../../../utils';
 
 import {
   refreshAuthAction,
@@ -27,7 +26,7 @@ const initialState: UserProcessType = {
   accessToken: Symbols.Empty,
   userRole: UserRoles.Unknown,
   userID: null,
-  languageCode: LanguageCodes.English,
+  languageCode: detectLanguageCode(),
   userAPIResponse: {
     type: null,
     body: null
