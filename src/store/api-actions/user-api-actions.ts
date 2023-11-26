@@ -38,10 +38,10 @@ export const registerUserAction = createAsyncThunk<ResponseAPIType<RegisterPaylo
 >
 (
   'registerUserAction',
-  async ({ email, password, repeatPassword }, { extra: api }) => {
+  async ({ firstName, lastName, email, password, repeatPassword }, { extra: api }) => {
     const { data } = await api.post<ResponseAPIType<RegisterPayloadType>>(
       APIRoutes.Register,
-      { email, password, repeatPassword }
+      { firstName, lastName, email, password, repeatPassword }
     );
 
     return data;

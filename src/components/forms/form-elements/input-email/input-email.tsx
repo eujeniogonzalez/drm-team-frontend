@@ -12,7 +12,8 @@ type InputEmailPropsType = {
   passEmailValidStatusToParent: Dispatch<SetStateAction<boolean>>,
   isFormTriedToSubmit: boolean,
   resetIsFormTriedToSubmit: Dispatch<SetStateAction<boolean>>,
-  isFormDisabled: boolean
+  isFormDisabled: boolean,
+  autofocus?: boolean
 }
 
 function InputEmail({
@@ -20,7 +21,8 @@ function InputEmail({
   passEmailValidStatusToParent,
   isFormTriedToSubmit,
   resetIsFormTriedToSubmit,
-  isFormDisabled
+  isFormDisabled,
+  autofocus = false
 }: InputEmailPropsType) {
   const languageCode = useAppSelector(getLanguageCode);
   
@@ -30,7 +32,11 @@ function InputEmail({
   const [errorMessage, setErrorMassage] = useState<string>(Symbols.Empty);
   
   if (!isEmailValid && isFormTriedToSubmit && !errorShouldBeShown) {
-    const errorMessage = email === Symbols.Empty ? FORM_MESSAGES.EMAIL_EMPTY[languageCode] : FORM_MESSAGES.EMAIL_INCORRECT[languageCode];
+    const errorMessage = (
+      email === Symbols.Empty
+        ? FORM_MESSAGES.EMAIL_EMPTY[languageCode]
+        : FORM_MESSAGES.EMAIL_INCORRECT[languageCode]
+    );
 
     setErrorShouldBeShown(true);
     setErrorMassage(errorMessage);
@@ -80,7 +86,7 @@ function InputEmail({
         placeholder={UI_NAMES.E_MAIL[languageCode]}
         name='email'
         maxLength={MAX_EMAIL_LENGTH}
-        autoFocus
+        autoFocus={autofocus}
         disabled={isFormDisabled}
         value={email}
         onInput={inputEmailHandler}

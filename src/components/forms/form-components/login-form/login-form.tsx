@@ -68,6 +68,7 @@ function LoginForm() {
             isFormTriedToSubmit={isFormTriedToSubmit}
             resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
             isFormDisabled={isFormDisabled}
+            autofocus={true}
           />
 
           <InputPassword

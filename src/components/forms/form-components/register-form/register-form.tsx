@@ -12,6 +12,8 @@ import LinksBlock from '../../../links-block/links-block';
 import { APIActions } from '../../../../const/api-const';
 import { showToast } from '../../../../store/processes/toast-process/toast-process';
 import { resetUserAPIResponse } from '../../../../store/processes/user-process/user-process';
+import InputFirstName from '../../form-elements/input-first-name/input-first-name';
+import InputLastName from '../../form-elements/input-last-name/input-last-name';
 
 import {
   getIsUserRequestInProgress,
@@ -22,6 +24,10 @@ import {
 function RegisterForm() {
   const dispatch = useAppDispatch();
 
+  const [firstName, setFirstName] = useState<string>(Symbols.Empty);
+  const [isFirstNameValid, setIsFirstNameValid] = useState<boolean>(false);
+  const [lastName, setLastName] = useState<string>(Symbols.Empty);
+  const [isLastNameValid, setIsLastNameValid] = useState<boolean>(false);
   const [email, setEmail] = useState<string>(Symbols.Empty);
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [password, setPassword] = useState<string>(Symbols.Empty);
@@ -45,17 +51,28 @@ function RegisterForm() {
     if (isToastShouldBeShown) dispatch(showToast(APIResponse.body?.message));
   });
   
+  const isRegisterFormValid = () => {
+    return (
+      isFirstNameValid &&
+      isLastNameValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isRepeatPasswordValid &&
+      password === repeatPassword
+    );
+  };
+
   const submitRegisterFormHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsFormTriedToSubmit(true);
 
-    if (!isEmailValid || !isPasswordValid || !isRepeatPasswordValid || password !== repeatPassword) {
+    if (!isRegisterFormValid()) {
       dispatch(resetUserAPIResponse());
       return;
     }
 
-    dispatch(registerUserAction({ email, password, repeatPassword }));
+    dispatch(registerUserAction({ firstName, lastName, email, password, repeatPassword }));
   };
 
   return (
@@ -64,6 +81,23 @@ function RegisterForm() {
         <div className='register-form-title'>{UI_NAMES.REGISTRATION[languageCode]}</div>
         
         <form onSubmit={submitRegisterFormHandler}>
+          <InputFirstName
+            passFirstNameToParent={setFirstName}
+            passFirstNameValidStatusToParent={setIsFirstNameValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+            autofocus={true}
+          />
+
+          <InputLastName
+            passLastNameToParent={setLastName}
+            passLastNameValidStatusToParent={setIsLastNameValid}
+            isFormTriedToSubmit={isFormTriedToSubmit}
+            resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
+            isFormDisabled={isFormDisabled}
+          />
+
           <InputEmail
             passEmailToParent={setEmail}
             passEmailValidStatusToParent={setIsEmailValid}

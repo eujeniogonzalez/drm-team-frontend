@@ -16,7 +16,9 @@ export enum Symbols {
   DoubleSlash = '//',
   Underline = '_',
   Dot = '.',
-  Space = ' '
+  Space = ' ',
+  Dash = '-',
+  DoubleDash = '--'
 }
 
 export enum LinksBlockAlignment {
@@ -41,8 +43,11 @@ export const EMAIL_REGEXP = /^[a-zA-Z0-9_]+([.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-
 export const PASSWORD_REGEXP = /^[a-zA-Z0-9`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]+$/;
 export const MAX_EMAIL_LENGTH = 129;
 export const MAX_PASSWORD_LENGTH = 50;
+export const MAX_FIRST_NAME_LENGTH = 30;
+export const MAX_LAST_NAME_LENGTH = 30;
 export const ANY_CAPITAL_LETTER_REGEXP = /(?=[A-Z])/;
 export const SLASHES_AT_END_OF_STRING_REGEXP = /\/+$/;
 export const MIN_LOADER_DISPLAYING_TIME = 700;
 export const WRAPPER_MIN_HEIGHT = 30;
+export const FIRST_AND_LAST_NAME_REGEXP = /^(?!-)(?!.*--)[\p{L}-]+(?<!-)$/u;
 

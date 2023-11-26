@@ -1,6 +1,8 @@
 import { UpdateTaskAPIMicroActions } from '../const/api-const';
 
 export type RegisterBodyType = {
+  firstName: string,
+  lastName: string,
   email: string,
   password: string,
   repeatPassword: string

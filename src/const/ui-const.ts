@@ -118,5 +118,13 @@ export const UI_NAMES = {
   TASKS_TOTAL_COUNT: {
     [LanguageCodes.Russian]: 'Всего задач',
     [LanguageCodes.English]: 'Tasks total count'
+  },
+  FIRST_NAME: {
+    [LanguageCodes.Russian]: 'Имя',
+    [LanguageCodes.English]: 'First name'
+  },
+  LAST_NAME: {
+    [LanguageCodes.Russian]: 'Фамилия',
+    [LanguageCodes.English]: 'Last name'
   }
 }

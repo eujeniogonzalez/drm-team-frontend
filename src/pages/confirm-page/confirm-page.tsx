@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/header-components/header/header';
 import Footer from '../../components/footer/footer';
 import Content from '../../components/content/content';
@@ -28,8 +28,12 @@ function ConfirmPage() {
   const userAPIResponse = useAppSelector(getUserAPIResponse);
   const authStatus = useAppSelector(getAuthorizationStatus)
   const dispatch = useAppDispatch();
-  
-  if (confirmID && userAPIResponse.type !== APIActions.Confirm) dispatch(confirmUserAction({ confirmID }));
+
+  useEffect(() =>{
+    if (confirmID && userAPIResponse.type !== APIActions.Confirm && userAPIResponse.type !== APIActions.Refresh) {
+      dispatch(confirmUserAction({ confirmID }));
+    };
+  });
 
   const getLinksList = () => {
     switch (userAPIResponse.body?.success) {

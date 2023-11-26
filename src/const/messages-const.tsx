@@ -35,6 +35,46 @@ export const FORM_MESSAGES = {
   TEXTAREA_EMPTY: {
     [LanguageCodes.Russian]: 'Поле не может быть пустым',
     [LanguageCodes.English]: 'Field can\'t to be empty'
+  },
+  FIRST_NAME_INCORRECT: {
+    [LanguageCodes.Russian]: 'Только буквы и дефисы',
+    [LanguageCodes.English]: 'Only letters and dashes'
+  },
+  FIRST_NAME_EMPTY: {
+    [LanguageCodes.Russian]: 'Имя не может быть пустым',
+    [LanguageCodes.English]: 'First name is empty'
+  },
+  FIRST_NAME_INCORRECT_FIRST_DASH: {
+    [LanguageCodes.Russian]: 'Имя не может начинаться с дефиса',
+    [LanguageCodes.English]: 'First name can\'t start with dash'
+  },
+  FIRST_NAME_INCORRECT_LAST_DASH: {
+    [LanguageCodes.Russian]: 'Имя не может оканчиваться дефисом',
+    [LanguageCodes.English]: 'First name can\'t end with dash'
+  },
+  FIRST_NAME_INCORRECT_DOUBLE_DASH: {
+    [LanguageCodes.Russian]: 'Имя не может содержать два дефиса подряд',
+    [LanguageCodes.English]: 'First name can\'t include two dashes together'
+  },
+  LAST_NAME_INCORRECT: {
+    [LanguageCodes.Russian]: 'Только буквы и дефисы',
+    [LanguageCodes.English]: 'Only letters and dashes'
+  },
+  LAST_NAME_EMPTY: {
+    [LanguageCodes.Russian]: 'Фамилия не может быть пустой',
+    [LanguageCodes.English]: 'Last name is empty'
+  },
+  LAST_NAME_INCORRECT_FIRST_DASH: {
+    [LanguageCodes.Russian]: 'Фамилия не может начинаться с дефиса',
+    [LanguageCodes.English]: 'Last name can\'t start with dash'
+  },
+  LAST_NAME_INCORRECT_LAST_DASH: {
+    [LanguageCodes.Russian]: 'Фамилия не может оканчиваться дефисом',
+    [LanguageCodes.English]: 'Last name can\'t end with dash'
+  },
+  LAST_NAME_INCORRECT_DOUBLE_DASH: {
+    [LanguageCodes.Russian]: 'Фамилия не может содержать два дефиса подряд',
+    [LanguageCodes.English]: 'Last name can\'t include two dashes together'
   }
 };
 

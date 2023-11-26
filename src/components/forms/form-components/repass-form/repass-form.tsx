@@ -65,6 +65,7 @@ function RepassForm() {
             isFormTriedToSubmit={isFormTriedToSubmit}
             resetIsFormTriedToSubmit={setIsFormTriedToSubmit}
             isFormDisabled={isFormDisabled}
+            autofocus={true}
           />
 
           <SubmitButton
