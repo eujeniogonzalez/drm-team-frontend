@@ -1,5 +1,5 @@
 import './input-email.scss';
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { EMAIL_REGEXP, MAX_EMAIL_LENGTH, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
@@ -31,18 +31,34 @@ function InputEmail({
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
   const [errorMessage, setErrorMassage] = useState<string>(Symbols.Empty);
   
-  if (!isEmailValid && isFormTriedToSubmit && !errorShouldBeShown) {
-    const errorMessage = (
-      email === Symbols.Empty
-        ? FORM_MESSAGES.EMAIL_EMPTY[languageCode]
-        : FORM_MESSAGES.EMAIL_INCORRECT[languageCode]
-    );
+  const validateEmail = (email: string) => EMAIL_REGEXP.test(email);
 
-    setErrorShouldBeShown(true);
-    setErrorMassage(errorMessage);
+  const getEmailErrorMessage = (email: string) => {
+    let errorMessage: string = Symbols.Empty;
+
+    switch (true) {
+      case email === Symbols.Empty:
+        errorMessage = FORM_MESSAGES.EMAIL_EMPTY[languageCode];
+        break;
+    
+      case !isEmailValid:
+        errorMessage = FORM_MESSAGES.EMAIL_INCORRECT[languageCode];
+        break;
+    }
+
+    return errorMessage;
   };
 
-  const validateEmail = (email: string) => EMAIL_REGEXP.test(email);
+  useEffect(() => {
+    if (!errorShouldBeShown) return;
+
+    setErrorMassage(getEmailErrorMessage(email));
+  }, [languageCode]);
+
+  if (!isEmailValid && isFormTriedToSubmit && !errorShouldBeShown) {
+    setErrorShouldBeShown(true);
+    setErrorMassage(getEmailErrorMessage(email));
+  };
 
   const showErrors = () => {
     if (email === Symbols.Empty) return;
@@ -55,7 +71,7 @@ function InputEmail({
     
       case false:
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.EMAIL_INCORRECT[languageCode]);
+        setErrorMassage(getEmailErrorMessage(email));
         break;
     }
   };

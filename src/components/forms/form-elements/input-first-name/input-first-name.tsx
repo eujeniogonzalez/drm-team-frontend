@@ -1,5 +1,5 @@
 import './input-first-name.scss';
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FIRST_AND_LAST_NAME_REGEXP, MAX_FIRST_NAME_LENGTH, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
@@ -53,13 +53,19 @@ function InputFirstName({
         errorMessage = FORM_MESSAGES.FIRST_NAME_INCORRECT_DOUBLE_DASH[languageCode];
         break;
 
-      case !validateFirstName(firstName):
+      case !isFirstNameValid:
         errorMessage = FORM_MESSAGES.FIRST_NAME_INCORRECT[languageCode];
         break;
     }
 
     return errorMessage;
   };
+
+  useEffect(() => {
+    if (!errorShouldBeShown) return;
+
+    setErrorMassage(getFirstNameErrorMessage(firstName));
+  }, [languageCode]);
 
   if (!isFirstNameValid && isFormTriedToSubmit && !errorShouldBeShown) {
     setErrorShouldBeShown(true);

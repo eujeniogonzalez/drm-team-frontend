@@ -1,5 +1,5 @@
 import './input-last-name.scss';
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FIRST_AND_LAST_NAME_REGEXP, MAX_LAST_NAME_LENGTH, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
@@ -53,7 +53,7 @@ function InputLastName({
         errorMessage = FORM_MESSAGES.LAST_NAME_INCORRECT_DOUBLE_DASH[languageCode];
         break;
 
-      case !validateLastName(lastName):
+      case !isLastNameValid:
         errorMessage = FORM_MESSAGES.LAST_NAME_INCORRECT[languageCode];
         break;
     }
@@ -61,6 +61,12 @@ function InputLastName({
     return errorMessage;
   };
 
+  useEffect(() => {
+    if (!errorShouldBeShown) return;
+
+    setErrorMassage(getLastNameErrorMessage(lastName));
+  }, [languageCode]);
+  
   if (!isLastNameValid && isFormTriedToSubmit && !errorShouldBeShown) {
     setErrorShouldBeShown(true);
     setErrorMassage(getLastNameErrorMessage(lastName));

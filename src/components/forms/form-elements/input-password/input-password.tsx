@@ -1,9 +1,8 @@
 import './input-password.scss';
-import React, { KeyboardEvent, ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
+import React, { KeyboardEvent, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { MAX_PASSWORD_LENGTH, PASSWORD_REGEXP, Symbols } from '../../../../const/common-const';
 import InputErrorMessage from '../input-error-message/input-error-message';
 import { FORM_MESSAGES } from '../../../../const/messages-const';
-import { UI_NAMES } from '../../../../const/ui-const';
 import { useAppSelector } from '../../../../hooks';
 import { getLanguageCode } from '../../../../store/processes/user-process/user-selectors';
 
@@ -35,14 +34,38 @@ function InputPassword({
   const [errorShouldBeShown, setErrorShouldBeShown] = useState<boolean>(false);
   const [errorMessage, setErrorMassage] = useState<string>(Symbols.Empty);
 
-  if (!isPasswordValid && isFormTriedToSubmit && !errorShouldBeShown) {
-    const errorMessage = password === Symbols.Empty ? FORM_MESSAGES.PASSWORD_EMPTY[languageCode] : FORM_MESSAGES.PASSWORD_INCORRECT[languageCode];
+  const validatePassword = (password: string) => PASSWORD_REGEXP.test(password);
 
-    setErrorShouldBeShown(true);
-    setErrorMassage(errorMessage);
+  const getPasswordErrorMessage = (password: string) => {
+    let errorMessage: string = Symbols.Empty;
+
+    switch (true) {
+      case password === Symbols.Empty:
+        errorMessage = FORM_MESSAGES.PASSWORD_EMPTY[languageCode];
+        break;
+    
+      case (passwordForMatching && passwordForMatching !== password):
+        errorMessage = FORM_MESSAGES.PASSWORDS_NOT_MATCH[languageCode];
+        break;
+
+      case !isPasswordValid:
+        errorMessage = FORM_MESSAGES.PASSWORD_INCORRECT[languageCode];
+        break;
+    }
+
+    return errorMessage;
   };
 
-  const validatePassword = (password: string) => PASSWORD_REGEXP.test(password);
+  useEffect(() => {
+    if (!errorShouldBeShown) return;
+
+    setErrorMassage(getPasswordErrorMessage(password));
+  }, [languageCode]);
+  
+  if (!isPasswordValid && isFormTriedToSubmit && !errorShouldBeShown) {
+    setErrorShouldBeShown(true);
+    setErrorMassage(getPasswordErrorMessage(password));
+  };
 
   const showErrors = () => {
     if (password === Symbols.Empty) return;
@@ -50,12 +73,12 @@ function InputPassword({
     switch (true) {
       case !isPasswordValid:
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.PASSWORD_INCORRECT[languageCode]);
+        setErrorMassage(getPasswordErrorMessage(password));
         break;
         
       case (passwordForMatching && passwordForMatching !== password):
         setErrorShouldBeShown(true);
-        setErrorMassage(FORM_MESSAGES.PASSWORDS_NOT_MATCH[languageCode]);
+        setErrorMassage(getPasswordErrorMessage(password));
         break;
 
       case isPasswordValid:
