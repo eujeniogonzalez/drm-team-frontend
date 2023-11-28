@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
-import Message from '../../components/message/message';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
+import Message from '../../components/page-components/message/message';
 import { META } from '../../const/meta-const';
 import { MESSAGES } from '../../const/messages-const';
 import { useAppSelector } from '../../hooks';

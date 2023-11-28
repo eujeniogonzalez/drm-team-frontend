@@ -1,14 +1,14 @@
 import './main.scss';
 import React from 'react';
-import App from './components/app/app';
-import HistoryRouter from './components/history-router/history-router';
+import App from './components/app-components/app/app';
+import HistoryRouter from './components/app-components/history-router/history-router';
 import { createRoot } from 'react-dom/client';
 import browserHistory from './services/browser-history';
 import { store } from './store';
 import { refreshAuthAction } from './store/api-actions/user-api-actions';
 import { Provider } from 'react-redux';
-import Toast from './components/toast/toast';
-import Init from './components/init/init';
+import Toast from './components/page-components/toast/toast';
+import Init from './components/app-components/init/init';
 
 store.dispatch(refreshAuthAction());
 

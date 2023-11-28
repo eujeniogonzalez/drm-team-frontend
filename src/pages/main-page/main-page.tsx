@@ -1,11 +1,11 @@
 import './main-page.scss';
 import React from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
-import LinksBlock from '../../components/links-block/links-block';
+import LinksBlock from '../../components/page-components/links-block/links-block';
 import { UI_NAMES } from '../../const/ui-const';
 import { LinksBlockAlignment } from '../../const/common-const';
 import { useAppSelector } from '../../hooks';

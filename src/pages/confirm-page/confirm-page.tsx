@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
-import Loader from '../../components/loader/loader';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
+import Loader from '../../components/page-components/loader/loader';
 import { LoaderColors, LoaderSizes } from '../../const/classnames-const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Navigate, useParams } from 'react-router-dom';
 import { confirmUserAction } from '../../store/api-actions/user-api-actions';
-import Message from '../../components/message/message';
+import Message from '../../components/page-components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';

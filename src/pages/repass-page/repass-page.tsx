@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
-import RepassForm from '../../components/forms/form-components/repass-form/repass-form';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
+import RepassForm from '../../components/form-components/repass-form/repass-form';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
-import Message from '../../components/message/message';
+import Message from '../../components/page-components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';

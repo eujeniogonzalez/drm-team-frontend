@@ -4,7 +4,7 @@ import { store } from '../store';
 import { getAPIURL, isAccessTokenExpired, syntheticAPIDelay } from '../utils';
 import { adaptFromClientToServer, adaptFromServerToClient } from './adapter';
 import { refreshAuthAction } from '../store/api-actions/user-api-actions';
-import { StartAPITimeType } from '../types/start-API-time-type';
+import { StartAPITimeType } from '../types/start-api-time-type';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({

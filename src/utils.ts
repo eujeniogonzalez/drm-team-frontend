@@ -1,7 +1,7 @@
 import { TokenType } from './types/token-type';
 import { adaptFromServerToClient } from './services/adapter';
 import { UserIDType } from './types/state-types';
-import { StartAPITimeType } from './types/start-API-time-type';
+// import { StartAPITimeType } from './types/start-api-time-type';
 import { getLanguageCodeFromStorage } from './services/local-storage';
 
 import {
@@ -19,6 +19,7 @@ import {
   CLIENT_URL_PROD
 } from './const/api-const'
 import { LanguageCodes } from './const/languages-const';
+import { StartAPITimeType } from './types/start-api-time-type';
 
 export function removeLastSlash(string: string) {
   return string.replace(SLASHES_AT_END_OF_STRING_REGEXP, Symbols.Empty);

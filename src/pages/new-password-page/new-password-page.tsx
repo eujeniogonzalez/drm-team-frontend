@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
-import NewPasswordForm from '../../components/forms/form-components/new-password-form/new-password-form';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getLanguageCode, getUserAPIResponse } from '../../store/processes/user-process/user-selectors';
-import Message from '../../components/message/message';
+import Message from '../../components/page-components/message/message';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const/router-const';
@@ -13,6 +12,7 @@ import { META } from '../../const/meta-const';
 import { APIActions } from '../../const/api-const';
 import { resetUserAPIResponse } from '../../store/processes/user-process/user-process';
 import { UI_NAMES } from '../../const/ui-const';
+import NewPasswordForm from '../../components/form-components/new-password-form/new-password-form';
 
 function NewPasswordPage() {
   document.title = META.TITLE.NEW_PASSWORD;

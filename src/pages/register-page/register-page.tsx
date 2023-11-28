@@ -1,9 +1,9 @@
 import React, { useEffect }  from 'react';
-import Header from '../../components/header-components/header/header';
-import Footer from '../../components/footer/footer';
-import Content from '../../components/content/content';
-import RegisterForm from '../../components/forms/form-components/register-form/register-form';
-import Message from '../../components/message/message';
+import Header from '../../components/page-components/header/header';
+import Footer from '../../components/page-components/footer/footer';
+import Content from '../../components/page-components/content/content';
+import RegisterForm from '../../components/form-components/register-form/register-form';
+import Message from '../../components/page-components/message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthStatuses } from '../../const/common-const';
 import { Navigate } from 'react-router-dom';
