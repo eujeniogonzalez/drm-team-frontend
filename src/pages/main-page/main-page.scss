@@ -1,11 +1,79 @@
-.main-page-content {
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
+@import '../../const/const.scss';
 
-  .main-page-title {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 100px;
+.offer {
+  width: 100%;
+  max-width: $content-max-width;
+  margin: auto;
+  background-color: #f1f1f1;
+  flex-grow: 1;
+  border-radius: 20px;
+  padding: 40px;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'offer-title           offer-image'
+    'offer-description     offer-image'
+    'offer-button          offer-image';
+
+  @media (max-width: '1000px') {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'offer-title'
+      'offer-image'
+      'offer-description'
+      'offer-button';
+  }
+
+  @media (max-width: '600px') {
+    padding: 30px;
+  }
+
+  .offer-title {
+    font-size: 32px;
+    grid-area: offer-title;
+
+    @media (max-width: '600px') {
+      font-size: 24px;
+    }
+  }
+
+  .offer-description {
+    font-size: 18px;
+    margin-top: 70px;
+    line-height: 24px;
+    grid-area: offer-description;
+
+    & > p + p {
+      margin-top: 10px;
+
+      @media (max-width: '600px') {
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: '600px') {
+      font-size: 16px;
+    }
+  }
+
+  .offer-button {
+    margin-top: 70px;
+    grid-area: offer-button;
+
+    @media (max-width: '1000px') {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .offer-image {
+    grid-area: offer-image;
+
+    & img {
+      width: 100%;
+      display: block;
+      border-radius: 15px;
+    }
   }
 }

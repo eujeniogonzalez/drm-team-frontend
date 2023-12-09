@@ -25,6 +25,12 @@
     overflow: hidden;
     position: relative;
 
+    @media (max-width: '600px') {
+      min-width: unset;
+      width: 100%;
+      padding: 70px 40px 50px 30px;
+    }
+
     .modal-close-button {
       position: absolute;
       top: 30px;

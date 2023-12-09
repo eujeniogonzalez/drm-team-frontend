@@ -3,13 +3,13 @@ import React from 'react';
 import Header from '../../components/page-components/header/header';
 import Footer from '../../components/page-components/footer/footer';
 import Content from '../../components/page-components/content/content';
-import { AppRoutes } from '../../const/router-const';
 import { META } from '../../const/meta-const';
-import LinksBlock from '../../components/page-components/links-block/links-block';
-import { UI_NAMES } from '../../const/ui-const';
-import { LinksBlockAlignment } from '../../const/common-const';
 import { useAppSelector } from '../../hooks';
 import { getLanguageCode } from '../../store/processes/user-process/user-selectors';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../const/router-const';
+import { UI_NAMES } from '../../const/ui-const';
+import { CONTENT } from '../../const/content-const';
 
 function MainPage() {
   document.title = META.TITLE.MAIN;
@@ -20,17 +20,25 @@ function MainPage() {
     <>
       <Header />
       <Content>
-        <div className='main-page-content'>
-          <div className='main-page-title'>Это лендинг</div>
+        <div className='offer'>
+          <div className='offer-title'>
+            {CONTENT.OFFER_TITLE[languageCode]}
+          </div>
 
-          <LinksBlock
-            links={[
-              {route: AppRoutes.Login, anchor: UI_NAMES.ENTER[languageCode]},
-              {route: AppRoutes.Repass, anchor: UI_NAMES.RESTORE_PASSWORD[languageCode]},
-              {route: AppRoutes.Register, anchor: UI_NAMES.REGISTER[languageCode]}
-            ]}
-            alignment={LinksBlockAlignment.Vertical}
-          />
+          <div className='offer-description'>
+            <p>{CONTENT.OFFER_DESCRIPTION_1[languageCode]}</p>
+            <p>{CONTENT.OFFER_DESCRIPTION_2[languageCode]}</p>
+          </div>
+
+          <div className='offer-button'>
+            <Link to={AppRoutes.Register} className='button link-button button-main-color'>
+              {UI_NAMES.REGISTER[languageCode]}
+            </Link>
+          </div>
+          
+          <div className='offer-image'>
+            <img src='/images/offer-image.jpg' />
+          </div>
         </div>
       </Content>
       <Footer />

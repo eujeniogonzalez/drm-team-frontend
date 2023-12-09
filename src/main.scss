@@ -64,6 +64,7 @@ body {
 .button {
   display: block;
   height: 60px;
+  min-width: 200px;
   border-radius: 8px;
   border: none;
   padding: 15px 25px;
@@ -73,6 +74,10 @@ body {
   &:disabled {
     opacity: 0.7;
     cursor: default;
+  }
+
+  @media (max-width: '600px') {
+    font-size: 16px;
   }
 }
 
@@ -90,9 +95,17 @@ body {
   cursor: not-allowed;
 }
 
+.link-button {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .textarea {
   padding: 20px;
   border-radius: 8px;
   border: 2px solid $border-color;
   resize: vertical;
 }
+

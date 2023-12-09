@@ -6,6 +6,7 @@ import { META } from '../../const/meta-const';
 import NewTaskButton from '../../components/task-components/create-task-button/create-task-button';
 import Wrapper from '../../components/page-components/wrapper/wrapper';
 import TaskList from '../../components/task-components/task-list/task-list';
+import TasksInfo from '../../components/task-components/tasks-info/tasks-info';
 
 function TasksPage() {
   document.title = META.TITLE.TASKS;
@@ -17,6 +18,8 @@ function TasksPage() {
         <Wrapper minHeight={30}>
           <NewTaskButton />
         </Wrapper>
+
+        <TasksInfo />
 
         <TaskList />
       </Content>

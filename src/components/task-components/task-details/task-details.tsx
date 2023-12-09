@@ -28,10 +28,10 @@ function TaskDetails({ task }: TaskDetailsPropsType) {
     if (!isTaskAvailable) return;
     
     return (
-      <Wrapper minHeight={30}>
+      <div className='task-details-control-buttons'>
         <AssignTaskButton task={task} />
         <ReviewTaskButton task={task} />
-      </Wrapper>    
+      </div>
     );
   };
 

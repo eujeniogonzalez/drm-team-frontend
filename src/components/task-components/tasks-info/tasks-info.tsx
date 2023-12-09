@@ -15,7 +15,7 @@ function TasksInfo() {
 
   if (authStatus !== AuthStatuses.Auth) return;
 
-  const loader = <Loader size={LoaderSizes.Micro} color={LoaderColors.White} />
+  const loader = <Loader size={LoaderSizes.Micro} color={LoaderColors.Main} />
 
   return (
     <div className='tasks-info'>
