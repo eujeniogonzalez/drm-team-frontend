@@ -36,6 +36,8 @@ export const createAPI = (): AxiosInstance => {
           break;
       }
 
+      config.headers['language-code'] = store.getState().user.languageCode;
+
       if (!config.data) return config;
       
       config.data = adaptFromClientToServer(config.data);
