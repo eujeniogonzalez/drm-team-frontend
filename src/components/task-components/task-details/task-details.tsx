@@ -11,7 +11,7 @@ import { useAppSelector } from '../../../hooks';
 import { getUsersRunningTaskID } from '../../../store/processes/task-process/task-selectors';
 import { MESSAGES } from '../../../const/messages-const';
 import { WRAPPER_MIN_HEIGHT } from '../../../const/common-const';
-import { getLanguageCode } from '../../../store/processes/user-process/user-selectors';
+import { getLanguageCode, getUserID } from '../../../store/processes/user-process/user-selectors';
 
 type TaskDetailsPropsType = {
   task: TaskType
@@ -20,9 +20,11 @@ type TaskDetailsPropsType = {
 function TaskDetails({ task }: TaskDetailsPropsType) {
   const languageCode = useAppSelector(getLanguageCode);
   const usersRunningTaskID = useAppSelector(getUsersRunningTaskID);
-  const isTaskMine = task.id === usersRunningTaskID;
+  const isTaskMineAndRunning = task.id === usersRunningTaskID;
   const isTaskFree = !task.executorID;
-  const isTaskAvailable = isTaskMine || (!usersRunningTaskID && isTaskFree);
+  const isTaskAvailable = isTaskMineAndRunning || (!usersRunningTaskID && isTaskFree);
+  const userID = useAppSelector(getUserID);
+  const amITaskExecutor = task.executorID === userID;
 
   const showControlButtons = () => {
     if (!isTaskAvailable) return;
@@ -46,7 +48,7 @@ function TaskDetails({ task }: TaskDetailsPropsType) {
       <Wrapper minHeight={WRAPPER_MIN_HEIGHT}>
         <TaskStatus taskStatus={task.status} />
 
-        <TaskSticker text={UI_NAMES.MY_TASK[languageCode]} isTaskStickerShouldBeShown={isTaskMine} />
+        <TaskSticker text={UI_NAMES.MY_TASK[languageCode]} isTaskStickerShouldBeShown={amITaskExecutor} />
       </Wrapper>      
       
       {showWarning()}
