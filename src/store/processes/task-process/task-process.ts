@@ -12,7 +12,8 @@ const initialState: TaskProcessType = {
     totalCount: null,
     notArchivedCount: null,
     archivedCount: null,
-    usersRunningTaskID: null
+    usersRunningTaskID: null,
+    usersReviewingTaskID: null
   },
   tasks: [],
   taskAPIResponse: {

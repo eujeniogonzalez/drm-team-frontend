@@ -5,9 +5,17 @@ export const MESSAGES = {
     [LanguageCodes.Russian]: 'Такой страницы не существует',
     [LanguageCodes.English]: 'Page not found'
   },
-  TASK_NOT_AVAILABLE_FOR_YOU: {
-    [LanguageCodes.Russian]: 'Задача недоступна, она занята другим пользователем, либо у вас уже есть задача в работе',
-    [LanguageCodes.English]: 'Task not available, it busy by other user or you already have running task'
+  YOU_ALREADY_HAVE_RUNNING_TASK: {
+    [LanguageCodes.Russian]: 'У вас уже есть задача в работе, взять новую задачу в работу вы сможете только после выполнения и проверки текущей',
+    [LanguageCodes.English]: 'You already have a task in progress, you will be able to take a new task to work only after completing and checking the current one'
+  },
+  TASK_IS_PERFORMED_BY_ANOTHER_USER: {
+    [LanguageCodes.Russian]: 'Задачу выполняет другой пользователь',
+    [LanguageCodes.English]: 'The task is performed by another user'
+  },
+  YOU_HAVE_UNREVIEWED_TASK: {
+    [LanguageCodes.Russian]: 'У вас есть непроверенная задача, взять новую задачу в работу вы сможете только после проверки текущей',
+    [LanguageCodes.English]: 'You have an unreviewed task, you will be able to take a new task to work only after reviewing the current one'
   }
 };
 
